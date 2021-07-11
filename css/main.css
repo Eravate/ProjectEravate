@@ -1,7 +1,3 @@
-@font-face {  
-    font-family: "Eurostile";
-    src: local("Eurostile"), url(../fonts/EurostileNormal.ttf) format("truetype"); /* non-IE */  
-  } 
 html {
     width:100%;
     height:100%;
@@ -11,13 +7,17 @@ body {
     background-color: black;
     width:100%;
     height:100%;
-    margin: 0px;
-    font-family: "Eurostile";
     color: white;
 }
 main {
     width:100%;
     height:100%;
+}
+#loading {
+    position: absolute;
+    z-index: 10;
+    width:100vw;
+    height:100vh;
 }
 
 
@@ -37,7 +37,7 @@ main {
 }
 
 #content {
-    display: flex;
+    display: none;
     position: relative;
     align-items: center; /* vertical */
     justify-content: center; /* horizontal */
@@ -59,10 +59,8 @@ main {
     padding: 0.25vw 0.05vw 0px;
     top: 3vw;
     left: 10vw;
-    font-size: 3vw;
+    font-size: 2vw;
     border-bottom: 1px solid #FF6E00;
-    
-    letter-spacing:3px;
 }
 #imgnav {
     float: right;
@@ -95,7 +93,6 @@ main {
     z-index: 9;
     border: 1px solid #FF6E00;
     background-color: rgba(0,0,0,0.8);
-    letter-spacing:1.5px;
 }
 #consoleDivheader {
     width: 600px;
@@ -148,8 +145,7 @@ input:focus {
     position: absolute;
     top: 10.5vw;
     left: 10vw;
-    font-size: 1.1vw;
-    letter-spacing:2px;
+    font-size: 1vw;
 }
 .lefttitle {
     width:10vw;
@@ -165,8 +161,7 @@ input:focus {
     position: absolute;
     top: 10.5vw;
     right: 10vw;
-    font-size: 1.1vw;
-    letter-spacing:2px;
+    font-size: 1vw;
 }
 .righttitle {
     width:10vw;
@@ -249,10 +244,7 @@ input:focus {
     top: -0.4vw;
     height: 0.2vw;
     width: 5vw;
-    -webkit-appearance: none;
-    background: #FF6E00;
-    color: white;
-    border-radius: 3px;
+    
 }
 #volume::-webkit-slider-thumb {
     background: white;

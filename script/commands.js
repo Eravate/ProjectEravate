@@ -114,7 +114,31 @@ function submitLogin() {
     })
       .then(response => response.text())
       .then(data => {
-        console.log(data);
+        result = JSON.parse(data);
+        switch(result) {
+          case "sucl":
+              window.location.href = "index.php";
+            break;
+          case "succ":
+            Swal.fire({
+              icon: 'success',
+              title: 'The Account Has Been Created Succesfully, You Can Now Log In!',
+            })
+            changeLoginScope(true);
+            break;
+          case "err1":
+            Swal.fire({
+              icon: 'error',
+              title: 'An Accout With This Email Already Exists!',
+            })
+            break;
+          case "err2":
+            Swal.fire({
+              icon: 'error',
+              title: 'The Email And The Password Do Not Correspond To Any Account!',
+            })
+            break;
+        }
       });
   } else {
     if (type == "create") {
@@ -134,7 +158,7 @@ function logout() {
 
 function changeLoginScope(createAcc) {
   var txtLogin = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="login"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label><div class="forgotPass"><a href="#">Forgot password?</a></div></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
-  var txtCreate = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="create"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label></div></div><div class="row"><div class="input-field col s12"><input id="sec_password_input" type="password" class="validate" required="" aria-required="true"><label for="sec_password_input">Repeat Password</label></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(true)">Have an account? Log In</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
+  var txtCreate = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="create"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label></div></div><div class="row"><div class="input-field col s12"><input id="sec_password_input" type="password" class="validate" required="" aria-required="true"><label for="sec_password_input">Repeat Password</label></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(true)">Have an account? Log In</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Create</button></div></div>';
   if (!createAcc) {
     $('#formLogin').html(txtCreate);
   } else {

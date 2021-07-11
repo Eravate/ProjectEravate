@@ -8,27 +8,31 @@ if (!isset($_SESSION['user'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="icons/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/swup.css"/>
+
     <script src="script/jquery.js"></script>
     <script src="script/commands.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="icon" type="image/png" href="icons/logo.png"/>
-    <title>Eravate Project</title>
     <script src="script/three.js"></script>
-    <script>
-        // DATA NEEDED TO START THE APP
-        var numPlanet = 2;
-        var planets;
-        var audio;
-        var sfx = new Audio('music/swipe.mp3');
-        sfx.volume = 0.05;
-        var vis = false;
-        fetchData();
-    </script>
+    <script defer src="script/planets.js"></script>
+    <script src="script/mainstart.js"></script>
+    <script defer src="script/swup.min.js"></script>
+    <script defer src="script/swupinit.js"></script>
+
+    <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#ffe4e1","text":"#000000","border":"#c25e5e"},"button":{"background":"#c25e5e","text":"#ffffff"}},"position":"bottom","content":{"href":"https://eravate.es/cookiepolicy.php"}})});</script>
+
+    <title>Eravate Project</title>
+
 </head>
-<body>
+<body class="loader">
+    <iframe id="loading" src="loader.php" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" ></iframe>
     <main>
         <div id="landscape">
             <!-- All the Content -->
@@ -99,5 +103,5 @@ if (!isset($_SESSION['user'])) {
         </div>
     </main>
 </body>
-<script src="script/planets.js"></script>
+    <script src="script/mainend.js"></script>
 </html>
