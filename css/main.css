@@ -1,6 +1,6 @@
 @font-face {  
     font-family: "Eurostile";
-    src: local("Eurostile"), url(fonts/EurostileNormal.ttf) format("truetype"); /* non-IE */  
+    src: local("Eurostile"), url(../fonts/EurostileNormal.ttf) format("truetype"); /* non-IE */  
   } 
 html {
     width:100%;
@@ -80,6 +80,11 @@ main {
 #see {
     height: 2vw;
     margin-left: 10px;
+}
+#logout {
+    margin-left: 10px;
+    height:2vw;
+    
 }
 
 
