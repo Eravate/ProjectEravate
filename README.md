@@ -5,7 +5,7 @@ First version of the app is limited to 2D only with no animation, which will be 
 
 ## How do I access the app?
 
-It's available on projecteravate.com, any changes visible in this repository will be available on there.
+It's available on eravate.es, any changes visible in this repository will be available on there.
 
 ## What is the update frequency?
 

@@ -1,6 +1,7 @@
 CREATE SCHEMA Eravate;
 USE Eravate;
 DROP TABLE Planet;
+DROP TABLE AppUser;
 CREATE TABLE Planet(
 	ID int primary key,
     Planet varchar(20),
@@ -22,6 +23,14 @@ CREATE TABLE Planet(
     Composition1 varchar(30),
     Composition2 varchar(30)
     );
+    
+CREATE TABLE AppUser(
+	email varchar(80) primary key,
+    passwd varchar(120) NOT NULL,
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+    #activate varchar(20) NOT NULL,
+    #activated tinyint NOT NULL DEFAULT 0
+);
 
 -- MASS RADIUS GRAVITY TEMPERATURE PRESSURE ORBITALPERIOD SEMIMAJORAXIS AXIALTILT ORBITALSPEED TYPE VOLCANISM ATMOSPHERE COMPOSITION
 
