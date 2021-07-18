@@ -23,8 +23,12 @@ if (!isset($_SESSION['user'])) {
     <script src="script/three.js"></script>
     <script defer src="script/planets.js"></script>
     <script src="script/mainstart.js"></script>
-    <script defer src="script/swup.min.js"></script>
-    <script defer src="script/swupinit.js"></script>
+    <script defer src="script/three.min.js"></script>
+    <script defer src="script/postprocessing.min.js"></script>
+    <script type="module" src="script/GLTFLoader.js"></script>
+    <script type="module" src="script/OrbitControls.js"></script>
+    <script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>
+
 
     <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#ffe4e1","text":"#000000","border":"#c25e5e"},"button":{"background":"#c25e5e","text":"#ffffff"}},"position":"bottom","content":{"href":"https://eravate.es/cookiepolicy.php"}})});</script>
 
@@ -41,7 +45,7 @@ if (!isset($_SESSION['user'])) {
                 <!-- Title Layer -->
                 <img id="planet" alt="Planet">
                 <div id="navbar"><span id="planetname"></span>
-                <div id="imgnav"><img src="icons/threed.png" id="threed" alt="3D"><img src="icons/console.png" id="console" alt="Console"><img src="icons/eye.png" id="see" alt="See"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
+                <div id="imgnav"><img src="icons/threed.png" id="threed" alt="3D" onclick="initClouds();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/eye.png" id="see" alt="See"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
 
                 <!-- Information Layer -->
                 <div id="consoleDiv">
@@ -51,26 +55,12 @@ if (!isset($_SESSION['user'])) {
                 </div>
                 <!-- Information Left -->
                 <div id="infoleft">
-                    <p class="lefttitle">Mass:</p><p class="leftinfo" id="mass"></p><br>
-                    <p class="lefttitle">Radius:</p><p class="leftinfo" id="radius"></p><br>
-                    <p class="lefttitle">Gravity:</p><p class="leftinfo" id="gravity"></p><br>
-                    <p class="lefttitle">Surface Temp:</p><p class="leftinfo" id="temperature"></p><br>
-                    <p class="lefttitle">Surface Press:</p><p class="leftinfo" id="pressure"></p><br>
-                    <p class="lefttitle">Orbital Period:</p><p class="leftinfo" id="period"></p><br>
-                    <p class="lefttitle">Semi Major Axis:</p><p class="leftinfo" id="axis"></p><br>
-                    <p class="lefttitle">Axial Tilt:</p><p class="leftinfo" id="tilt"></p><br>
-                    <p class="lefttitle">Orbital Speed:</p><p class="leftinfo" id="speed"></p><br>
+                    <div id="titleLeft"><img src="icons/minimize.png" id="minimize" alt="Minimize" onclick="retractInfoLeft()"><span id="about">ABOUT</span></div>
+                    <div id="contentLeft"></div>
                 </div>
                 <!-- Information Right -->
                 <div id="inforight">
-                    <p class="righttitle">Type:</p><p class="rightinfo" id="type"></p><br>
-                    <p class="righttitle">Volcanism:</p><p class="rightinfo" id="volcanism"></p><br>
-                    <p class="righttitle">Atmosphere Type:</p><p class="rightinfo" id="atmosphere"></p><br>
-                    <p class="righttitle">Atmosphere:</p><p class="rightinfo" id="atmosphere1"></p><br>
-                    <p class="righttitle"></p><p class="rightinfo" id="atmosphere2"></p><br>
-                    <p class="righttitle"></p><p class="rightinfo" id="atmosphere3"></p><br>
-                    <p class="righttitle">Composition:</p><p class="rightinfo" id="composition1"></p><br>
-                    <p class="righttitle"></p><p class="rightinfo" id="composition2"></p><br>
+                    
                 </div>
 
                 <!-- Navigation Layer -->

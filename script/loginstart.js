@@ -1,4 +1,5 @@
 // Make div disappear for screenshot capture ;)
+var vis;
 $('#logo').click(function(){
     $('.login-div').fadeOut(500);
     vis = true;

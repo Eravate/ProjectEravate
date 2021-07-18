@@ -1,6 +1,6 @@
-let scene, camera, cloudParticles = [],composer,vis;
+let scene, camera, cloudParticles = [],composer;
 
-function init() {
+function initClouds() {
 
 scene = new THREE.Scene();
 camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight,1,1000);
@@ -99,4 +99,5 @@ cloudParticles.forEach(p => {
 composer.render(0.1);
 requestAnimationFrame(render);
 }
-init();
+
+initClouds();

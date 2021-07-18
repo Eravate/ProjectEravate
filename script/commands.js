@@ -165,3 +165,7 @@ function changeLoginScope(createAcc) {
     $('#formLogin').html(txtLogin);
   }
 }
+
+function retractInfoLeft() {
+  $('#contentLeft').slideToggle(1000);
+}
