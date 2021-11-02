@@ -27,7 +27,7 @@ if (!isset($_SESSION['user'])) {
     <script defer src="script/postprocessing.min.js"></script>
     <script type="module" src="script/GLTFLoader.js"></script>
     <script type="module" src="script/OrbitControls.js"></script>
-    <!--<script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>-->
+    <script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>
 
 
     <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#ffe4e1","text":"#000000","border":"#c25e5e"},"button":{"background":"#c25e5e","text":"#ffffff"}},"position":"bottom","content":{"href":"https://eravate.es/cookiepolicy.php"}})});</script>
@@ -43,7 +43,7 @@ if (!isset($_SESSION['user'])) {
             <div id="content">
 
                 <!-- Title Layer -->
-                <img id="planet" alt="Planet" />
+                <img id="planet" alt="Planet">
                 <div id="navbar"><span id="planetname"></span>
                 <div id="imgnav"><img src="icons/threed.png" id="threed" alt="3D" onclick="initClouds();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/eye.png" id="see" alt="See"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
 
@@ -67,7 +67,7 @@ if (!isset($_SESSION['user'])) {
                 <div id="goleft"><img src="icons/left.png" id="arrowleft"></div>
                 <div id="goright"><img src="icons/right.png" id="arrowright"></div>
                 
-                <!-- Music Layer - Used Previously
+                <!-- Music Layer -->
                 <div id="music">
                     <div id="musictitle">Now Playing...</div>
                     <div id="musicname">Gato by Nowhere Voyage</div>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['user'])) {
                         <img src="icons/skipright.png" id="next">
                         <input type="range" id="volume" min="0" max="100">
                     </div>
-                </div>-->
+                </div>
 
                 <!-- Transition Layer -->
                 <div class="top-layer"></div>

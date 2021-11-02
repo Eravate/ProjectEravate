@@ -5,7 +5,7 @@ if (isset($_POST['action'])) {
   session_destroy();
 }
 if (isset($_SESSION['user'])) {
-  header("Location: index.php");
+  //header("Location: index.php");
 }
 ?>
 <!DOCTYPE html>
