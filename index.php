@@ -46,12 +46,12 @@ if (!isset($_SESSION['user'])) {
 
                 <div id="object" alt="Object"></div>
                 <div id="navbar"><span id="planetname"></span>
-                <div id="imgnav"><img src="icons/threed.png" id="threed" alt="3D" onclick="initClouds();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/eye.png" id="see" alt="See"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
+                <div id="imgnav"><img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
 
                 <!-- Information Layer -->
 
                 <div id="consoleDiv">
-                    <div id="consoleDivheader"><img src="icons/reddot.png" id="reddot" alt="Close"></div>
+                    <div id="consoleDivheader"><img src="icons/x.png" id="reddot" alt="Close"></div>
                     <div id="textArea"></div>
                     <!--<div id="consoleInfo">Eravate@EravateProject:</div>--><input id="consoleInput" type="text">
                 </div>
@@ -65,7 +65,7 @@ if (!isset($_SESSION['user'])) {
 
                 <!-- Information Right -->
 
-                <div id="inforight">
+                <div id="info">
                     
                 </div>
 
@@ -88,14 +88,21 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 </div>-->
 
-                <!-- Transition Layer, used to ensure smooth transitions between objects, may be subject to a lot of changes depending on how the app ends up working -->
+                <div id="additional">
+                    <div id="add1"></div>
+                    <div id="add2"></div>
+                    <div id="add3"></div>
+                    <div id="add4"></div>
+                </div>
+
+                <!-- Transition Layer, used to ensure smooth transitions between objects, may be subject to a lot of changes depending on how the app ends up working 
 
                 <div class="top-layer"></div>
                 <div class="top-layer top-layer--1"></div>
                 <div class="top-layer top-layer--2"></div>
                 <div class="top-layer top-layer--3"></div>
                 <div class="top-layer top-layer--4"></div>
-                <div class="top-layer top-layer--5">ERAVATE</div>
+                <div class="top-layer top-layer--5">ERAVATE</div>-->
             </div>
         </div>
         <!-- Used Previously 

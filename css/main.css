@@ -36,7 +36,7 @@ main {
 
 #content {
     width: 100vw;
-    /* The height is set to 56.25 width to preserve the 16:9 format at all times /*
+    /* The height is set to 56.25 width to preserve the 16:9 format at all times */
     height: 56.25vw;
     position: relative;
     align-items: center; /* vertical */
@@ -46,12 +46,54 @@ main {
 }
 #object {
     position: absolute;
-    top: 13.2vw;
-    border: 1px solid red;
-    left: 10vw;
+    top: 10vw;
+    left: 20vw;
     height: 30vw;
     width: 30vw;
     pointer-events: none;
+    border: 1px solid #FF6E00;
+}
+
+#info {
+    position: absolute;
+    top: 10vw;
+    right: 20vw;
+    width: 20vw;
+    height: 30vw;
+    font-size: 1vw;
+    border: 1px solid #FF6E00;
+}
+
+#additional {
+    position: absolute;
+    top: 45vw;
+    height: 6vw;
+    width: 60vw;
+    left: 20vw;
+    display: flex;
+}
+#add1 {
+    height:6vw;
+    width: 13.25vw;
+    border: 1px solid #FF6E00;
+}
+#add2 {
+    height:6vw;
+    width: 13.25vw;
+    margin-left: 2.5vw;
+    border: 1px solid #FF6E00;
+}
+#add3 {
+    height:6vw;
+    width: 13.25vw;
+    margin-left: 2.5vw;
+    border: 1px solid #FF6E00;
+}
+#add4 {
+    height:6vw;
+    width: 13.25vw;
+    margin-left: 2.5vw;
+    border: 1px solid #FF6E00;
 }
 
 canvas {
@@ -71,8 +113,8 @@ canvas {
     top: 3vw;
     left: 10vw;
     font-size: 2vw;
-    /*border-bottom: 1px solid #FF6E00;*/
-    border-bottom: 1px solid #675288;
+    border-bottom: 1px solid #FF6E00;
+    /*border-bottom: 1px solid #675288;*/
     /*border-bottom: rgb(63,94,251);
     border-bottom: linear-gradient(347deg, rgba(63,94,251,1) 0%, rgba(252,70,70,1) 100%);*/
 }
@@ -86,12 +128,8 @@ canvas {
     height: 2vw;
     margin-left: 10px;
 }
-#threed {
+#fulls {
     height: 2vw;
-}
-#see {
-    height: 2vw;
-    margin-left: 10px;
 }
 #logout {
     margin-left: 10px;
@@ -105,20 +143,20 @@ canvas {
     width: 600px;
     height: 300px;
     z-index: 9;
-    /* border: 1px solid #FF6E00;*/
-    border: 1px solid #675288;
+    border: 1px solid #FF6E00;
+    /*border: 1px solid #675288;*/
     background-color: rgba(0,0,0,0.8);
 }
 #consoleDivheader {
-    width: 600px;
+    width: 598px;
     height: 20px;
     z-index: 10;
-    /*background-color: #FF6E00;*/
-    background-color: #675288;
+    background-color: #FF6E00;
+    /*background-color: #675288;*/
     outline: none;
 }
 #textArea {
-    width: 595px;
+    width: 590px;
     padding-left: 5px;
     padding-top: 5px;
     height:254px;
@@ -135,21 +173,22 @@ canvas {
 }
 */
 #consoleInput {
-    width: 595px;
+    width: 593px;
     height: 20px;
     padding-left: 5px;
-    /*border-top: 1px solid #FF6E00;*/
-    border-top: 1px solid #675288;
+    border-top: 1px solid #FF6E00;
+    border-bottom: 0px!important;
+    /*border-top: 1px solid #675288;*/
     background-color: transparent;
     color: white;
 }
 
 input {
-    border:0;
     outline:0;
 }
 input:focus {
     outline:none!important;
+    -webkit-appearance:none;
 }
 
 #reddot {
@@ -158,6 +197,7 @@ input:focus {
     margin-top: 2px;
 }
 
+/* USED PREVIOUSLY, NOT
 #infoleft {
     
     position: absolute;
@@ -171,7 +211,7 @@ input:focus {
 #titleLeft {
     display: flex;
     align-items: center;
-    /* border: 1px solid #FF6E00;*/
+    border: 1px solid #FF6E00;
     border: 1px solid #675288;
     width:20vw;
     height: 3vw;
@@ -193,23 +233,8 @@ input:focus {
     width:20vw;
     height:31.99vw;
     border-radius: 10px;
-}
-
-
-#inforight {
-    position: absolute;
-    top: 10.5vw;
-    right: 10vw;
-    font-size: 1vw;
-}
-.righttitle {
-    width:10vw;
-    display: inline-block;
-}
-.rightinfo {
-    width:10vw;
-    display: inline-block;
-}
+}   display: inline-block;
+*/
 
 
 #goleft {
@@ -241,8 +266,8 @@ input:focus {
     bottom: 3vw;
     font-size: 1vw;
     left: 10vw;
-    /* border: 1px solid #FF6E00;*/
-    border: 1px solid #675288;
+    border: 1px solid #FF6E00;
+    /* border: 1px solid #675288;*/
 }
 #musictitle {
     width: 10vw;
@@ -356,8 +381,8 @@ body {
     background: black;
     transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
     font-size:20vw;
-    /*color: #FF6E00;*/
-    color: #675288;
+    color: #FF6E00;
+    /*color: #675288;*/
     text-align: center;
   }
   .top-layer.active {
