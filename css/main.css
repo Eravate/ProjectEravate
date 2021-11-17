@@ -1,23 +1,19 @@
-@font-face {  
-    font-family: "Eurostile";
-    src: local("Eurostile"), url(../fonts/EurostileNormal.ttf) format("truetype"); /* non-IE */  
-  } 
-html {
-    width:100%;
-    height:100%;
-    overflow: hidden;
-}
+
 body {
     background-color: black;
-    width:100%;
-    height:100%;
-    margin: 0px;
-    font-family: "Eurostile";
+    width:100vw;
+    height:100vh;
     color: white;
 }
 main {
-    width:100%;
-    height:100%;
+    width:100vw;
+    height:100vh;
+}
+#loading {
+    position: absolute;
+    z-index: 10;
+    width:100vw;
+    height:100vh;
 }
 
 
@@ -27,6 +23,7 @@ main {
     display: flex;
     align-items: center; /* vertical */
     justify-content: center; /* horizontal */
+    
 }
 #landscape {
     width:100vw;
@@ -34,20 +31,76 @@ main {
     display: flex;
     align-items: center; /* vertical */
     justify-content: center; /* horizontal */
+    
 }
 
 #content {
-    display: flex;
+    width: 100vw;
+    /* The height is set to 56.25 width to preserve the 16:9 format at all times */
+    height: 56.25vw;
     position: relative;
     align-items: center; /* vertical */
     justify-content: center; /* horizontal */
+    background-image: url("../icons/starsbackground.jpg");
+    background-size: cover;
 }
-#planet {
-    max-width:100vw;
+#object {
+    position: absolute;
+    top: 10vw;
+    left: 20vw;
+    height: 30vw;
+    width: 30vw;
     pointer-events: none;
-    z-index: -1;
+    border: 1px solid #FF6E00;
 }
 
+#info {
+    position: absolute;
+    top: 10vw;
+    right: 20vw;
+    width: 20vw;
+    height: 30vw;
+    font-size: 1vw;
+    border: 1px solid #FF6E00;
+}
+
+#additional {
+    position: absolute;
+    top: 45vw;
+    height: 6vw;
+    width: 60vw;
+    left: 20vw;
+    display: flex;
+}
+#add1 {
+    height:6vw;
+    width: 13.25vw;
+    border: 1px solid #FF6E00;
+}
+#add2 {
+    height:6vw;
+    width: 13.25vw;
+    margin-left: 2.5vw;
+    border: 1px solid #FF6E00;
+}
+#add3 {
+    height:6vw;
+    width: 13.25vw;
+    margin-left: 2.5vw;
+    border: 1px solid #FF6E00;
+}
+#add4 {
+    height:6vw;
+    width: 13.25vw;
+    margin-left: 2.5vw;
+    border: 1px solid #FF6E00;
+}
+
+canvas {
+    position: absolute;
+    top: 0vw;
+    z-index: -5;
+}
 
 #navbar {
     -webkit-box-sizing: border-box; 
@@ -59,10 +112,11 @@ main {
     padding: 0.25vw 0.05vw 0px;
     top: 3vw;
     left: 10vw;
-    font-size: 3vw;
+    font-size: 2vw;
     border-bottom: 1px solid #FF6E00;
-    
-    letter-spacing:3px;
+    /*border-bottom: 1px solid #675288;*/
+    /*border-bottom: rgb(63,94,251);
+    border-bottom: linear-gradient(347deg, rgba(63,94,251,1) 0%, rgba(252,70,70,1) 100%);*/
 }
 #imgnav {
     float: right;
@@ -74,12 +128,8 @@ main {
     height: 2vw;
     margin-left: 10px;
 }
-#threed {
+#fulls {
     height: 2vw;
-}
-#see {
-    height: 2vw;
-    margin-left: 10px;
 }
 #logout {
     margin-left: 10px;
@@ -94,18 +144,19 @@ main {
     height: 300px;
     z-index: 9;
     border: 1px solid #FF6E00;
+    /*border: 1px solid #675288;*/
     background-color: rgba(0,0,0,0.8);
-    letter-spacing:1.5px;
 }
 #consoleDivheader {
-    width: 600px;
+    width: 598px;
     height: 20px;
     z-index: 10;
     background-color: #FF6E00;
+    /*background-color: #675288;*/
     outline: none;
 }
 #textArea {
-    width: 595px;
+    width: 590px;
     padding-left: 5px;
     padding-top: 5px;
     height:254px;
@@ -122,20 +173,22 @@ main {
 }
 */
 #consoleInput {
-    width: 595px;
+    width: 593px;
     height: 20px;
     padding-left: 5px;
     border-top: 1px solid #FF6E00;
+    border-bottom: 0px!important;
+    /*border-top: 1px solid #675288;*/
     background-color: transparent;
     color: white;
 }
 
 input {
-    border:0;
     outline:0;
 }
 input:focus {
     outline:none!important;
+    -webkit-appearance:none;
 }
 
 #reddot {
@@ -144,38 +197,44 @@ input:focus {
     margin-top: 2px;
 }
 
+/* USED PREVIOUSLY, NOT
 #infoleft {
+    
     position: absolute;
     top: 10.5vw;
     left: 10vw;
-    font-size: 1.1vw;
-    letter-spacing:2px;
+    font-size: 1vw;
+    width: 20vw;
+    height: 35vw;
+    
 }
-.lefttitle {
-    width:10vw;
-    display: inline-block;
+#titleLeft {
+    display: flex;
+    align-items: center;
+    border: 1px solid #FF6E00;
+    border: 1px solid #675288;
+    width:20vw;
+    height: 3vw;
+    font-size: 1.5vw;
+    z-index:0;
+    border-radius: 10px;
 }
-.leftinfo {
-    width:10vw;
-    display: inline-block;
+#minimize {
+    height: 1.8vw;
+    width: 1.8vw;
+    margin-left: 10px;
 }
-
-
-#inforight {
-    position: absolute;
-    top: 10.5vw;
-    right: 10vw;
-    font-size: 1.1vw;
-    letter-spacing:2px;
+#about {
+    margin-left: 10px;
 }
-.righttitle {
-    width:10vw;
-    display: inline-block;
-}
-.rightinfo {
-    width:10vw;
-    display: inline-block;
-}
+#contentLeft {
+    background-color:rgba(67,52,88,0.4);
+   
+    width:20vw;
+    height:31.99vw;
+    border-radius: 10px;
+}   display: inline-block;
+*/
 
 
 #goleft {
@@ -208,6 +267,7 @@ input:focus {
     font-size: 1vw;
     left: 10vw;
     border: 1px solid #FF6E00;
+    /* border: 1px solid #675288;*/
 }
 #musictitle {
     width: 10vw;
@@ -249,10 +309,7 @@ input:focus {
     top: -0.4vw;
     height: 0.2vw;
     width: 5vw;
-    -webkit-appearance: none;
-    background: #FF6E00;
-    color: white;
-    border-radius: 3px;
+    
 }
 #volume::-webkit-slider-thumb {
     background: white;
@@ -325,6 +382,7 @@ body {
     transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
     font-size:20vw;
     color: #FF6E00;
+    /*color: #675288;*/
     text-align: center;
   }
   .top-layer.active {
@@ -347,7 +405,7 @@ body {
     transition-delay: 0.1s;
   }
 
-
+/**
 @media screen and (orientation: landscape) {
     #portrait {
         display: none;
@@ -364,4 +422,4 @@ body {
     #landscape {
         display: none;
     }
-}
+}*/
