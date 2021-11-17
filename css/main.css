@@ -35,14 +35,22 @@ main {
 }
 
 #content {
-    display: none;
+    width: 100vw;
+    /* The height is set to 56.25 width to preserve the 16:9 format at all times /*
+    height: 56.25vw;
     position: relative;
     align-items: center; /* vertical */
     justify-content: center; /* horizontal */
     background-image: url("../icons/starsbackground.jpg");
+    background-size: cover;
 }
-#planet {
-    max-width:100vw;
+#object {
+    position: absolute;
+    top: 13.2vw;
+    border: 1px solid red;
+    left: 10vw;
+    height: 30vw;
+    width: 30vw;
     pointer-events: none;
 }
 

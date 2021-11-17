@@ -15,7 +15,7 @@ function fetchData() {
 function fillWithPlanet() {
     planetName = planets[numPlanet][1].toLowerCase();
     audio = new Audio('music/'+planetName+'.mp3');
-    $("#planet").attr("src","photos/"+planetName+".png");
+    //$("#object").attr("src","photos/"+planetName+".png");
     $("#planetname").html(planets[numPlanet][1]);
     $("#mass").html(planets[numPlanet][2]);
     $("#radius").html(planets[numPlanet][3]);
@@ -38,6 +38,7 @@ function fillWithPlanet() {
 }
 
 // Function to wait for Planets to load in
+
 function waitForPlanets(){
     if(typeof planets !== "undefined") {
         fillWithPlanet();
@@ -47,6 +48,7 @@ function waitForPlanets(){
 }
 
 // Function to allow the dragging of the console across the screen
+
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(elmnt.id + "header")) {
@@ -89,11 +91,13 @@ function dragElement(elmnt) {
   }
 
 // Function to clear the console
+
 function clearTextArea() {
   $("#textArea").contents().filter(function(){ return this.nodeType != 1; }).remove();
 }
 
 // Function to submit the Log In and check if it's valid
+
 function submitLogin() {
   var type = $('#type_input').val();
   var email = $('#email_input').val();
@@ -116,6 +120,11 @@ function submitLogin() {
       .then(data => {
         result = JSON.parse(data);
         switch(result) {
+          // I've set up two different success cases and 2 different error cases for more specific alerts
+          // sucl means the client has succesfully logged into his account
+          // succ, on the other hand, means the client has succesfully registered his account, and is now allow to log in
+          // err1 is the error that we get when a client is trying to register, but has already created an account with that email address
+          // err2 is the error we get when the client is trying to log-in, but either the email address or the password are not correct
           case "sucl":
               window.location.href = "index.php";
             break;
@@ -142,6 +151,7 @@ function submitLogin() {
       });
   } else {
     if (type == "create") {
+      // This alert is pretty self-explanatory, it's when the client has typed two different passwords when creating his account
       Swal.fire('Passwords Not Matching!','error');
       Swal.fire({
         icon: 'error',
@@ -152,9 +162,13 @@ function submitLogin() {
   
 }
 
+// Function to log-out, pretty self-explanatory
+
 function logout() {
   $('#logoutForm').submit();
 }
+
+// Function to change between Log-in and Register
 
 function changeLoginScope(createAcc) {
   var txtLogin = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="login"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label><div class="forgotPass"><a href="#">Forgot password?</a></div></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
@@ -166,6 +180,10 @@ function changeLoginScope(createAcc) {
   }
 }
 
+// Function used previously to retract the left-content table, unused now
+
+/**
 function retractInfoLeft() {
   $('#contentLeft').slideToggle(1000);
 }
+*/

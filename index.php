@@ -43,31 +43,40 @@ if (!isset($_SESSION['user'])) {
             <div id="content">
 
                 <!-- Title Layer -->
-                <img id="planet" alt="Planet" />
+
+                <div id="object" alt="Object"></div>
                 <div id="navbar"><span id="planetname"></span>
                 <div id="imgnav"><img src="icons/threed.png" id="threed" alt="3D" onclick="initClouds();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/eye.png" id="see" alt="See"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
 
                 <!-- Information Layer -->
+
                 <div id="consoleDiv">
                     <div id="consoleDivheader"><img src="icons/reddot.png" id="reddot" alt="Close"></div>
                     <div id="textArea"></div>
                     <!--<div id="consoleInfo">Eravate@EravateProject:</div>--><input id="consoleInput" type="text">
                 </div>
-                <!-- Information Left -->
+
+                <!-- Information Left, obsolete as of now -->
+                <!--
                 <div id="infoleft">
                     <div id="titleLeft"><img src="icons/minimize.png" id="minimize" alt="Minimize" onclick="retractInfoLeft()"><span id="about">ABOUT</span></div>
                     <div id="contentLeft"></div>
-                </div>
+                </div>-->
+
                 <!-- Information Right -->
+
                 <div id="inforight">
                     
                 </div>
 
                 <!-- Navigation Layer -->
+
                 <div id="goleft"><img src="icons/left.png" id="arrowleft"></div>
                 <div id="goright"><img src="icons/right.png" id="arrowright"></div>
                 
-                <!-- Music Layer - Used Previously
+                <!-- Layer previously used for music, now used for info below. -->
+
+                <!-- This is the music part, previously used
                 <div id="music">
                     <div id="musictitle">Now Playing...</div>
                     <div id="musicname">Gato by Nowhere Voyage</div>
@@ -79,7 +88,8 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 </div>-->
 
-                <!-- Transition Layer -->
+                <!-- Transition Layer, used to ensure smooth transitions between objects, may be subject to a lot of changes depending on how the app ends up working -->
+
                 <div class="top-layer"></div>
                 <div class="top-layer top-layer--1"></div>
                 <div class="top-layer top-layer--2"></div>

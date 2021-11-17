@@ -1,4 +1,4 @@
-// DATA NEEDED TO START THE APP
+// Data needed to start the app, may be subject to a lot of changes in the near future
 var numPlanet = 2;
 var planets;
 var audio;
