@@ -49,7 +49,7 @@
                 $_SESSION['user'] = $encemail;
                 echo json_encode("sucl");
             } else {
-                echo json_encode("err2");
+                echo json_encode("err3");
             }
         } else {
             echo json_encode("err2");
