@@ -1,8 +1,11 @@
 // Function to fetch data from the DB
 
 function fetchData() {
+    var formData = new FormData();
+    formData.append('solar', solar);
     fetch('php/read.php', {
         method: "POST",
+        body: formData
     })
         .then(response => response.text())
         .then(data => {
@@ -13,9 +16,9 @@ function fetchData() {
 // Function to fill all the planets with information uppon load
 
 function fillWithPlanet() {
-    planetName = planets[numPlanet][1].toLowerCase();
+    /*planetName = planets[numPlanet][1].toLowerCase();
     audio = new Audio('music/'+planetName+'.mp3');
-    //$("#object").attr("src","photos/"+planetName+".png");
+    $("#object").attr("src","photos/"+planetName+".png");
     $("#planetname").html(planets[numPlanet][1]);
     $("#mass").html(planets[numPlanet][2]);
     $("#radius").html(planets[numPlanet][3]);
@@ -33,7 +36,7 @@ function fillWithPlanet() {
     $("#atmosphere2").html(planets[numPlanet][15]);
     $("#atmosphere3").html(planets[numPlanet][16]);
     $("#composition1").html(planets[numPlanet][17]);
-    $("#composition2").html(planets[numPlanet][18]);
+    $("#composition2").html(planets[numPlanet][18]);*/
 
 }
 
