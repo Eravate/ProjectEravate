@@ -37,7 +37,14 @@ function fillWithPlanet() {
     $("#atmosphere3").html(planets[numPlanet][16]);
     $("#composition1").html(planets[numPlanet][17]);
     $("#composition2").html(planets[numPlanet][18]);*/
-
+    $("#solarsystem").html(planets[0][1]);
+    $("#name").html(planets[numPlanet][1].toUpperCase());
+    $("#txt").html(planets[numPlanet][6]);
+    $("#source").html('Source: &nbsp; <a href=\''+planets[numPlanet][8]+'\'>'+planets[numPlanet][7]+'</a>');
+    $("#rottime").html(planets[numPlanet][2]+'&nbsp;DAYS');
+    $("#revtime").html(planets[numPlanet][3]+'&nbsp;DAYS');
+    $("#radius").html(planets[numPlanet][4]+'&nbsp;KM');
+    $("#temp").html(planets[numPlanet][5]+'&nbsp;ºC');
 }
 
 // Function to wait for Planets to load in

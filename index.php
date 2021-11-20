@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])) {
                 <!-- Title Layer -->
 
                 <div id="object" alt="Object"></div>
-                <div id="navbar"><span id="planetname"></span>
+                <div id="navbar"><span id="solarsystem"></span>
                 <div id="imgnav"><img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
 
                 <!-- Information Layer -->
@@ -66,7 +66,12 @@ if (!isset($_SESSION['user'])) {
                 <!-- Information Right -->
 
                 <div id="info">
-                    
+                    <div id='name'></div>
+                    <div id='txt'></div>
+                    <div id="source">Source: </div>
+                    <div class="seldiv" id="overview"><div class='selnumber'>01</div><div class='seltxt'>OVIERVIEW</div></div>
+                    <div class="seldiv" id="internal"><div class='selnumber'>02</div><div class='seltxt'>INTERNAL STRUCTURE</div></div>
+                    <div class="seldiv" id="surface"><div class='selnumber'>03</div><div class='seltxt'>SURFACE GEOLOGY</div></div>
                 </div>
 
                 <!-- Navigation Layer -->
@@ -89,20 +94,32 @@ if (!isset($_SESSION['user'])) {
                 </div>-->
 
                 <div id="additional">
-                    <div id="add1"></div>
-                    <div id="add2"></div>
-                    <div id="add3"></div>
-                    <div id="add4"></div>
+                    <div id="add1">
+                        <div class="addtit">ROTATION TIME</div>
+                        <div class="addtxt" id="rottime">Test</div>
+                    </div>
+                    <div id="add2">
+                        <div class="addtit">REVOLUTION TIME</div>
+                        <div class="addtxt" id="revtime"></div>
+                    </div>
+                    <div id="add3">
+                        <div class="addtit">RADIUS</div>
+                        <div class="addtxt" id="radius"></div>
+                    </div>
+                    <div id="add4">
+                        <div class="addtit">AVERAGE TEMP.</div>
+                        <div class="addtxt" id="temp"></div>
+                    </div>
                 </div>
 
-                <!-- Transition Layer, used to ensure smooth transitions between objects, may be subject to a lot of changes depending on how the app ends up working 
+                <!-- Transition Layer, used to ensure smooth transitions between objects, may be subject to a lot of changes depending on how the app ends up working -->
 
                 <div class="top-layer"></div>
                 <div class="top-layer top-layer--1"></div>
                 <div class="top-layer top-layer--2"></div>
                 <div class="top-layer top-layer--3"></div>
                 <div class="top-layer top-layer--4"></div>
-                <div class="top-layer top-layer--5">ERAVATE</div>-->
+                <div class="top-layer top-layer--5">ERAVATE</div>
             </div>
         </div>
         <!-- Used Previously 

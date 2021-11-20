@@ -31,7 +31,7 @@ switch ($rowcount) {
     }
 
 $database->stmt_init();
-$result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3D FROM Planet WHERE ID=? ORDER BY position ASC");
+$result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3D FROM Planet WHERE Star=? ORDER BY position ASC");
 $result->bind_param('i',$solar);
 $result->execute();
 $result->store_result();

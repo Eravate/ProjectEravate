@@ -82,4 +82,34 @@ $("#arrowright").click(function() {
     sfx.play();
     setTimeout(fillWithPlanet,500);
 });
+
+// Commands regarding on-click events
+
+$("#overview").click(function(){
+    $("#txt").fadeOut(function(){
+        $("#txt").html(planets[numPlanet][6]).fadeIn();
+    });
+    $("#source").fadeOut(function(){
+        $("#source").html('Source: &nbsp; <a href=\''+planets[numPlanet][8]+'\'>'+planets[numPlanet][7]+'</a>').fadeIn();
+    });
+});
+$("#internal").click(function(){
+    $("#txt").fadeOut(function(){
+        $("#txt").html(planets[numPlanet][9]).fadeIn();
+    });
+    $("#source").fadeOut(function(){
+        $("#source").html('Source: &nbsp; <a href=\''+planets[numPlanet][11]+'\'>'+planets[numPlanet][10]+'</a>').fadeIn();
+    });
+});
+$("#surface").click(function(){
+    $("#txt").fadeOut(function(){
+        $("#txt").html(planets[numPlanet][12]).fadeIn();
+    });
+    $("#source").fadeOut(function(){
+        $("#source").html('Source: &nbsp; <a href=\''+planets[numPlanet][14]+'\'>'+planets[numPlanet][13]+'</a>').fadeIn();
+    });
+});
+  
+
+
 waitForPlanets();
