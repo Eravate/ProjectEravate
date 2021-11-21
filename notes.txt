@@ -96,3 +96,43 @@ database? Eh, It is what It is.
 
 Slow progression is progression at least, but there needs to be a way to pick up the pace in this
 system.
+
+-----------------------------------------------------------------------------------------------
+20/11/2021
+-----------------------------------------------------------------------------------------------
+
+Man, November do really be cold huh? tried to go outside with my long-sleeve for the first time
+in like a month and a half and almost froze to death, It's a real pitty I don't have any jackets
+or sweatshirts.
+
+Anyways, I finally was able to advance the amount I wanted today, the database is up and fully
+working! same goes for the PHP! man is this a relief, but still, a lot of work remains ahead of 
+me.
+
+Tomorrow, I'll have to load the 3D Planets by once, it is scary to think how hard it will be, and
+just how I'll pull it off, together with the Admin site and all that, but I should just keep my 
+head up and see what happens for myself.
+
+Today I also daydreamed about being a video-game programmer a lot, but when thinking about the
+entire process in-depth, I know I will never pull it off, despite this being my dream, but at
+least I can experience it in my head.
+
+-----------------------------------------------------------------------------------------------
+21/11/2021
+-----------------------------------------------------------------------------------------------
+
+Hey, you still reading this? with how much nonsense I put out right here, I wouldn't expect no
+one to reach this stage, but if you are here, congrats, you have my gratitude, and you should
+stop wasting your time, unless, for some reason, you are interested in how I process my thoughts.
+
+It's the 5th day of consecutive programming! the progress is slow as it always is with me, like,
+despite sitting on this code for over 12 hours today, I only programmed for 3-4 hours, it's crazy 
+how much time programming I spend on thinking and wasting time.
+
+Anyways, I figured it's about time I joined my application together, so from now on, loader, login
+and index will become one file, wonder just how much debugging will I have to do to get it working.
+
+Apart from this, my TODO list is pretty full of things, like improve the command prompt, design 
+an admin site, create logs to ensure client safety, add black holes and pulsars, add the music
+I composed, and all of this in less than 20 days? man I sure am high on crack thinking I will be 
+able to do this with my 3-4 hours of programming a day.

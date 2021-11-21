@@ -16,7 +16,7 @@ body {
     height:100vh;
     color: white;
     overflow: hidden;
-    font-family:'Marsden Slim','Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family:'Marsden Slim','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 main {
     width:100vw;
@@ -96,7 +96,12 @@ main {
     height: 30vw;
     width: 30vw;
     pointer-events: none;
-    border: 1px solid #FF6E00;
+    display: inline;
+}
+
+#objectCanvas {
+    width:30vw;
+    height:30vw;
 }
 
 /* CSS FOR INFO PART ON THE RIGHT */
@@ -235,6 +240,8 @@ main {
 /* CSS FOR CONSOLE */
 #consoleDiv {
     position: absolute;
+    top: 20vw;
+    left: 35vw;
     width: 600px;
     height: 300px;
     z-index: 9;

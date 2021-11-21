@@ -26,6 +26,16 @@ function initClouds() {
     blueLight.position.set(300,300,200);
     scene.add(blueLight);
 
+    /*let orangeLight = new THREE.PointLight(0xccaa2d,50,450,1.7);
+    orangeLight.position.set(200,300,100);
+    scene.add(orangeLight);
+    let purpleLight = new THREE.PointLight(0x8B008B,50,450,1.7);
+    purpleLight.position.set(100,300,100);
+    scene.add(purpleLight);
+    let blueLight = new THREE.PointLight(0x2daacc,50,450,1.7);
+    blueLight.position.set(300,300,200);
+    scene.add(blueLight);*/
+
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth,window.innerHeight);
     scene.fog = new THREE.FogExp2(0x121212, 0.001);

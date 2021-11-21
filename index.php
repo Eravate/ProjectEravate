@@ -19,6 +19,7 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" type="text/css" href="css/swup.css"/>
 
     <script src="script/jquery.js"></script>
+    <script type="module" src="script/3dplanets.js"></script>
     <script src="script/commands.js"></script>
     <script src="script/three.js"></script>
     <script defer src="script/planets.js"></script>
@@ -27,6 +28,7 @@ if (!isset($_SESSION['user'])) {
     <script defer src="script/postprocessing.min.js"></script>
     <script type="module" src="script/GLTFLoader.js"></script>
     <script type="module" src="script/OrbitControls.js"></script>
+    
     <!--<script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>-->
 
 
@@ -44,7 +46,7 @@ if (!isset($_SESSION['user'])) {
 
                 <!-- Title Layer -->
 
-                <div id="object" alt="Object"></div>
+                <div id="object" alt="Object"><canvas id="objectCanvas"></canvas></div>
                 <div id="navbar"><span id="solarsystem"></span>
                 <div id="imgnav"><img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
 
@@ -69,7 +71,7 @@ if (!isset($_SESSION['user'])) {
                     <div id='name'></div>
                     <div id='txt'></div>
                     <div id="source">Source: </div>
-                    <div class="seldiv" id="overview"><div class='selnumber'>01</div><div class='seltxt'>OVIERVIEW</div></div>
+                    <div class="seldiv" id="overview"><div class='selnumber'>01</div><div class='seltxt'>OVERVIEW</div></div>
                     <div class="seldiv" id="internal"><div class='selnumber'>02</div><div class='seltxt'>INTERNAL STRUCTURE</div></div>
                     <div class="seldiv" id="surface"><div class='selnumber'>03</div><div class='seltxt'>SURFACE GEOLOGY</div></div>
                 </div>
@@ -96,7 +98,7 @@ if (!isset($_SESSION['user'])) {
                 <div id="additional">
                     <div id="add1">
                         <div class="addtit">ROTATION TIME</div>
-                        <div class="addtxt" id="rottime">Test</div>
+                        <div class="addtxt" id="rottime"></div>
                     </div>
                     <div id="add2">
                         <div class="addtit">REVOLUTION TIME</div>
