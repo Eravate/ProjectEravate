@@ -1,0 +1,138 @@
+-----------------------------------------------------------------------------------------------
+17/11/2001
+-----------------------------------------------------------------------------------------------
+
+Hello World! I doubt anyone will ever read this but just in case, here it goes.
+
+5 months into development I decided to create a small txt file for myself so I can detail 
+the brainstorms I've been doing these past few hours, maybe make it into a bigger thing?
+I say 5 month development when in reality I have only programmed for like 10 days by now,
+after losing my job I couldn't get myself to do anything for 3 months, I've had a lot of
+issues at home and development has been very hard, I haven't touched code for so long that
+I basically forgot almost all the basics!
+
+You know, sometimes I just can't help but think, maybe I'm just not made for this? maybe
+I was right all along, after all, there are so many others that are much better at this,
+even in my own classroom, I can't compare myself to the top 3, let alone to the top 1,
+during my first year I believed I could actually make a career out of this, that it's
+something that I'm finally good at, but during the second year, seeing everyone just
+exceed me by far when it came to knowledge, it made me realize that this is just not my
+future, but if this isn't my future, what is? maybe I'm not destined for anything? that's 
+what I keep telling myself... I should probably go to sleep already.
+
+I can't guarantee I will finish this on time, or maybe at all, some days I really just
+want all of this to end, but I haven't been raised to give up this easily, but 1 month to
+finish this project? this is going to be the biggest challenge I've taken since I've been
+born! Anyways, enough of this little ramble, I really need to get going or else I'll never
+finish this, so, as I said, this TXT will contain all of the brainstorming and everything
+I couldn't include in the documentation.
+
+Also, why is it that when I have a concept in mind and look at it, I think "yeah, this'll 
+be easy to pull off" but then nothing looks like the original concept at all? maybe I should
+really switch industries...
+
+----------------------------------------------------------------------------------------------
+
+Looking at this webpage, 3 months I've really been thinking about implementing the log-in
+and the main into one page so that I can transition between them completely, and as of 
+now, I've come up with a basic plan.
+
+It will consist on two page loaders in one, earlier concepts had 3, but I think with two 
+it will be much easier.
+
+A note will be passed between PHP and jQuery to notify the script whether the user is 
+logged in to make sure the right page is loaded.
+
+The first page loader will contain the transition, and will be invisible as of default.
+
+The second page loader will contain both the log-in and the main page, and the first page
+loader will be used to make sure the client doesn't see the switch, all of this on one 
+page!
+
+I sound enthusiastic but this is the first time I will be doing something like this, but 
+it's all trial and error right? I really hope it is, for now I can't help but feel anxious...
+
+The design is another part... I have changed it so many times I can't count it on my own
+fingers, and I still don't know which way to go... maybe I should just prepare something
+and then switch between styles to decide the final one?
+
+This project has been far more difficult than I expected it to, I already know it won't end 
+like I wanted it to, and I won't use this as a portfolio, I don't even think I want to 
+finish it.
+
+Well, this will be it for the first day! I have less than 30 days to finish this...
+
+-----------------------------------------------------------------------------------------------
+18/11/2021
+-----------------------------------------------------------------------------------------------
+
+I am extremely close to having a mental breakdown by now, it's not because of the project,
+but because of what's happening the last few days in my home, I mean, who would've guessed
+living with alcoholic and manipulative parents would've been this hard, right?
+
+It's an extremely hard feeling to describe, it's like you are about to burst into tears for 
+no reason at all, if my mental health keeps decreasing like this, I'll be better off in a 
+mental asylum.
+
+I barely got anything done today, and I had to take a drive with my car, but the few minutes
+I got to drive it into the sunset, the few moments where my brain went into auto-pilot and
+allowed be to finally escape my thoughts... It's just an amazing feeling, absolutely
+outstanding.
+
+Anyways, I hope I can get something done tomorrow, I guess they can't be drinking 3 days
+straight right? right???...
+
+-----------------------------------------------------------------------------------------------
+19/11/2021
+-----------------------------------------------------------------------------------------------
+
+Maybe I should create an admin site for the ease of data insertion? It seems like a lot of work
+but it could pay off quite well, I should look into this, specially that manual data insertion
+is hell.
+
+This day was extremely tiring, I just can't help but fall asleep every 30 minutes or so, and the
+fact that I have one of the most boring jobs to do rn doesn't help at all, like filling out the
+database? Eh, It is what It is.
+
+Slow progression is progression at least, but there needs to be a way to pick up the pace in this
+system.
+
+-----------------------------------------------------------------------------------------------
+20/11/2021
+-----------------------------------------------------------------------------------------------
+
+Man, November do really be cold huh? tried to go outside with my long-sleeve for the first time
+in like a month and a half and almost froze to death, It's a real pitty I don't have any jackets
+or sweatshirts.
+
+Anyways, I finally was able to advance the amount I wanted today, the database is up and fully
+working! same goes for the PHP! man is this a relief, but still, a lot of work remains ahead of 
+me.
+
+Tomorrow, I'll have to load the 3D Planets by once, it is scary to think how hard it will be, and
+just how I'll pull it off, together with the Admin site and all that, but I should just keep my 
+head up and see what happens for myself.
+
+Today I also daydreamed about being a video-game programmer a lot, but when thinking about the
+entire process in-depth, I know I will never pull it off, despite this being my dream, but at
+least I can experience it in my head.
+
+-----------------------------------------------------------------------------------------------
+21/11/2021
+-----------------------------------------------------------------------------------------------
+
+Hey, you still reading this? with how much nonsense I put out right here, I wouldn't expect no
+one to reach this stage, but if you are here, congrats, you have my gratitude, and you should
+stop wasting your time, unless, for some reason, you are interested in how I process my thoughts.
+
+It's the 5th day of consecutive programming! the progress is slow as it always is with me, like,
+despite sitting on this code for over 12 hours today, I only programmed for 3-4 hours, it's crazy 
+how much time programming I spend on thinking and wasting time.
+
+Anyways, I figured it's about time I joined my application together, so from now on, loader, login
+and index will become one file, wonder just how much debugging will I have to do to get it working.
+
+Apart from this, my TODO list is pretty full of things, like improve the command prompt, design 
+an admin site, create logs to ensure client safety, add black holes and pulsars, add the music
+I composed, and all of this in less than 20 days? man I sure am high on crack thinking I will be 
+able to do this with my 3-4 hours of programming a day.
