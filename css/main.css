@@ -258,7 +258,8 @@ main {
     outline: none;
 }
 #textArea {
-    width: 590px;
+    overflow: hidden;
+    width: 550px;
     padding-left: 5px;
     padding-top: 5px;
     height:254px;
@@ -355,6 +356,25 @@ input:focus {
     right: 2vw;
 }
 #arrowright {
+    height: 5.625vw;
+}
+
+#goup {
+    position: absolute;
+    top: 10vw;
+    right: 11.8vw;
+}
+#arrowup {
+    height: 5.625vw;
+}
+
+
+#godown {
+    position: absolute;
+    top: 36vw;
+    right: 11.8vw;
+}
+#arrowdown {
     height: 5.625vw;
 }
 
@@ -531,3 +551,10 @@ body {
         display: none;
     }
 }*/
+
+.redall {
+    color: red;
+}
+.yellowall {
+    color: yellow;
+}

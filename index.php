@@ -80,6 +80,8 @@ if (!isset($_SESSION['user'])) {
 
                 <div id="goleft"><img src="icons/left.png" id="arrowleft"></div>
                 <div id="goright"><img src="icons/right.png" id="arrowright"></div>
+                <div id="goup"><img src="icons/up.png" id="arrowup"></div>
+                <div id="godown"><img src="icons/down.png" id="arrowdown"></div>
                 
                 <!-- Layer previously used for music, now used for info below. -->
 

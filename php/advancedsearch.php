@@ -4,8 +4,9 @@ session_start();
 # Database Con
 $database = new mysqli('localhost', 'root', '', 'eravate');
 
-$queryname = $_POST['solar'];
+$queryname = $_POST['location'];
 $objects = array();
+$idSun;
 
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 
@@ -14,22 +15,22 @@ $result = $database->prepare("SELECT 'star', ID, name FROM Star WHERE name = ? U
 $result->bind_param('ssss',$queryname,$queryname,$queryname,$queryname);
 $result->execute();
 $result->store_result();
-$result->bind_result($type,$id,$name);
+$result->bind_result($typeRes,$idRes,$nameRes);
+
 
 $rowcount = $result->num_rows;
 switch ($rowcount) {
     case 0:
-        $sun = 1
+        $objects = 1;
         break;
     case 1:
         $result->fetch();
-        switch ($type):
-            // If the object that was searched for was a Star
+        switch ($typeRes) {
+            // If the object that was searched for was a Star, It is starting to get extremely complicated y'know
             case "star":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=? AND s.startype = t.ID
-                                            UNION SELECT p.ID, p.name, p.rotation, p.revolution, p.radius, p.temp, p.overviewTXT, p.overviewSor, p.overviewURL, p.internalTXT, p.internalSor, p.internalURL, p.surfaceTXT, p.surfaceSor, p.surfaceURL, p.3D FROM Planet p WHERE Star=?");
-                $result->bind_param('ii',$id,$id);
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=? AND s.startype = t.ID");
+                $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();
                 $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
@@ -44,6 +45,54 @@ switch ($rowcount) {
                             $sun = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
                                             $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
                             array_push($objects, $sun);
+                        }
+                        break;
+                    }
+
+                $database->stmt_init();
+                $result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM Planet WHERE Star=? ORDER BY position ASC");
+                $result->bind_param('i',$idRes);
+                $result->execute();
+                $result->store_result();
+                $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                    $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+
+                $rowcount = $result->num_rows;
+
+                switch ($rowcount) {
+                    case 0:
+                        break;
+                    default:
+                        while ($result->fetch()) {
+                            $objectsSmaller = array();
+                            $planet = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                            $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+                            array_push($objectsSmaller, $planet);
+                            $database->stmt_init();
+                            $resultS = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM Satellite WHERE Planet=? ORDER BY position ASC");
+                            $resultS->bind_param('i',$id);
+                            $resultS->execute();
+                            $resultS->store_result();
+                            $resultS->bind_result($idS,$nameS,$rotationS,$revolutionS,$radiusS,$tempS,$overviewTXTS,$overviewSorS,$overviewURLS,
+                                                $internalTXTS,$internalSorS,$internalURLS,$surfaceTXTS,$surfaceSorS,$surfaceURLS,$threedS);
+
+                            $rowcountS = $resultS->num_rows;
+                            switch ($rowcountS) {
+                                case 0:
+                                    break;
+                                default:
+                                    while ($resultS->fetch()) {
+                                        $satellite = array($idS,$nameS,$rotationS,$revolutionS,$radiusS,$tempS,$overviewTXTS,$overviewSorS,$overviewURLS,
+                                                        $internalTXTS,$internalSorS,$internalURLS,$surfaceTXTS,$surfaceSorS,$surfaceURLS,$threedS);
+                                        array_push($objectsSmaller, $satellite);
+                                    }
+                                    break;
+                                }
+                            if (sizeof($objectsSmaller)>1) {
+                                array_push($objects, $objectsSmaller);
+                            } else {
+                                array_push($objects, $planet);
+                            }
                         }
                         break;
                     }
@@ -51,9 +100,8 @@ switch ($rowcount) {
             // If the object that was searched for was a Star - Uses subquery to determine ID
             case "planet":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM Planet Where ID=?) AND s.startype = t.ID
-                                            UNION SELECT p.ID, p.name, p.rotation, p.revolution, p.radius, p.temp, p.overviewTXT, p.overviewSor, p.overviewURL, p.internalTXT, p.internalSor, p.internalURL, p.surfaceTXT, p.surfaceSor, p.surfaceURL, p.3D FROM Planet p WHERE Star=?");
-                $result->bind_param('ii',$id,$id);
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM Planet WHERE ID=?) AND s.startype = t.ID");
+                $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();
                 $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
@@ -65,19 +113,67 @@ switch ($rowcount) {
                         break;
                     default:
                         while ($result->fetch()) {
+                            $idSun = $id;
                             $sun = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
                                             $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
                             array_push($objects, $sun);
+                        }
+                        break;
+                    }
+
+                $database->stmt_init();
+                $result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM Planet WHERE Star=? ORDER BY position ASC");
+                $result->bind_param('i',$idSun);
+                $result->execute();
+                $result->store_result();
+                $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                    $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+
+                $rowcount = $result->num_rows;
+
+                switch ($rowcount) {
+                    case 0:
+                        break;
+                    default:
+                        while ($result->fetch()) {
+                            $objectsSmaller = array();
+                            $planet = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                            $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+                            array_push($objectsSmaller, $planet);
+                            $database->stmt_init();
+                            $resultS = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM Satellite WHERE Planet=? ORDER BY position ASC");
+                            $resultS->bind_param('i',$id);
+                            $resultS->execute();
+                            $resultS->store_result();
+                            $resultS->bind_result($idS,$nameS,$rotationS,$revolutionS,$radiusS,$tempS,$overviewTXTS,$overviewSorS,$overviewURLS,
+                                                $internalTXTS,$internalSorS,$internalURLS,$surfaceTXTS,$surfaceSorS,$surfaceURLS,$threedS);
+
+                            $rowcountS = $resultS->num_rows;
+                            switch ($rowcountS) {
+                                case 0:
+                                    break;
+                                default:
+                                    while ($resultS->fetch()) {
+                                        $satellite = array($idS,$nameS,$rotationS,$revolutionS,$radiusS,$tempS,$overviewTXTS,$overviewSorS,$overviewURLS,
+                                                        $internalTXTS,$internalSorS,$internalURLS,$surfaceTXTS,$surfaceSorS,$surfaceURLS,$threedS);
+                                        array_push($objectsSmaller, $satellite);
+                                    }
+                                    break;
+                                }
+                            if (sizeof($objectsSmaller)>1) {
+                                array_push($objects, $objectsSmaller);
+                            } else {
+                                array_push($objects, $planet);
+                            }
                         }
                         break;
                     }
                 break;
             // If the object that was searched for was a Star
-            case: "npo":
+            case "npo":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM NPO Where ID=?) AND s.startype = t.ID
-                                            UNION SELECT n.ID, n.name, n.rotation, n.revolution, n.radius, n.temp, n.overviewTXT, n.overviewSor, n.overviewURL, n.internalTXT, n.internalSor, n.internalURL, n.surfaceTXT, n.surfaceSor, n.surfaceURL, n.3D FROM NPO n WHERE Star=?");
-                $result->bind_param('ii',$id,$id);
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM NPO WHERE ID=?) AND s.startype = t.ID");
+                $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();
                 $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
@@ -89,21 +185,115 @@ switch ($rowcount) {
                         break;
                     default:
                         while ($result->fetch()) {
+                            $idSun = $id;
                             $sun = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
                                             $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
                             array_push($objects, $sun);
                         }
                         break;
                     }
+
+                $database->stmt_init();
+                $result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM NPO WHERE Star=? ORDER BY position ASC");
+                $result->bind_param('i',$idSun);
+                $result->execute();
+                $result->store_result();
+                $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                    $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+
+                $rowcount = $result->num_rows;
+
+                switch ($rowcount) {
+                    case 0:
+                        break;
+                    default:
+                        while ($result->fetch()) {
+                            $objectsSmaller = array();
+                            $npo = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                            $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+                            array_push($objects, $npo);
+                        }
+                        break;
+                    }
                 break;
-            // If the object that was searched for was a Star, This one's where it get tricky, since it uses subqueries within subqueries.
-            case: "satellite":
+            // If the object that was searched for was a Star, This one's boutta have so much code fml
+            case "satellite":
+                $database->stmt_init();
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM Planet WHERE ID=(SELECT Planet FROM Satellite WHERE ID=?)) AND s.startype = t.ID");
+                $result->bind_param('i',$idRes);
+                $result->execute();
+                $result->store_result();
+                $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                    $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+
+                $rowcount = $result->num_rows;
+                switch ($rowcount) {
+                    case 0:
+                        break;
+                    default:
+                        while ($result->fetch()) {
+                            $idSun = $id;
+                            $sun = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                            $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+                            array_push($objects, $sun);
+                        }
+                        break;
+                    }
+
+                $database->stmt_init();
+                $result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM Planet WHERE Star=? ORDER BY position ASC");
+                $result->bind_param('i',$idSun);
+                $result->execute();
+                $result->store_result();
+                $result->bind_result($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                    $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+
+                $rowcount = $result->num_rows;
+
+                switch ($rowcount) {
+                    case 0:
+                        break;
+                    default:
+                        while ($result->fetch()) {
+                            $objectsSmaller = array();
+                            $planet = array($id,$name,$rotation,$revolution,$radius,$temp,$overviewTXT,$overviewSor,$overviewURL,
+                                            $internalTXT,$internalSor,$internalURL,$surfaceTXT,$surfaceSor,$surfaceURL,$threed);
+                            array_push($objectsSmaller, $planet);
+                            $database->stmt_init();
+                            $resultS = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM Satellite WHERE Planet=? ORDER BY position ASC");
+                            $resultS->bind_param('i',$id);
+                            $resultS->execute();
+                            $resultS->store_result();
+                            $resultS->bind_result($idS,$nameS,$rotationS,$revolutionS,$radiusS,$tempS,$overviewTXTS,$overviewSorS,$overviewURLS,
+                                                $internalTXTS,$internalSorS,$internalURLS,$surfaceTXTS,$surfaceSorS,$surfaceURLS,$threedS);
+
+                            $rowcountS = $resultS->num_rows;
+                            switch ($rowcountS) {
+                                case 0:
+                                    break;
+                                default:
+                                    while ($resultS->fetch()) {
+                                        $satellite = array($idS,$nameS,$rotationS,$revolutionS,$radiusS,$tempS,$overviewTXTS,$overviewSorS,$overviewURLS,
+                                                        $internalTXTS,$internalSorS,$internalURLS,$surfaceTXTS,$surfaceSorS,$surfaceURLS,$threedS);
+                                        array_push($objectsSmaller, $satellite);
+                                    }
+                                    break;
+                                }
+                            if (sizeof($objectsSmaller)>1) {
+                                array_push($objects, $objectsSmaller);
+                            } else {
+                                array_push($objects, $planet);
+                            }
+                        }
+                        break;
+                    }
                 break;
+        }
         break;
     default:
-        $sun = 2
+        $objects = 2;
         break;
-    }
+    };
 
 echo json_encode($objects);
 ?>

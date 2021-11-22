@@ -9,7 +9,6 @@ function fetchData() {
     })
         .then(response => response.text())
         .then(data => {
-            console.log(data);
             objects = JSON.parse(data);
         });
 }
@@ -40,31 +39,57 @@ function fillWithPlanet() {
     $("#composition1").html(objects[numObject][17]);
     $("#composition2").html(objects[numObject][18]);*/
     $("#solarsystem").html(objects[0][1].toUpperCase());
-    $("#name").html(objects[numObject][1].toUpperCase());
-    $("#txt").html(objects[numObject][6]);
-    $("#source").html('Source: &nbsp; <a href=\''+objects[numObject][8]+'\'>'+objects[numObject][7]+'</a>');
-    $("#rottime").html(objects[numObject][2]+'&nbsp;DAYS');
-    $("#revtime").html(objects[numObject][3]+'&nbsp;DAYS');
-    $("#radius").html(objects[numObject][4]+'&nbsp;KM');
-    $("#temp").html(objects[numObject][5]+'&nbsp;ºC');
+    if (Array.isArray(objects[numObject][0])) {
+      $("#name").html(objects[numObject][numSat][1].toUpperCase());
+      $("#txt").html(objects[numObject][numSat][6]);
+      $("#source").html('Source: &nbsp; <a href=\''+objects[numObject][0][8]+'\'>'+objects[numObject][numSat][7]+'</a>');
+      $("#rottime").html(objects[numObject][numSat][2]+'&nbsp;DAYS');
+      $("#revtime").html(objects[numObject][numSat][3]+'&nbsp;DAYS');
+      $("#radius").html(objects[numObject][numSat][4]+'&nbsp;KM');
+      $("#temp").html(objects[numObject][numSat][5]+'&nbsp;ºC');
+
+      threed = objects[numObject][numSat][15];
+      // Switch for loading 3D Planet
+      switch (threed) {
+        // If the object doesn't have a 3D Texture, load the ? texture
+        case 0:
+          execute3d("unknown");
+          break;
+        case 1:
+          execute3d(objects[numObject][numSat][1].toLowerCase());
+          break;
+        default:
+          execute3d(threed);
+          break;
+      }
+    } else {
+      $("#name").html(objects[numObject][1].toUpperCase());
+      $("#txt").html(objects[numObject][6]);
+      $("#source").html('Source: &nbsp; <a href=\''+objects[numObject][8]+'\'>'+objects[numObject][7]+'</a>');
+      $("#rottime").html(objects[numObject][2]+'&nbsp;DAYS');
+      $("#revtime").html(objects[numObject][3]+'&nbsp;DAYS');
+      $("#radius").html(objects[numObject][4]+'&nbsp;KM');
+      $("#temp").html(objects[numObject][5]+'&nbsp;ºC');
+
+      threed = objects[numObject][15];
+      // Switch for loading 3D Planet
+      switch (threed) {
+        // If the object doesn't have a 3D Texture, load the ? texture
+        case 0:
+          execute3d("unknown");
+          break;
+        case 1:
+          execute3d(objects[numObject][1].toLowerCase());
+          break;
+        default:
+          execute3d(threed);
+          break;
+      }
+    }
+    
     checkForArrows();
 
-    // Switch for loading 3D Planet
-
-    threed = objects[numObject][15];
-
-    switch (threed) {
-      // If the object doesn't have a 3D Texture, load the ? texture
-      case "0":
-        execute3d("unknown");
-        break;
-      case "1":
-        execute3d(objects[numObject][1].toLowerCase());
-        break;
-      default:
-        execute3d(threed);
-        break;
-    }
+    
 }
 
 // Function to wait for objects to load in
