@@ -1,6 +1,7 @@
 // USED PREVIOUSLY TO IMPORT VERTEX SHADERS
 import * as THREE from './three.module';
 import { MapControls, OrbitControls } from './OrbitControls.js';
+import {ObjectControls} from './ObjectControls.js';
 //import vertexShader from '../shaders/vertex.glsl';
 
 //Fancy trick that allows a function to become global

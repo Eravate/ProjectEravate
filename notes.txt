@@ -136,3 +136,22 @@ Apart from this, my TODO list is pretty full of things, like improve the command
 an admin site, create logs to ensure client safety, add black holes and pulsars, add the music
 I composed, and all of this in less than 20 days? man I sure am high on crack thinking I will be 
 able to do this with my 3-4 hours of programming a day.
+
+-----------------------------------------------------------------------------------------------
+24/11/2021
+-----------------------------------------------------------------------------------------------
+
+Ah, was finally able to catch a breathe from programming this useless app, and have some fresh
+air.
+
+I still can't believe how far I've taken this in so few days, and looking at how it looked like 
+2 weeks ago, this seems like absolutely 0 code was reused, and one could even say so, since I've 
+had to chnage pretty much everything.
+
+Now comes the design part of the admin website and that's pretty much it for everything I've had 
+originally in my mind, with the exception of movable planets with the cursor of one's mouse, but 
+I don't know if I will be able to do that one, I'm still fairly new to 3JS so...
+
+I've been alternating between a couple of designs but they all ended up looking kind of average 
+so I decided to reuse the design part from the main app, this way we have consistency across the 
+different pages.

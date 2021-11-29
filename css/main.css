@@ -62,16 +62,20 @@ main {
     height: 3vw;
     width: 12vw;
 }
+#exclamation {
+    height: 2vw;
+}
 #console {
     height: 2vw;
     margin-left: 1vw;
 }
 #fulls {
     height: 2vw;
+    margin-left: 1vw;
 }
 #logout {
-    margin-left: 1vw;
     height:2vw;
+    margin-left: 1vw;
 }
 
 /* CSS FOR CONTENT */
@@ -85,6 +89,9 @@ main {
     justify-content: center; /* horizontal */
     background-image: url("../icons/starsbackground.jpg");
     background-size: cover;
+}
+.invis {
+    opacity:0;
 }
 
 /* CSS FOR 3D OBJECT */

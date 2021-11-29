@@ -16,9 +16,11 @@ if (!isset($_SESSION['user'])) {
     <link rel="icon" type="image/png" href="icons/logo.png"/>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/dark.css">
     <link rel="stylesheet" type="text/css" href="css/swup.css"/>
 
     <script src="script/jquery.js"></script>
+    <script src="script/sweetalert2.min.js"></script>
     <script type="module" src="script/3dplanets.js"></script>
     <script src="script/commands.js"></script>
     <script src="script/three.js"></script>
@@ -28,6 +30,7 @@ if (!isset($_SESSION['user'])) {
     <script defer src="script/postprocessing.min.js"></script>
     <script type="module" src="script/GLTFLoader.js"></script>
     <script type="module" src="script/OrbitControls.js"></script>
+    
     
     <!--<script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>-->
 
@@ -42,13 +45,19 @@ if (!isset($_SESSION['user'])) {
     <main>
         <div id="landscape">
             <!-- All the Content -->
-            <div id="content">
+            <div id="content" class="invis">
 
                 <!-- Title Layer -->
 
                 <div id="object" alt="Object"><canvas id="objectCanvas"></canvas></div>
                 <div id="navbar"><span id="solarsystem"></span>
-                <div id="imgnav"><img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();"><img src="icons/console.png" id="console" alt="Console"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form></div></div>
+                <div id="imgnav">
+                    <img src="icons/exclamation.png" id="exclamation" alt="Notif" onclick="reportError();">
+                    <img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();">
+                    <img src="icons/console.png" id="console" alt="Console">
+                    <img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out">
+                    <form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form>
+                </div></div>
 
                 <!-- Information Layer -->
 

@@ -143,7 +143,7 @@ $("#console").click(function(){
 $("#reddot").click(function(){
     $("#consoleDiv").fadeToggle(500);
 })
-// Make menu and info disappear on click
+/* Make menu and info disappear on click
 $('#see').click(function(){
     $('#navbar').fadeOut(500);
     $('#infoleft').fadeOut(500);
@@ -167,7 +167,7 @@ $(document).mousemove(function(){
         audio.pause();
         audio.currentTime = 0;
     }
-});
+});*/
 
 // Function to check if arrows should disappear
 function checkForArrows(){

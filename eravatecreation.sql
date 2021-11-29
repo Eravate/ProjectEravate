@@ -96,16 +96,54 @@ USE Eravate;
 CREATE TABLE AppUser(
 	email varchar(80) primary key,
     passwd varchar(120) NOT NULL,
-	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-    #activate varchar(20) NOT NULL,
-    #activated tinyint NOT NULL DEFAULT 0
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    -- #activate varchar(20) NOT NULL,
+    -- #activated tinyint NOT NULL DEFAULT 0,
+    isAdmin tinyint NOT NULL DEFAULT 0,
+    isSuperAdmin tinyint NOT NULL DEFAULT 0
+);
+
+-- Admin logs will be kept here 
+
+CREATE TABLE AdminLogs(
+    ID int primary key auto_increment,
+    user varchar(80),
+    action varchar(80),
+    objectAffected varchar(80),
+    done timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user) REFERENCES AppUser(email)
+);
+
+-- Messages sent by the users to the site admins will be kept here
+
+CREATE TABLE MessageToTeam(
+    ID int primary key auto_increment,
+    sentBy varchar(80) NOT NULL,
+    message text NOT NULL,
+    sentOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    hasBeenRead tinyint NOT NULL DEFAULT 0,
+    closed tinyint NOT NULL DEFAULT 0,
+    isTagged tinyint NOT NULL DEFAULT 0,
+    FOREIGN KEY (sentBy) REFERENCES AppUser(email)
+);
+
+-- Man why the fuck am I complicating this more?
+
+CREATE TABLE CommentsOnMessage(
+    ID int primary key auto_increment,
+    message int NOT NULL,
+    sentBy varchar(80) NOT NULL,
+    comment text NOT NULL,
+    sentOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (message) REFERENCES MessageToTeam(ID),
+    FOREIGN KEY (sentBy) REFERENCES AppUser(email)
 );
 
 -- A star is any object whose orbit depends solely on the galaxy it belongs to.
 -- To this day, it is unknown whether these objects are gravitationally bound to SMBH (Supermassive Black Holes), 
 -- since those are believed to not produce enough gravity to keep an entire galaxy together.
 -- That's why BH and SMBH will be part of the Star table.
--- Bellow, I'll include sources for this, in an easy to understand format (Kurzgesagt video), as well as scientific papers published on this matter (Pun not intended).
+-- Below, I'll include sources for this, in an easy to understand format (Kurzgesagt video), as well as scientific papers published on this matter (Pun not intended).
 -- Kurzgesagt: https://www.youtube.com/watch?v=QAa2O_8wBUQ
 -- https://royalsocietypublishing.org/doi/abs/10.1098/rsta.1986.0128
 -- https://iopscience.iop.org/article/10.1086/309577/meta

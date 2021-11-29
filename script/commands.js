@@ -12,6 +12,15 @@ function fetchData() {
             objects = JSON.parse(data);
         });
 }
+function fetchDataAdmin() {
+  fetch('php/receivemessages.php', {
+      method: "POST",
+  })
+      .then(response => response.text())
+      .then(data => {
+          adminInfo = JSON.parse(data);
+      });
+}
 
 // Function to fill all the objects with information uppon load
 
@@ -87,10 +96,117 @@ function fillWithPlanet() {
       }
     }
     
-    checkForArrows();
-
-    
+    checkForArrows();   
 }
+
+function fillWithDataAdmin(typeofInfo) {
+  var fillWithLeft;
+  var fillWithCenter;
+  var fillWithRight;
+  switch (typeofInfo) {
+    case "home":
+      // Left side
+      // Fill with Sun info
+      if (adminInfo[0].length == 1) {
+        fillWithLeft = "<div class='titleInfo'>" + adminInfo[0].length + " STAR</div><div class='textInfo'>Has been added since the creation of this app, the last being " + adminInfo[0][0][1] + ".</div>";
+      } else if (adminInfo[0].length == 0) {
+        fillWithLeft = "<div class='titleInfo'>" + adminInfo[0].length + " STARS</div><div class='textInfo'>No stars have been added yet!</div>";
+      } else {
+        fillWithLeft = "<div class='titleInfo'>" + adminInfo[0].length + " STARS</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[0][adminInfo[0].length-1][1] + ".</div>";
+      }
+      // Fill with Planet info
+      if (adminInfo[1].length == 1) {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[1].length + " PLANET</div><div class='textInfo'>Has been added since the creation of this app, the last being " + adminInfo[1][0][2] + ".</div>";
+      } else if (adminInfo[1].length == 0) {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[1].length + " PLANETS</div><div class='textInfo'>No planets have been added yet!</div>";
+      } else {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[1].length + " PLANETS</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[1][adminInfo[1].length-1][2] + ".</div>";
+      }
+      // Fill with NPO info
+      if (adminInfo[2].length == 1) {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPO</div><div class='textInfo'>Has been added since the creation of this app, the last being " + adminInfo[2][0][2] + ".</div>";
+      } else if (adminInfo[2].length == 0) {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPOs</div><div class='textInfo'>No npos have been added yet!</div>";
+      } else {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPOs</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[2][adminInfo[2].length-1][2] + ".</div>";
+      }
+      // Fill with Satellite info
+      if (adminInfo[3].length == 1) {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[3].length + " SATELLITE</div><div class='textInfo'>Has been added since the creation of this app, "+adminInfo[3][0][2]+", with a radius of " + adminInfo[3][0][6] + "km.</div>";
+      } else if (adminInfo[3].length == 0) {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[3].length + " SATELLITES</div><div class='textInfo'>No satellites have been added yet!</div>";
+      } else {
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[3].length + " SATELLITES</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[3][adminInfo[3].length-1][2] + ".</div>";
+      }
+
+      // Centre
+      
+      if (adminInfo[5].length == 1) {
+        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGE</div><div class='textInfo'>Has been received recently.</div><div id='infoMessages'></div>"
+      } else if (adminInfo[5].length == 0) {
+        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>No messages have been received recently.</div>"
+      } else {
+        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>Have messages have been received recently.</div>"
+      }
+
+      if (adminInfo[5].length >= 1) {
+        fillWithCenter += "<div class='messageRow'>"
+        for (var i=0;i<adminInfo[5].length;i++) {
+          fillWithCenter += "<div class='rowTitle'>"+adminInfo[5][i][1]+"</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
+        }
+        fillWithCenter += "</div>"
+      }
+
+      // Right
+
+      if (adminInfo[4].length == 1) {
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOG</div><div class='textInfo'>Only one log is available as of currently.</div><div id='infoLogs'></div>"
+      } else if (adminInfo[4].length == 0) {
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>There are no logs as of currently.</div>"
+      } else {
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>Are available as of currently.</div>"
+      }
+
+      if (adminInfo[4].length >= 1) {
+        fillWithRight += "<div class='messageRow'>"
+        for (var i=0;i<adminInfo[4].length;i++) {
+          fillWithRight += "<div class='rowTitle'>"+adminInfo[4][i][1]+"</div><div class='rowText'>"+adminInfo[4][i][2]+"</div><div class='rowFooter'>"+adminInfo[4][i][4]+"</div>";
+        }
+        fillWithRight += "</div>"
+      }
+      break;
+    default:
+      break;
+  }
+  $("#infoleft").html(fillWithLeft);
+  $("#infocentreInner").html(fillWithCenter);
+  $("#inforightInner").html(fillWithRight);
+}
+
+function fillWithAdmin() {
+  if (adminInfo[0].length == 1) {
+    $("#addtit1").html(adminInfo[0].length + " STAR");
+  } else {
+    $("#addtit1").html(adminInfo[0].length + " STARS");
+  }
+  if (adminInfo[1].length == 1) {
+    $("#addtit2").html(adminInfo[1].length + " PLANET");
+  } else {
+    $("#addtit2").html(adminInfo[1].length + " PLANETS");
+  }
+  if (adminInfo[2].length == 1) {
+    $("#addtit3").html(adminInfo[2].length + " NPO");
+  } else {
+    $("#addtit3").html(adminInfo[2].length + " NPOS");
+  }
+  if (adminInfo[3].length == 1) {
+    $("#addtit4").html(adminInfo[3].length + " SATELLITE");
+  } else {
+    $("#addtit4").html(adminInfo[3].length + " SATELLITES");
+  }
+  
+}
+
 
 // Function to wait for objects to load in
 
@@ -100,6 +216,15 @@ function waitForObjects(){
     } else {
         setTimeout(waitForObjects, 250);
     }
+}
+
+function waitForAdmin(){
+  if(typeof adminInfo !== "undefined") {
+      fillWithAdmin();
+      fillWithDataAdmin("home");
+  } else {
+      setTimeout(waitForAdmin, 250);
+  }
 }
 
 // Function to allow the dragging of the console across the screen
@@ -181,7 +306,25 @@ function submitLogin() {
           // err1 is the error that we get when a client is trying to register, but has already created an account with that email address
           // err2 is the error we get when the client is trying to log-in, but either the email address or the password are not correct
           case "sucl":
-              window.location.href = "index.php";
+            window.location.href = "index.php";
+            break;
+          case "suca":
+            var formData = new FormData();
+            formData.append('action', "Logged In");
+            formData.append('objAffected', "None");
+            fetch('php/insertintologs.php', {
+              method: "POST",
+              body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    var result = JSON.parse(data);
+                    if (result == "success") {
+                      window.location.href = "admin.php";
+                    } else {
+                      console.log(data);
+                    }
+                });
             break;
           case "succ":
             Swal.fire({
@@ -220,6 +363,24 @@ function submitLogin() {
 // Function to log-out, pretty self-explanatory
 
 function logout() {
+  if (typeof(adminInfo)!="undefined") {
+    var formData = new FormData();
+    formData.append('action', "Logged Out");
+    formData.append('objAffected', "None");
+    fetch('php/insertintologs.php', {
+      method: "POST",
+      body: formData
+    })
+        .then(response => response.text())
+        .then(data => {
+            var result = JSON.parse(data);
+            if (result == "success") {
+              window.location.href = "login.php";
+            } else {
+              console.log(data);
+            }
+        });
+  }
   $('#logoutForm').submit();
 }
 
@@ -265,3 +426,37 @@ function retractInfoLeft() {
   $('#contentLeft').slideToggle(1000);
 }
 */
+
+function reportError() {
+  Swal.fire({
+    title: "Send a message to our team",
+    input: 'textarea',
+    inputPlaceholder: 'Type your message here...',
+    inputAttributes: {
+      'aria-label': 'Type your message here'
+    },
+    showCancelButton: true
+  }).then((result) => {
+    // THIS WORKS LMFAO FINESSED THEM DEVS!
+    if(result.isConfirmed) {
+      var formData = new FormData();
+      formData.append('message', result.value);
+      fetch('php/sendmessage.php', {
+          method: "POST",
+          body: formData
+      })
+          .then(response => response.text())
+          .then(data => {
+              if(data=="success") {
+                Swal.fire('Sent!', 'The message has been sent', 'success');
+              } else {
+                console.log(data);
+                Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+              }
+          });
+      
+    } else {
+      Swal.fire('Canceled!', 'The message has not been sent', 'info');
+    }
+  });
+}

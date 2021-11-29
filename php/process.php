@@ -37,17 +37,23 @@
             echo json_encode("err1");
         }
     } else {
-        $result = $database->prepare("SELECT passwd FROM AppUser WHERE email=?");
+        $result = $database->prepare("SELECT passwd, isAdmin, isSuperAdmin FROM AppUser WHERE email=?");
         $result->bind_param('s',$email);
         $result->execute();
         $result->store_result();
-        $result->bind_result($passwdHash);
+        $result->bind_result($passwdHash,$isAdmin,$isSuperAdmin);
         $rowcount = $result->num_rows;
         if($rowcount==1) {
             $result->fetch();
             if (password_verify($passwd,$passwdHash)){
-                $_SESSION['user'] = $encemail;
-                echo json_encode("sucl");
+                if($isAdmin) {
+                    $_SESSION['admin'] = $email;
+                    $_SESSION['sadmin'] = $isSuperAdmin;
+                    echo json_encode("suca");
+                } else {
+                    $_SESSION['user'] = $email;
+                    echo json_encode("sucl");
+                }
             } else {
                 echo json_encode("err2");
             }
