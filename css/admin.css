@@ -10,6 +10,10 @@
   font-style: normal;
 }
 
+select {
+  display:block;
+}
+
 body {
   background-color: black;
   width:100vw;
@@ -163,8 +167,19 @@ main {
   margin-bottom:1vw;
 }
 
+.row {
+  margin-bottom: 1vw;
+  width: 16vw;
+}
+
 .rowTitle {
+  vertical-align:middle;
+  height:1vw;
   font-size:0.8vw;
+}
+.rowIcon {
+  float:right;
+  height: 1vw;
 }
 .rowText {
   overflow: hidden;
@@ -174,7 +189,6 @@ main {
 }
 .rowFooter {
   font-size: 0.8vw;
-  margin-bottom: 1vw;
 }
 /*#infoMessages {
   width:16vw;

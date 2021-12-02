@@ -18,6 +18,10 @@ window.execute3d = function (object) {
         // Alpha allows the background to be transparent ESSENTIAL
         alpha: true
     });
+    const mouse = {
+        x: undefined,
+        y: undefined
+    };
 
     renderer.setSize(canvasContainer.offsetWidth,canvasContainer.offsetHeight);
 
@@ -87,10 +91,9 @@ window.execute3d = function (object) {
         requestAnimationFrame(animate);
         renderer.render(scene,camera);
         // Used for slow rotation of the planet in X and Y axis
-        sphere.rotation.y += 0.0005
-        sphere.rotation.x += 0.0002
+        sphere.rotation.y += 0.0005; 
+        sphere.rotation.x += 0.0002;
     };
 
     animate();
-
 }

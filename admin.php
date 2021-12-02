@@ -12,12 +12,12 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="icon" type="image/png" href="icons/logo.png"/>
+    <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/dark.css">
     <link rel="stylesheet" type="text/css" href="css/swup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jqueryeditableselect.min.css"/>
 
     <script src="script/jquery.js"></script>
     <script src="script/sweetalert2.min.js"></script>
@@ -26,6 +26,7 @@ if (!isset($_SESSION['admin'])) {
     <script defer src="script/admin.js"></script>
     <script defer src="script/three.min.js"></script>
     <script defer src="script/postprocessing.min.js"></script>
+    <script src="script/jqueryeditableselect.min.js"></script>
     <script type="module" src="script/GLTFLoader.js"></script>
     <script type="module" src="script/OrbitControls.js"></script>
     
@@ -71,7 +72,7 @@ if (!isset($_SESSION['admin'])) {
                 <!-- Information Right -->
 
                 <div id="info">
-                    <div id="infoleft"></div>
+                    <div id="infoleft"><div id="infoleftInner"></div></div>
                     <div id="infocentre"><div id="infocentreInner"></div></div>
                     <div id="inforight"><div id="inforightInner"></div></div>
                 </div>

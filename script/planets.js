@@ -272,7 +272,7 @@ $("#overview").click(function(){
         if (Array.isArray(objects[numObject][numSat])) {
             $("#txt").html(objects[numObject][numSat][6]).fadeIn();
         } else {
-            $("#txt").html(objects[numObject][numSat]).fadeIn();
+            $("#txt").html(objects[numObject][6]).fadeIn();
         }
     });
     $("#source").fadeOut(function(){
@@ -285,8 +285,8 @@ $("#overview").click(function(){
 });
 $("#internal").click(function(){
     $("#txt").fadeOut(function(){
-        if (Array.isArray(objects[numObject][0])) {
-            $("#txt").html(objects[numObject][0][9]).fadeIn();
+        if (Array.isArray(objects[numObject][numSat])) {
+            $("#txt").html(objects[numObject][numSat][9]).fadeIn();
         } else {
             $("#txt").html(objects[numObject][9]).fadeIn();
         }

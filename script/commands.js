@@ -152,9 +152,26 @@ function fillWithDataAdmin(typeofInfo) {
       if (adminInfo[5].length >= 1) {
         fillWithCenter += "<div class='messageRow'>"
         for (var i=0;i<adminInfo[5].length;i++) {
-          fillWithCenter += "<div class='rowTitle'>"+adminInfo[5][i][1]+"</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
+          // IF the message is still open
+          if (adminInfo[5][i][5] == 0) {
+            fillWithCenter += "<div class='row'><div class='rowTitle'>"+adminInfo[5][i][1];
+            // IF the message is tagged / not tagged
+            if (adminInfo[5][i][6] == 0) {
+              fillWithCenter += "<img class='rowIcon' src='icons/notflagged.png'>"
+            } else {
+              fillWithCenter += "<img class='rowIcon' src='icons/flagged.png'>"
+            }
+            // IF the message has not been read / has been read
+            if (adminInfo[5][i][4] == 0) {
+              fillWithCenter += " <img class='rowIcon' src='icons/notread.png'>"
+            } else {
+              fillWithCenter += "<img class='rowIcon' src='icons/read.png'>"
+            }
+            fillWithCenter += "</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
+          }
+          fillWithCenter += "</div>";
         }
-        fillWithCenter += "</div>"
+        fillWithCenter += "</div>";
       }
 
       // Right
@@ -168,17 +185,48 @@ function fillWithDataAdmin(typeofInfo) {
       }
 
       if (adminInfo[4].length >= 1) {
-        fillWithRight += "<div class='messageRow'>"
+        fillWithRight += "<div class='logRow'>"
         for (var i=0;i<adminInfo[4].length;i++) {
-          fillWithRight += "<div class='rowTitle'>"+adminInfo[4][i][1]+"</div><div class='rowText'>"+adminInfo[4][i][2]+"</div><div class='rowFooter'>"+adminInfo[4][i][4]+"</div>";
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[4][i][1]+"</div><div class='rowText'>"+adminInfo[4][i][2]+"</div><div class='rowFooter'>"+adminInfo[4][i][4]+"</div></div>";
         }
         fillWithRight += "</div>"
       }
       break;
+    case "sun":
+      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo' style='height:10vw;'><select id='editable-select' name='numStar'><option>hi</option><option>hello</option></select></div>";
+      fillWithCenter = "<div class='titleInfo'>Add New Star</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added Stars</div>";
+      break;
+    case "planet":
+      fillWithLeft = "<div class='titleInfo'>Select Planet</div>";
+      fillWithCenter = "<div class='titleInfo'>Add New Planet</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added Planets</div>";
+      break;
+    case "npo":
+      fillWithLeft = "<div class='titleInfo'>Select NPO</div>";
+      fillWithCenter = "<div class='titleInfo'>Add New NPO</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added NPOs</div>";
+      break;
+    case "satellite":
+      fillWithLeft = "<div class='titleInfo'>Select Star</div>";
+      fillWithCenter = "<div class='titleInfo'>Add New Star</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added Satellites</div>";
+      break;
+    case "message":
+      fillWithLeft = "<div class='titleInfo'>Select Message</div>";
+      fillWithCenter = "<div class='titleInfo'>Handle Message</div>";
+      fillWithRight = "<div class='titleInfo'>Message Comments</div>";
+      break;
+    case "user":
+      fillWithLeft = "<div class='titleInfo'>Select User</div>";
+      fillWithCenter = "<div class='titleInfo'>Add New User</div>";
+      fillWithRight = "<div class='titleInfo'>User Logs</div>";
+      break;
     default:
       break;
   }
-  $("#infoleft").html(fillWithLeft);
+  $("#infoleftInner").html(fillWithLeft);
+  $('#editable-select').editableSelect();
   $("#infocentreInner").html(fillWithCenter);
   $("#inforightInner").html(fillWithRight);
 }
