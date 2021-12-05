@@ -41,7 +41,54 @@ main {
   justify-content: center; /* horizontal */
   
 }
+input {
+  color: white;
+}
+textarea {
+  color: white;
+  height: 5vw;
+}
+button {
+  background-color: transparent;
+  -webkit-transition:background 1s;
+    -moz-transition:background 1s;
+    -o-transition:background 1s;
+    transition:background 1s;
+  outline: none;
+  color:white;
+  border: 1px solid #FF6E00;
+  padding: 0.4vw;
+  border-radius: 5px;
+}
+.delete {
+  border: 1px solid #FF0000;
+  float: right;
+}
+button:hover {
+  background: #FF6E00;
+}
+button:focus {
+  background: #FF6E00;
+}
+.delete:hover {
+  background: #FF0000;
+}
 
+.selectTra {
+  color: white;
+  border: 0px;
+  border-bottom: 1px solid #FF6E00;
+  background: none;
+  margin-bottom: 8px;
+  padding: 0; 
+}
+.selectTra option {
+  color:black;
+}
+.selectTra:focus {
+  outline: none;
+  
+}
 /* CSS FOR NAVIGATION BAR */
 
 #navbar {
@@ -136,7 +183,7 @@ main {
 #infocentreInner {
   overflow: scroll;
   overflow-x: hidden;
-  
+  width:100%;
 }
 ::-webkit-scrollbar {
   width: 0;  /* Remove scrollbar space */

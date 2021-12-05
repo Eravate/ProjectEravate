@@ -142,30 +142,30 @@ function fillWithDataAdmin(typeofInfo) {
       // Centre
       
       if (adminInfo[5].length == 1) {
-        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGE</div><div class='textInfo'>Has been received recently.</div><div id='infoMessages'></div>"
+        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGE</div><div class='textInfo'>Has been received recently.</div><div id='infoMessages'></div>";
       } else if (adminInfo[5].length == 0) {
-        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>No messages have been received recently.</div>"
+        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>No messages have been received recently.</div>";
       } else {
-        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>Have messages have been received recently.</div>"
+        fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>Have messages have been received recently.</div>";
       }
 
       if (adminInfo[5].length >= 1) {
-        fillWithCenter += "<div class='messageRow'>"
+        fillWithCenter += "<div class='messageRow'>";
         for (var i=0;i<adminInfo[5].length;i++) {
           // IF the message is still open
           if (adminInfo[5][i][5] == 0) {
             fillWithCenter += "<div class='row'><div class='rowTitle'>"+adminInfo[5][i][1];
             // IF the message is tagged / not tagged
             if (adminInfo[5][i][6] == 0) {
-              fillWithCenter += "<img class='rowIcon' src='icons/notflagged.png'>"
+              fillWithCenter += "<img class='rowIcon' src='icons/notflagged.png'>";
             } else {
-              fillWithCenter += "<img class='rowIcon' src='icons/flagged.png'>"
+              fillWithCenter += "<img class='rowIcon' src='icons/flagged.png'>";
             }
             // IF the message has not been read / has been read
             if (adminInfo[5][i][4] == 0) {
-              fillWithCenter += " <img class='rowIcon' src='icons/notread.png'>"
+              fillWithCenter += " <img class='rowIcon' src='icons/notread.png'>";
             } else {
-              fillWithCenter += "<img class='rowIcon' src='icons/read.png'>"
+              fillWithCenter += "<img class='rowIcon' src='icons/read.png'>";
             }
             fillWithCenter += "</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
           }
@@ -177,48 +177,200 @@ function fillWithDataAdmin(typeofInfo) {
       // Right
 
       if (adminInfo[4].length == 1) {
-        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOG</div><div class='textInfo'>Only one log is available as of currently.</div><div id='infoLogs'></div>"
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOG</div><div class='textInfo'>Only one log is available as of currently.</div><div id='infoLogs'></div>";
       } else if (adminInfo[4].length == 0) {
-        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>There are no logs as of currently.</div>"
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>There are no logs as of currently.</div>";
       } else {
-        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>Are available as of currently.</div>"
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>Are available as of currently.</div>";
       }
 
       if (adminInfo[4].length >= 1) {
-        fillWithRight += "<div class='logRow'>"
+        fillWithRight += "<div class='logRow'>";
         for (var i=0;i<adminInfo[4].length;i++) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[4][i][1]+"</div><div class='rowText'>"+adminInfo[4][i][2]+"</div><div class='rowFooter'>"+adminInfo[4][i][4]+"</div></div>";
         }
-        fillWithRight += "</div>"
+        fillWithRight += "</div>";
       }
       break;
     case "sun":
-      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo' style='height:10vw;'><select id='editable-select' name='numStar'><option>hi</option><option>hello</option></select></div>";
-      fillWithCenter = "<div class='titleInfo'>Add New Star</div>";
-      fillWithRight = "<div class='titleInfo'>Last Added Stars</div>";
+      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'><select id='editable-select' name='numStar'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithLeft += "</select><button type='button' id='modifyStar'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
+      
+      fillWithCenter = "<div class='titleInfo' id='starSubmitTitle'>Add New Star</div><div class='textInfo'>";
+      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<input type='hidden' id='starExists' name='starExists' value='no'>"
+      fillWithCenter += "<label for='starName'>Star Name:</label><input type='text' id='starName' name='starName'><br>";
+      fillWithCenter += "<label for='starRotation'>Rotation:</label><input type='text' id='starRotation' name='starRotation'><br>";
+      fillWithCenter += "<label for='starRevolution'>Revolution:</label><input type='text' id='starRevolution' name='starRevolution'><br>";
+      fillWithCenter += "<label for='starRadius'>Radius:</label><input type='text' id='starRadius' name='starRadius'><br>";
+      fillWithCenter += "<label for='starTemperature'>Temperature:</label><input type='text' id='starTemperature' name='starTemperature'><br>";
+      fillWithCenter += "<label for='starOverview'>Overview:</label><textarea id='starOverview' name='starOverview'></textarea><br>";
+      fillWithCenter += "<label for='starOverviewSource'>Overview Source:</label><input type='text' id='starOverviewSource' name='starOverviewSource'><br>";
+      fillWithCenter += "<label for='starOverviewUrl'>Overview URL:</label><input type='text' id='starOverviewUrl' name='starOverviewUrl'><br>";
+      fillWithCenter += "<label for='starInternal'>Internal:</label><textarea id='starInternal' name='starInternal'></textarea><br>";
+      fillWithCenter += "<label for='starInternalSource'>Internal Source:</label><input type='text' id='starInternalSource' name='starInternalSource'><br>";
+      fillWithCenter += "<label for='starInternalUrl'>Internal URL:</label><input type='text' id='starInternalUrl' name='starInternalUrl'><br>";
+      fillWithCenter += "<label for='starSurface'>Surface:</label><textarea id='starSurface' name='starSurface'></textarea><br>";
+      fillWithCenter += "<label for='starSurfaceSource'>Surface Source:</label><input type='text' id='starSurfaceSource' name='starSurfaceSource'><br>";
+      fillWithCenter += "<label for='starSurfaceUrl'>Surface URL:</label><input type='text' id='starSurfaceUrl' name='starSurfaceUrl'><br>";
+      fillWithCenter += "<label for='starType'>Star Type:</label><select id='starType' class='selectTra' name='starType'>";
+      for (var i=0;i<adminInfo[6].length;i++) {
+        fillWithCenter += "<option id='starType"+adminInfo[6][i][0]+"' value='"+adminInfo[6][i][0]+"'>"+adminInfo[6][i][1]+"</option>";
+      }
+      fillWithCenter += "</select><br>";
+      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetStar' value='Reset'>Reset</button>";
+      fillWithCenter += "</form>";
+      fillWithCenter += "</div>";
+      
+      fillWithRight = "<div class='titleInfo'>Last Added Stars</div><div class='textInfo'>The last added stars are:</div>";
+      if (adminInfo[0].length <=5) {
+        for (var i=0;i<adminInfo[0].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[0][i][1]+"</div><div class='rowText'>"+adminInfo[0][i][6]+"</div><div class='rowFooter'>"+adminInfo[0][i][7]+"</div></div>";
+        }
+      } else {
+        for (var i=adminInfo[0].length-5;i<adminInfo[0].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[0][i][1]+"</div><div class='rowText'>"+adminInfo[0][i][6]+"</div><div class='rowFooter'>"+adminInfo[0][i][7]+"</div></div>";
+        }
+      }
       break;
     case "planet":
-      fillWithLeft = "<div class='titleInfo'>Select Planet</div>";
-      fillWithCenter = "<div class='titleInfo'>Add New Planet</div>";
-      fillWithRight = "<div class='titleInfo'>Last Added Planets</div>";
+      fillWithLeft = "<div class='titleInfo'>Select Planet</div><div class='textInfo'><select id='editable-select' class='planetPicker' name='numStar'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithLeft += "</select>";
+      fillWithLeft += "<select id='selectPlanet' name='numPlanet' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyPlanet'>Modify Data</button><button type='button' class='delete' id='deletePlanet'>Delete Planet</button></div>"
+      
+      fillWithCenter = "<div class='titleInfo' id='planetSubmitTitle'>Add New Planet</div><div class='textInfo'>";
+      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<input type='hidden' id='planetExists' name='planetExists' value='no'>"
+      fillWithCenter += "<label for='planetName'>Planet Name:</label><input type='text' id='planetName' name='planetName'><br>";
+      fillWithCenter += "<label for='planetPosition'>Position:</label><input type='text' id='planetPosition' name='planetPosition'><br>";
+      fillWithCenter += "<label for='planetRotation'>Rotation:</label><input type='text' id='planetRotation' name='planetRotation'><br>";
+      fillWithCenter += "<label for='planetRevolution'>Revolution:</label><input type='text' id='planetRevolution' name='planetRevolution'><br>";
+      fillWithCenter += "<label for='planetRadius'>Radius:</label><input type='text' id='planetRadius' name='planetRadius'><br>";
+      fillWithCenter += "<label for='planetTemperature'>Temperature:</label><input type='text' id='planetTemperature' name='planetTemperature'><br>";
+      fillWithCenter += "<label for='planetOverview'>Overview:</label><textarea id='planetOverview' name='planetOverview'></textarea><br>";
+      fillWithCenter += "<label for='planetOverviewSource'>Overview Source:</label><input type='text' id='planetOverviewSource' name='planetOverviewSource'><br>";
+      fillWithCenter += "<label for='planetOverviewUrl'>Overview URL:</label><input type='text' id='planetOverviewUrl' name='planetOverviewUrl'><br>";
+      fillWithCenter += "<label for='planetInternal'>Internal:</label><textarea id='planetInternal' name='planetInternal'></textarea><br>";
+      fillWithCenter += "<label for='planetInternalSource'>Internal Source:</label><input type='text' id='planetInternalSource' name='planetInternalSource'><br>";
+      fillWithCenter += "<label for='planetInternalUrl'>Internal URL:</label><input type='text' id='planetInternalUrl' name='planetInternalUrl'><br>";
+      fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface'></textarea><br>";
+      fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource'><br>";
+      fillWithCenter += "<label for='planetSurfaceUrl'>Surface URL:</label><input type='text' id='planetSurfaceUrl' name='planetSurfaceUrl'><br>";
+      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "</form>";
+
+      fillWithRight = "<div class='titleInfo'>Last Added Planets</div><div class='textInfo'>The last added planets are:</div>";
+      if (adminInfo[1].length <=5) {
+        for (var i=0;i<adminInfo[1].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[1][i][2]+"</div><div class='rowText'>"+adminInfo[1][i][8]+"</div><div class='rowFooter'>"+adminInfo[1][i][9]+"</div></div>";
+        }
+      } else {
+        for (var i=adminInfo[1].length-5;i<adminInfo[1].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[1][i][2]+"</div><div class='rowText'>"+adminInfo[1][i][8]+"</div><div class='rowFooter'>"+adminInfo[1][i][9]+"</div></div>";
+        }
+      }
       break;
     case "npo":
-      fillWithLeft = "<div class='titleInfo'>Select NPO</div>";
-      fillWithCenter = "<div class='titleInfo'>Add New NPO</div>";
-      fillWithRight = "<div class='titleInfo'>Last Added NPOs</div>";
+      fillWithLeft = "<div class='titleInfo'>Select NPO</div><div class='textInfo'><select id='editable-select' class='npoPicker' name='numStar'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithLeft += "</select>";
+      fillWithLeft += "<select id='selectNPO' name='numNPO' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyNPO'>Modify Data</button><button type='button' class='delete' id='deleteNPO'>Delete NPO</button></div>"
+      
+      fillWithCenter = "<div class='titleInfo' id='npoSubmitTitle'>Add New NPO</div><div class='textInfo'>";
+      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<input type='hidden' id='npoExists' name='npoExists' value='no'>"
+      fillWithCenter += "<label for='npoName'>NPO Name:</label><input type='text' id='npoName' name='npoName'><br>";
+      fillWithCenter += "<label for='npoPosition'>Position:</label><input type='text' id='npoPosition' name='npoPosition'><br>";
+      fillWithCenter += "<label for='npoRotation'>Rotation:</label><input type='text' id='npoRotation' name='npoRotation'><br>";
+      fillWithCenter += "<label for='npoRevolution'>Revolution:</label><input type='text' id='npoRevolution' name='npoRevolution'><br>";
+      fillWithCenter += "<label for='npoRadius'>Radius:</label><input type='text' id='npoRadius' name='npoRadius'><br>";
+      fillWithCenter += "<label for='npoTemperature'>Temperature:</label><input type='text' id='npoTemperature' name='npoTemperature'><br>";
+      fillWithCenter += "<label for='npoOverview'>Overview:</label><textarea id='npoOverview' name='npoOverview'></textarea><br>";
+      fillWithCenter += "<label for='npoOverviewSource'>Overview Source:</label><input type='text' id='npoOverviewSource' name='npoOverviewSource'><br>";
+      fillWithCenter += "<label for='npoOverviewUrl'>Overview URL:</label><input type='text' id='npoOverviewUrl' name='npoOverviewUrl'><br>";
+      fillWithCenter += "<label for='npoInternal'>Internal:</label><textarea id='npoInternal' name='npoInternal'></textarea><br>";
+      fillWithCenter += "<label for='npoInternalSource'>Internal Source:</label><input type='text' id='npoInternalSource' name='npoInternalSource'><br>";
+      fillWithCenter += "<label for='npoInternalUrl'>Internal URL:</label><input type='text' id='npoInternalUrl' name='npoInternalUrl'><br>";
+      fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface'></textarea><br>";
+      fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface'><br>";
+      fillWithCenter += "<label for='npoSurfaceUrl'>Surface URL:</label><input type='text' id='npoSurfaceUrl' name='npoSurfaceUrl'><br>";
+      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetNPO' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "</form>";
+
+      fillWithRight = "<div class='titleInfo'>Last Added NPOs</div><div class='textInfo'>The last added npos are:</div>";
+      if (adminInfo[2].length <=5) {
+        for (var i=0;i<adminInfo[2].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[2][i][2]+"</div><div class='rowText'>"+adminInfo[2][i][8]+"</div><div class='rowFooter'>"+adminInfo[2][i][9]+"</div></div>";
+        }
+      } else {
+        for (var i=adminInfo[2].length-5;i<adminInfo[2].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[2][i][2]+"</div><div class='rowText'>"+adminInfo[2][i][8]+"</div><div class='rowFooter'>"+adminInfo[2][i][9]+"</div></div>";
+        }
+      }
       break;
     case "satellite":
-      fillWithLeft = "<div class='titleInfo'>Select Star</div>";
-      fillWithCenter = "<div class='titleInfo'>Add New Star</div>";
-      fillWithRight = "<div class='titleInfo'>Last Added Satellites</div>";
+      fillWithLeft = "<div class='titleInfo'>Select Satellite</div><div class='textInfo'><select id='editable-select' class='satellitePicker' name='numStar'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithLeft += "</select>";
+      fillWithLeft += "<select id='selectSatellitePlanet' name='numSatellitePlanet' class='selectTra'><option value='no'>Select A Star</option></select><select id='selectSatellite' name='numSatellite' class='selectTra'><option value='no'>Select A Planet</option></select><button type='button' id='modifySatellite'>Modify Data</button><button type='button' class='delete' id='deleteSatellite'>Delete Satellite</button></div>"
+      
+      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo'>";
+      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<input type='hidden' id='satelliteExists' name='satelliteExists' value='no'>"
+      fillWithCenter += "<label for='satelliteName'>NPO Name:</label><input type='text' id='satelliteName' name='satelliteName'><br>";
+      fillWithCenter += "<label for='satellitePosition'>Position:</label><input type='text' id='satellitePosition' name='satellitePosition'><br>";
+      fillWithCenter += "<label for='satelliteRotation'>Rotation:</label><input type='text' id='satelliteRotation' name='satelliteRotation'><br>";
+      fillWithCenter += "<label for='satelliteRevolution'>Revolution:</label><input type='text' id='satelliteRevolution' name='satelliteRevolution'><br>";
+      fillWithCenter += "<label for='satelliteRadius'>Radius:</label><input type='text' id='satelliteRadius' name='satelliteRadius'><br>";
+      fillWithCenter += "<label for='satelliteTemperature'>Temperature:</label><input type='text' id='satelliteTemperature' name='satelliteTemperature'><br>";
+      fillWithCenter += "<label for='satelliteOverview'>Overview:</label><textarea id='satelliteOverview' name='satelliteOverview'></textarea><br>";
+      fillWithCenter += "<label for='satelliteOverviewSource'>Overview Source:</label><input type='text' id='satelliteOverviewSource' name='satelliteOverviewSource'><br>";
+      fillWithCenter += "<label for='satelliteOverviewUrl'>Overview URL:</label><input type='text' id='satelliteOverviewUrl' name='satelliteOverviewUrl'><br>";
+      fillWithCenter += "<label for='satelliteInternal'>Internal:</label><textarea id='satelliteInternal' name='satelliteInternal'></textarea><br>";
+      fillWithCenter += "<label for='satelliteInternalSource'>Internal Source:</label><input type='text' id='satelliteInternalSource' name='satelliteInternalSource'><br>";
+      fillWithCenter += "<label for='satelliteInternalUrl'>Internal URL:</label><input type='text' id='satelliteInternalUrl' name='satelliteInternalUrl'><br>";
+      fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface'></textarea><br>";
+      fillWithCenter += "<label for='satellitePlanetSurface'>Surface Source:</label><input type='text' id='satellitePlanetSurface' name='satellitePlanetSurface'><br>";
+      fillWithCenter += "<label for='satelliteSurfaceUrl'>Surface URL:</label><input type='text' id='satelliteSurfaceUrl' name='satelliteSurfaceUrl'><br>";
+      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "</form>";
+
+      fillWithRight = "<div class='titleInfo'>Last Added Satellites</div><div class='textInfo'>The last added satellites are:</div>";
+      if (adminInfo[3].length <=5) {
+        for (var i=0;i<adminInfo[3].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[3][i][2]+"</div><div class='rowText'>"+adminInfo[3][i][8]+"</div><div class='rowFooter'>"+adminInfo[3][i][9]+"</div></div>";
+        }
+      } else {
+        for (var i=adminInfo[3].length-5;i<adminInfo[3].length;i++) {
+          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[3][i][2]+"</div><div class='rowText'>"+adminInfo[3][i][8]+"</div><div class='rowFooter'>"+adminInfo[3][i][9]+"</div></div>";
+        }
+      }
       break;
     case "message":
       fillWithLeft = "<div class='titleInfo'>Select Message</div>";
+      for (var i=0;i<adminInfo[5].length;i++) {
+        fillWithLeft += "<option value='"+adminInfo[5][i][0]+"'>"+adminInfo[5][i][1]+"</option>";
+      }
+      fillWithLeft += "</select></div>";
       fillWithCenter = "<div class='titleInfo'>Handle Message</div>";
       fillWithRight = "<div class='titleInfo'>Message Comments</div>";
       break;
     case "user":
       fillWithLeft = "<div class='titleInfo'>Select User</div>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithLeft += "<option value='"+adminInfo[0][i][0]+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithLeft += "</select></div>";
       fillWithCenter = "<div class='titleInfo'>Add New User</div>";
       fillWithRight = "<div class='titleInfo'>User Logs</div>";
       break;

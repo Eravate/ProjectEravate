@@ -12,6 +12,7 @@ $npos = array();
 $satellites = array();
 $logs = array();
 $messages = array();
+$starTypes = array();
 
 
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
@@ -207,12 +208,32 @@ switch ($rowcount) {
         break;
     }
 
+$database->stmt_init();
+$result = $database->prepare("SELECT * FROM StarType");
+$result->execute();
+$result->store_result();
+$result->bind_result($id,$type);
+
+$rowcount = $result->num_rows;
+
+switch ($rowcount) {
+    case 0:
+        break;
+    default:
+        while ($result->fetch()) {
+            $starType = array($id,$type);
+            array_push($starTypes, $starType);
+        }
+        break;
+    }
+
 array_push($objects,$suns);
 array_push($objects,$planets);
 array_push($objects,$npos);
 array_push($objects,$satellites);
 array_push($objects,$logs);
 array_push($objects,$messages);
+array_push($objects,$starTypes);
 
 
 echo json_encode($objects);
