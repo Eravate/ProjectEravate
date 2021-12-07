@@ -1,5 +1,7 @@
 // Function to fetch data from the DB
 
+// Fetch data for standard app
+
 function fetchData() {
     var formData = new FormData();
     formData.append('solar', solar);
@@ -12,6 +14,9 @@ function fetchData() {
             objects = JSON.parse(data);
         });
 }
+
+// Fetch data for admin app
+
 function fetchDataAdmin() {
   fetch('php/receivemessages.php', {
       method: "POST",
@@ -26,6 +31,9 @@ function fetchDataAdmin() {
 
 function fillWithPlanet() {
     var threed;
+
+    // I used these variables before, obsolete by now, but felt like leaving them idk
+
     /*planetName = objects[numObject][1].toLowerCase();
     audio = new Audio('music/'+planetName+'.mp3');
     $("#object").attr("src","photos/"+planetName+".png");
@@ -99,11 +107,15 @@ function fillWithPlanet() {
     checkForArrows();   
 }
 
+// Function to fill admin with data 
+
 function fillWithDataAdmin(typeofInfo) {
+  // Each fill represents a div and its position 
   var fillWithLeft;
   var fillWithCenter;
   var fillWithRight;
   switch (typeofInfo) {
+    // IF the user goes to HOME page
     case "home":
       // Left side
       // Fill with Sun info
@@ -139,7 +151,7 @@ function fillWithDataAdmin(typeofInfo) {
         fillWithLeft += "<div class='titleInfo'>" + adminInfo[3].length + " SATELLITES</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[3][adminInfo[3].length-1][2] + ".</div>";
       }
 
-      // Centre
+      // Centre (or Center if american)
       
       if (adminInfo[5].length == 1) {
         fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGE</div><div class='textInfo'>Has been received recently.</div><div id='infoMessages'></div>";
@@ -148,6 +160,8 @@ function fillWithDataAdmin(typeofInfo) {
       } else {
         fillWithCenter = "<div class='titleInfo'>"+ adminInfo[5].length + " MESSAGES</div><div class='textInfo'>Have messages have been received recently.</div>";
       }
+
+      // This one's for Messages, fills the centre column
 
       if (adminInfo[5].length >= 1) {
         fillWithCenter += "<div class='messageRow'>";
@@ -174,7 +188,7 @@ function fillWithDataAdmin(typeofInfo) {
         fillWithCenter += "</div>";
       }
 
-      // Right
+      // This one's for Logs, fills the right column
 
       if (adminInfo[4].length == 1) {
         fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOG</div><div class='textInfo'>Only one log is available as of currently.</div><div id='infoLogs'></div>";
@@ -192,39 +206,47 @@ function fillWithDataAdmin(typeofInfo) {
         fillWithRight += "</div>";
       }
       break;
+    // IF user goes to SUN page
     case "sun":
-      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'><select id='editable-select' name='numStar'>";
+
+      // We fill the left side with a stellar choice (no pun intended)
+
+      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'><select id='starPicker' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
       fillWithLeft += "</select><button type='button' id='modifyStar'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
-      
+
+      // In the centre we have the main data point and form, which on submit does a function instead of redirect
+
       fillWithCenter = "<div class='titleInfo' id='starSubmitTitle'>Add New Star</div><div class='textInfo'>";
-      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<form onsubmit='event.preventDefault(); submitStars();'>";
       fillWithCenter += "<input type='hidden' id='starExists' name='starExists' value='no'>"
-      fillWithCenter += "<label for='starName'>Star Name:</label><input type='text' id='starName' name='starName'><br>";
-      fillWithCenter += "<label for='starRotation'>Rotation:</label><input type='text' id='starRotation' name='starRotation'><br>";
-      fillWithCenter += "<label for='starRevolution'>Revolution:</label><input type='text' id='starRevolution' name='starRevolution'><br>";
-      fillWithCenter += "<label for='starRadius'>Radius:</label><input type='text' id='starRadius' name='starRadius'><br>";
-      fillWithCenter += "<label for='starTemperature'>Temperature:</label><input type='text' id='starTemperature' name='starTemperature'><br>";
-      fillWithCenter += "<label for='starOverview'>Overview:</label><textarea id='starOverview' name='starOverview'></textarea><br>";
-      fillWithCenter += "<label for='starOverviewSource'>Overview Source:</label><input type='text' id='starOverviewSource' name='starOverviewSource'><br>";
-      fillWithCenter += "<label for='starOverviewUrl'>Overview URL:</label><input type='text' id='starOverviewUrl' name='starOverviewUrl'><br>";
-      fillWithCenter += "<label for='starInternal'>Internal:</label><textarea id='starInternal' name='starInternal'></textarea><br>";
-      fillWithCenter += "<label for='starInternalSource'>Internal Source:</label><input type='text' id='starInternalSource' name='starInternalSource'><br>";
-      fillWithCenter += "<label for='starInternalUrl'>Internal URL:</label><input type='text' id='starInternalUrl' name='starInternalUrl'><br>";
-      fillWithCenter += "<label for='starSurface'>Surface:</label><textarea id='starSurface' name='starSurface'></textarea><br>";
-      fillWithCenter += "<label for='starSurfaceSource'>Surface Source:</label><input type='text' id='starSurfaceSource' name='starSurfaceSource'><br>";
-      fillWithCenter += "<label for='starSurfaceUrl'>Surface URL:</label><input type='text' id='starSurfaceUrl' name='starSurfaceUrl'><br>";
+      fillWithCenter += "<label for='starName'>Star Name:</label><input type='text' id='starName' name='starName' required><br>";
+      fillWithCenter += "<label for='starRotation'>Rotation:</label><input type='text' id='starRotation' name='starRotation' required><br>";
+      fillWithCenter += "<label for='starRevolution'>Revolution:</label><input type='text' id='starRevolution' name='starRevolution' required><br>";
+      fillWithCenter += "<label for='starRadius'>Radius:</label><input type='text' id='starRadius' name='starRadius' required><br>";
+      fillWithCenter += "<label for='starTemperature'>Temperature:</label><input type='text' id='starTemperature' name='starTemperature' required><br>";
+      fillWithCenter += "<label for='starOverview'>Overview:</label><textarea id='starOverview' name='starOverview' required></textarea><br>";
+      fillWithCenter += "<label for='starOverviewSource'>Overview Source:</label><input type='text' id='starOverviewSource' name='starOverviewSource' required><br>";
+      fillWithCenter += "<label for='starOverviewUrl'>Overview URL:</label><input type='text' id='starOverviewUrl' name='starOverviewUrl' required><br>";
+      fillWithCenter += "<label for='starInternal'>Internal:</label><textarea id='starInternal' name='starInternal' required></textarea><br>";
+      fillWithCenter += "<label for='starInternalSource'>Internal Source:</label><input type='text' id='starInternalSource' name='starInternalSource' required><br>";
+      fillWithCenter += "<label for='starInternalUrl'>Internal URL:</label><input type='text' id='starInternalUrl' name='starInternalUrl' required><br>";
+      fillWithCenter += "<label for='starSurface'>Surface:</label><textarea id='starSurface' name='starSurface' required></textarea><br>";
+      fillWithCenter += "<label for='starSurfaceSource'>Surface Source:</label><input type='text' id='starSurfaceSource' name='starSurfaceSource' required><br>";
+      fillWithCenter += "<label for='starSurfaceUrl'>Surface URL:</label><input type='text' id='starSurfaceUrl' name='starSurfaceUrl' required><br>";
       fillWithCenter += "<label for='starType'>Star Type:</label><select id='starType' class='selectTra' name='starType'>";
       for (var i=0;i<adminInfo[6].length;i++) {
         fillWithCenter += "<option id='starType"+adminInfo[6][i][0]+"' value='"+adminInfo[6][i][0]+"'>"+adminInfo[6][i][1]+"</option>";
       }
       fillWithCenter += "</select><br>";
-      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetStar' value='Reset'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetStar' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
       fillWithCenter += "</div>";
       
+      // The right side is filled with the last added planets, the if is necessary in case there's more than 5 stars.
+
       fillWithRight = "<div class='titleInfo'>Last Added Stars</div><div class='textInfo'>The last added stars are:</div>";
       if (adminInfo[0].length <=5) {
         for (var i=0;i<adminInfo[0].length;i++) {
@@ -236,34 +258,47 @@ function fillWithDataAdmin(typeofInfo) {
         }
       }
       break;
+    // IF user goes to PLANET page
     case "planet":
-      fillWithLeft = "<div class='titleInfo'>Select Planet</div><div class='textInfo'><select id='editable-select' class='planetPicker' name='numStar'>";
+
+      // We fill the left side with a planetary choice
+
+      fillWithLeft = "<div class='titleInfo'>Select Planet</div><div class='textInfo'><div id='selectOutside'><select id='starPickerPlanet' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
-      fillWithLeft += "</select>";
+      fillWithLeft += "</select></div>";
       fillWithLeft += "<select id='selectPlanet' name='numPlanet' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyPlanet'>Modify Data</button><button type='button' class='delete' id='deletePlanet'>Delete Planet</button></div>"
       
+      // In the centre we have the main data point and form, which on submit does a function instead of redirect
+
       fillWithCenter = "<div class='titleInfo' id='planetSubmitTitle'>Add New Planet</div><div class='textInfo'>";
-      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<form onsubmit='event.preventDefault(); submitPlanets();'>";
       fillWithCenter += "<input type='hidden' id='planetExists' name='planetExists' value='no'>"
-      fillWithCenter += "<label for='planetName'>Planet Name:</label><input type='text' id='planetName' name='planetName'><br>";
-      fillWithCenter += "<label for='planetPosition'>Position:</label><input type='text' id='planetPosition' name='planetPosition'><br>";
-      fillWithCenter += "<label for='planetRotation'>Rotation:</label><input type='text' id='planetRotation' name='planetRotation'><br>";
-      fillWithCenter += "<label for='planetRevolution'>Revolution:</label><input type='text' id='planetRevolution' name='planetRevolution'><br>";
-      fillWithCenter += "<label for='planetRadius'>Radius:</label><input type='text' id='planetRadius' name='planetRadius'><br>";
-      fillWithCenter += "<label for='planetTemperature'>Temperature:</label><input type='text' id='planetTemperature' name='planetTemperature'><br>";
-      fillWithCenter += "<label for='planetOverview'>Overview:</label><textarea id='planetOverview' name='planetOverview'></textarea><br>";
-      fillWithCenter += "<label for='planetOverviewSource'>Overview Source:</label><input type='text' id='planetOverviewSource' name='planetOverviewSource'><br>";
-      fillWithCenter += "<label for='planetOverviewUrl'>Overview URL:</label><input type='text' id='planetOverviewUrl' name='planetOverviewUrl'><br>";
-      fillWithCenter += "<label for='planetInternal'>Internal:</label><textarea id='planetInternal' name='planetInternal'></textarea><br>";
-      fillWithCenter += "<label for='planetInternalSource'>Internal Source:</label><input type='text' id='planetInternalSource' name='planetInternalSource'><br>";
-      fillWithCenter += "<label for='planetInternalUrl'>Internal URL:</label><input type='text' id='planetInternalUrl' name='planetInternalUrl'><br>";
-      fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface'></textarea><br>";
-      fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource'><br>";
-      fillWithCenter += "<label for='planetSurfaceUrl'>Surface URL:</label><input type='text' id='planetSurfaceUrl' name='planetSurfaceUrl'><br>";
+      fillWithCenter += "<label for='planetName'>Planet Name:</label><input type='text' id='planetName' name='planetName' required><br>";
+      fillWithCenter += "<label for='starPickerPlanetInner'>Star Name:</label><div id='selectInside'><select id='starPickerPlanetInner' name='numStarInner'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithCenter += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithCenter += "</select></div>";
+      fillWithCenter += "<label for='planetPosition'>Position:</label><input type='text' id='planetPosition' name='planetPosition' required><br>";
+      fillWithCenter += "<label for='planetRotation'>Rotation:</label><input type='text' id='planetRotation' name='planetRotation' required><br>";
+      fillWithCenter += "<label for='planetRevolution'>Revolution:</label><input type='text' id='planetRevolution' name='planetRevolution' required><br>";
+      fillWithCenter += "<label for='planetRadius'>Radius:</label><input type='text' id='planetRadius' name='planetRadius' required><br>";
+      fillWithCenter += "<label for='planetTemperature'>Temperature:</label><input type='text' id='planetTemperature' name='planetTemperature' required><br>";
+      fillWithCenter += "<label for='planetOverview'>Overview:</label><textarea id='planetOverview' name='planetOverview' required></textarea><br>";
+      fillWithCenter += "<label for='planetOverviewSource'>Overview Source:</label><input type='text' id='planetOverviewSource' name='planetOverviewSource' required><br>";
+      fillWithCenter += "<label for='planetOverviewUrl'>Overview URL:</label><input type='text' id='planetOverviewUrl' name='planetOverviewUrl' required><br>";
+      fillWithCenter += "<label for='planetInternal'>Internal:</label><textarea id='planetInternal' name='planetInternal' required></textarea><br>";
+      fillWithCenter += "<label for='planetInternalSource'>Internal Source:</label><input type='text' id='planetInternalSource' name='planetInternalSource' required><br>";
+      fillWithCenter += "<label for='planetInternalUrl'>Internal URL:</label><input type='text' id='planetInternalUrl' name='planetInternalUrl' required><br>";
+      fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface' required></textarea><br>";
+      fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource' required><br>";
+      fillWithCenter += "<label for='planetSurfaceUrl'>Surface URL:</label><input type='text' id='planetSurfaceUrl' name='planetSurfaceUrl' required><br>";
       fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
+
+      // The right side is filled with the last added planets, the if is necessary in case there's more than 5 planets.
 
       fillWithRight = "<div class='titleInfo'>Last Added Planets</div><div class='textInfo'>The last added planets are:</div>";
       if (adminInfo[1].length <=5) {
@@ -276,35 +311,47 @@ function fillWithDataAdmin(typeofInfo) {
         }
       }
       break;
+    // IF user goes to NPO page
     case "npo":
-      fillWithLeft = "<div class='titleInfo'>Select NPO</div><div class='textInfo'><select id='editable-select' class='npoPicker' name='numStar'>";
+
+      // We fill the left side with a NPO choice
+
+      fillWithLeft = "<div class='titleInfo'>Select NPO</div><div class='textInfo'><div id='selectOutside'><select id='starPickerNPO' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
-      fillWithLeft += "</select>";
+      fillWithLeft += "</select></div>";
       fillWithLeft += "<select id='selectNPO' name='numNPO' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyNPO'>Modify Data</button><button type='button' class='delete' id='deleteNPO'>Delete NPO</button></div>"
       
+      // In the centre we have the main data point and form, which on submit does a function instead of redirect
+
       fillWithCenter = "<div class='titleInfo' id='npoSubmitTitle'>Add New NPO</div><div class='textInfo'>";
-      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<form onsubmit='event.preventDefault(); submitNPOs();'>";
       fillWithCenter += "<input type='hidden' id='npoExists' name='npoExists' value='no'>"
-      fillWithCenter += "<label for='npoName'>NPO Name:</label><input type='text' id='npoName' name='npoName'><br>";
-      fillWithCenter += "<label for='npoPosition'>Position:</label><input type='text' id='npoPosition' name='npoPosition'><br>";
-      fillWithCenter += "<label for='npoRotation'>Rotation:</label><input type='text' id='npoRotation' name='npoRotation'><br>";
-      fillWithCenter += "<label for='npoRevolution'>Revolution:</label><input type='text' id='npoRevolution' name='npoRevolution'><br>";
-      fillWithCenter += "<label for='npoRadius'>Radius:</label><input type='text' id='npoRadius' name='npoRadius'><br>";
-      fillWithCenter += "<label for='npoTemperature'>Temperature:</label><input type='text' id='npoTemperature' name='npoTemperature'><br>";
-      fillWithCenter += "<label for='npoOverview'>Overview:</label><textarea id='npoOverview' name='npoOverview'></textarea><br>";
-      fillWithCenter += "<label for='npoOverviewSource'>Overview Source:</label><input type='text' id='npoOverviewSource' name='npoOverviewSource'><br>";
-      fillWithCenter += "<label for='npoOverviewUrl'>Overview URL:</label><input type='text' id='npoOverviewUrl' name='npoOverviewUrl'><br>";
-      fillWithCenter += "<label for='npoInternal'>Internal:</label><textarea id='npoInternal' name='npoInternal'></textarea><br>";
-      fillWithCenter += "<label for='npoInternalSource'>Internal Source:</label><input type='text' id='npoInternalSource' name='npoInternalSource'><br>";
-      fillWithCenter += "<label for='npoInternalUrl'>Internal URL:</label><input type='text' id='npoInternalUrl' name='npoInternalUrl'><br>";
-      fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface'></textarea><br>";
-      fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface'><br>";
-      fillWithCenter += "<label for='npoSurfaceUrl'>Surface URL:</label><input type='text' id='npoSurfaceUrl' name='npoSurfaceUrl'><br>";
+      fillWithCenter += "<label for='npoName'>NPO Name:</label><input type='text' id='npoName' name='npoName' required><br>";
+      fillWithCenter += "<label for='starPickerNPOInner'>Star Name:</label><div id='selectInside'><select id='starPickerNPOInner' name='numStarInner'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithCenter += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithCenter += "</select></div>";
+      fillWithCenter += "<label for='npoRotation'>Rotation:</label><input type='text' id='npoRotation' name='npoRotation' required><br>";
+      fillWithCenter += "<label for='npoRevolution'>Revolution:</label><input type='text' id='npoRevolution' name='npoRevolution' required><br>";
+      fillWithCenter += "<label for='npoRadius'>Radius:</label><input type='text' id='npoRadius' name='npoRadius' required><br>";
+      fillWithCenter += "<label for='npoTemperature'>Temperature:</label><input type='text' id='npoTemperature' name='npoTemperature' required><br>";
+      fillWithCenter += "<label for='npoOverview'>Overview:</label><textarea id='npoOverview' name='npoOverview' required></textarea><br>";
+      fillWithCenter += "<label for='npoOverviewSource'>Overview Source:</label><input type='text' id='npoOverviewSource' name='npoOverviewSource' required><br>";
+      fillWithCenter += "<label for='npoOverviewUrl'>Overview URL:</label><input type='text' id='npoOverviewUrl' name='npoOverviewUrl' required><br>";
+      fillWithCenter += "<label for='npoInternal'>Internal:</label><textarea id='npoInternal' name='npoInternal' required></textarea><br>";
+      fillWithCenter += "<label for='npoInternalSource'>Internal Source:</label><input type='text' id='npoInternalSource' name='npoInternalSource' required><br>";
+      fillWithCenter += "<label for='npoInternalUrl'>Internal URL:</label><input type='text' id='npoInternalUrl' name='npoInternalUrl' required><br>";
+      fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface' required></textarea><br>";
+      fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface' required><br>";
+      fillWithCenter += "<label for='npoSurfaceUrl'>Surface URL:</label><input type='text' id='npoSurfaceUrl' name='npoSurfaceUrl' required ><br>";
       fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetNPO' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
+      // The right side is filled with the last added npos, the if is necessary in case there's more than 5 npos.
+      
       fillWithRight = "<div class='titleInfo'>Last Added NPOs</div><div class='textInfo'>The last added npos are:</div>";
       if (adminInfo[2].length <=5) {
         for (var i=0;i<adminInfo[2].length;i++) {
@@ -316,34 +363,48 @@ function fillWithDataAdmin(typeofInfo) {
         }
       }
       break;
+    // IF user goes to SATELLITE page
     case "satellite":
-      fillWithLeft = "<div class='titleInfo'>Select Satellite</div><div class='textInfo'><select id='editable-select' class='satellitePicker' name='numStar'>";
+
+      // We fill the left side with a Satellite choice
+
+      fillWithLeft = "<div class='titleInfo'>Select Satellite</div><div class='textInfo'><div id='selectOutside'><select id='starPickerSatellite' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
-      fillWithLeft += "</select>";
+      fillWithLeft += "</select></div>";
       fillWithLeft += "<select id='selectSatellitePlanet' name='numSatellitePlanet' class='selectTra'><option value='no'>Select A Star</option></select><select id='selectSatellite' name='numSatellite' class='selectTra'><option value='no'>Select A Planet</option></select><button type='button' id='modifySatellite'>Modify Data</button><button type='button' class='delete' id='deleteSatellite'>Delete Satellite</button></div>"
       
+      // In the centre we have the main data point and form, which on submit does a function instead of redirect
+
       fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo'>";
-      fillWithCenter += "<form action=''>";
+      fillWithCenter += "<form onsubmit='event.preventDefault(); submitSatellites();'>";
       fillWithCenter += "<input type='hidden' id='satelliteExists' name='satelliteExists' value='no'>"
-      fillWithCenter += "<label for='satelliteName'>NPO Name:</label><input type='text' id='satelliteName' name='satelliteName'><br>";
-      fillWithCenter += "<label for='satellitePosition'>Position:</label><input type='text' id='satellitePosition' name='satellitePosition'><br>";
-      fillWithCenter += "<label for='satelliteRotation'>Rotation:</label><input type='text' id='satelliteRotation' name='satelliteRotation'><br>";
-      fillWithCenter += "<label for='satelliteRevolution'>Revolution:</label><input type='text' id='satelliteRevolution' name='satelliteRevolution'><br>";
-      fillWithCenter += "<label for='satelliteRadius'>Radius:</label><input type='text' id='satelliteRadius' name='satelliteRadius'><br>";
-      fillWithCenter += "<label for='satelliteTemperature'>Temperature:</label><input type='text' id='satelliteTemperature' name='satelliteTemperature'><br>";
-      fillWithCenter += "<label for='satelliteOverview'>Overview:</label><textarea id='satelliteOverview' name='satelliteOverview'></textarea><br>";
-      fillWithCenter += "<label for='satelliteOverviewSource'>Overview Source:</label><input type='text' id='satelliteOverviewSource' name='satelliteOverviewSource'><br>";
-      fillWithCenter += "<label for='satelliteOverviewUrl'>Overview URL:</label><input type='text' id='satelliteOverviewUrl' name='satelliteOverviewUrl'><br>";
-      fillWithCenter += "<label for='satelliteInternal'>Internal:</label><textarea id='satelliteInternal' name='satelliteInternal'></textarea><br>";
-      fillWithCenter += "<label for='satelliteInternalSource'>Internal Source:</label><input type='text' id='satelliteInternalSource' name='satelliteInternalSource'><br>";
-      fillWithCenter += "<label for='satelliteInternalUrl'>Internal URL:</label><input type='text' id='satelliteInternalUrl' name='satelliteInternalUrl'><br>";
-      fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface'></textarea><br>";
-      fillWithCenter += "<label for='satellitePlanetSurface'>Surface Source:</label><input type='text' id='satellitePlanetSurface' name='satellitePlanetSurface'><br>";
-      fillWithCenter += "<label for='satelliteSurfaceUrl'>Surface URL:</label><input type='text' id='satelliteSurfaceUrl' name='satelliteSurfaceUrl'><br>";
+      fillWithCenter += "<label for='satelliteName'>NPO Name:</label><input type='text' id='satelliteName' name='satelliteName' required><br>";
+      fillWithCenter += "<label for='starPickerSatelliteInner'>Star Name:</label><div id='selectInside'><select id='starPickerSatelliteInner' name='numStarInner'>";
+      for (var i=0;i<adminInfo[0].length;i++) {
+        fillWithCenter += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
+      }
+      fillWithCenter += "</select></div>";
+      fillWithCenter += "<label for='selectSatellitePlanetInner'>Planet:</label><select id='selectSatellitePlanetInner' name='selectSatellitePlanetInner' class='selectTra'><option value='no'>Select A Star</option></select>";
+      fillWithCenter += "<label for='satellitePosition'>Position:</label><input type='text' id='satellitePosition' name='satellitePosition' required><br>";
+      fillWithCenter += "<label for='satelliteRotation'>Rotation:</label><input type='text' id='satelliteRotation' name='satelliteRotation' required><br>";
+      fillWithCenter += "<label for='satelliteRevolution'>Revolution:</label><input type='text' id='satelliteRevolution' name='satelliteRevolution' required><br>";
+      fillWithCenter += "<label for='satelliteRadius'>Radius:</label><input type='text' id='satelliteRadius' name='satelliteRadius' required><br>";
+      fillWithCenter += "<label for='satelliteTemperature'>Temperature:</label><input type='text' id='satelliteTemperature' name='satelliteTemperature' required><br>";
+      fillWithCenter += "<label for='satelliteOverview'>Overview:</label><textarea id='satelliteOverview' name='satelliteOverview' required></textarea><br>";
+      fillWithCenter += "<label for='satelliteOverviewSource'>Overview Source:</label><input type='text' id='satelliteOverviewSource' name='satelliteOverviewSource' required><br>";
+      fillWithCenter += "<label for='satelliteOverviewUrl'>Overview URL:</label><input type='text' id='satelliteOverviewUrl' name='satelliteOverviewUrl' required><br>";
+      fillWithCenter += "<label for='satelliteInternal'>Internal:</label><textarea id='satelliteInternal' name='satelliteInternal' required></textarea><br>";
+      fillWithCenter += "<label for='satelliteInternalSource'>Internal Source:</label><input type='text' id='satelliteInternalSource' name='satelliteInternalSource' required><br>";
+      fillWithCenter += "<label for='satelliteInternalUrl'>Internal URL:</label><input type='text' id='satelliteInternalUrl' name='satelliteInternalUrl' required><br>";
+      fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface' required></textarea><br>";
+      fillWithCenter += "<label for='satelliteSurfaceSource'>Surface Source:</label><input type='text' id='satelliteSurfaceSource' name='satelliteSurfaceSource' required><br>";
+      fillWithCenter += "<label for='satelliteSurfaceUrl'>Surface URL:</label><input type='text' id='satelliteSurfaceUrl' name='satelliteSurfaceUrl' required><br>";
       fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
+
+      // The right side is filled with the last added satellites, the if is necessary in case there's more than 5 satellites.
 
       fillWithRight = "<div class='titleInfo'>Last Added Satellites</div><div class='textInfo'>The last added satellites are:</div>";
       if (adminInfo[3].length <=5) {
@@ -356,6 +417,7 @@ function fillWithDataAdmin(typeofInfo) {
         }
       }
       break;
+    // IF user goes to MESSAGE page
     case "message":
       fillWithLeft = "<div class='titleInfo'>Select Message</div>";
       for (var i=0;i<adminInfo[5].length;i++) {
@@ -365,6 +427,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter = "<div class='titleInfo'>Handle Message</div>";
       fillWithRight = "<div class='titleInfo'>Message Comments</div>";
       break;
+    // IF user goes to USER page (requires superadmin priv)
     case "user":
       fillWithLeft = "<div class='titleInfo'>Select User</div>";
       for (var i=0;i<adminInfo[0].length;i++) {
@@ -377,11 +440,24 @@ function fillWithDataAdmin(typeofInfo) {
     default:
       break;
   }
+
+  // Here we will the HTML
+
   $("#infoleftInner").html(fillWithLeft);
-  $('#editable-select').editableSelect();
   $("#infocentreInner").html(fillWithCenter);
   $("#inforightInner").html(fillWithRight);
+
+  // Necessary editableselect assigning for the library to work
+  $('#starPicker').editableSelect();
+  $('#starPickerPlanet').editableSelect();
+  $('#starPickerNPO').editableSelect();
+  $('#starPickerSatellite').editableSelect();
+  $('#starPickerPlanetInner').editableSelect();
+  $('#starPickerNPOInner').editableSelect();
+  $('#starPickerSatelliteInner').editableSelect();
 }
+
+// Fill admin homepage with basic data
 
 function fillWithAdmin() {
   if (adminInfo[0].length == 1) {
@@ -407,7 +483,6 @@ function fillWithAdmin() {
   
 }
 
-
 // Function to wait for objects to load in
 
 function waitForObjects(){
@@ -418,6 +493,8 @@ function waitForObjects(){
     }
 }
 
+// Function to wait for objects to load in, admin version
+
 function waitForAdmin(){
   if(typeof adminInfo !== "undefined") {
       fillWithAdmin();
@@ -427,7 +504,7 @@ function waitForAdmin(){
   }
 }
 
-// Function to allow the dragging of the console across the screen
+// Function to allow the dragging of the console across the screen, only in client side
 
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -627,6 +704,8 @@ function retractInfoLeft() {
 }
 */
 
+
+// Message sent to team - Errors reported by mundane users
 function reportError() {
   Swal.fire({
     title: "Send a message to our team",
@@ -638,6 +717,7 @@ function reportError() {
     showCancelButton: true
   }).then((result) => {
     // THIS WORKS LMFAO FINESSED THEM DEVS!
+    // I wrote random stuff based on how this library works and it actually works
     if(result.isConfirmed) {
       var formData = new FormData();
       formData.append('message', result.value);
@@ -659,4 +739,157 @@ function reportError() {
       Swal.fire('Canceled!', 'The message has not been sent', 'info');
     }
   });
+}
+
+// When a Stellar object is submitted - Admin
+
+function submitStars() {
+  // assigning values
+  var sendStar = [$("#starExists").val(),$("#starName").val(),$("#starRotation").val(),$("#starRevolution").val(),$("#starRadius").val(),$("#starTemperature").val(),
+  $("#starOverview").val(),$("#starOverviewSource").val(),$("#starOverviewUrl").val(),$("#starInternal").val(),$("#starInternalSource").val(),$("#starInternalUrl").val(),
+  $("#starSurface").val(),$("#starSurfaceSource").val(),$("#starSurfaceUrl").val(),$("#starType").val()];
+  // sending query to php
+  var formData = new FormData();
+  formData.append('action','star');
+  formData.append('objArray', JSON.stringify(sendStar));
+  fetch('php/insertfromadmin.php', {
+      method: "POST",
+      body: formData
+  })
+      .then(response => response.text())
+      .then(data => {
+          if(data=="success") {
+            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+              if(result.isConfirmed) {
+                location.reload();
+              }
+            });
+          } else {
+            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+            console.log(data);
+          }
+      });
+}
+
+// When a Planetary object is submitted - Admin
+
+function submitPlanets() {
+  // assigning values - slightly longer due to check if star was chosen
+  var starID;
+  var selectedStar = $("#selectInside .es-list .es-visible");
+  if (selectedStar.length == 1) {
+    var starPosition = selectedStar[0].value;
+    starID = adminInfo[0][starPosition][0];
+    var sendPlanet = [$("#planetExists").val(),starID,$("#planetName").val(),$("#planetPosition").val(),$("#planetRotation").val(),$("#planetRevolution").val(),$("#planetRadius").val(),
+    $("#planetTemperature").val(),$("#planetOverview").val(),$("#planetOverviewSource").val(),$("#planetOverviewUrl").val(),$("#planetInternal").val(),$("#planetInternalSource").val(),
+    $("#planetInternalUrl").val(),$("#planetSurface").val(),$("#planetSurfaceSource").val(),$("#planetSurfaceUrl").val()];
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'You need to choose a star before doing this!',
+    })
+  }
+
+  // sending query to php
+  var formData = new FormData();
+  formData.append('action','planet');
+  formData.append('objArray', JSON.stringify(sendPlanet));
+  fetch('php/insertfromadmin.php', {
+      method: "POST",
+      body: formData
+  })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+          if(data=="success") {
+            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+              if(result.isConfirmed) {
+                location.reload();
+              }
+            });
+          } else {
+            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+          }
+      });
+}
+
+// When a NPO object is submitted - Admin
+
+function submitNPOs() {
+  // assigning values - slightly longer due to check if star was chosen
+  var starID;
+  var selectedStar = $("#selectInside .es-list .es-visible");
+  if (selectedStar.length == 1) {
+    var starPosition = selectedStar[0].value;
+    starID = adminInfo[0][starPosition][0];
+    var sendNPO = [$("#npoExists").val(),starID,$("#npoName").val() ,$("#npoRotation").val(),$("#npoRevolution").val(),$("#npoRadius").val(),
+    $("#npoTemperature").val(),$("#npoOverview").val(),$("#npoOverviewSource").val(),$("#npoOverviewUrl").val(),$("#npoInternal").val(),$("#npoInternalSource").val(),
+    $("#npoInternalUrl").val(),$("#npoSurface").val(),$("#npoPlanetSurface").val(),$("#npoSurfaceUrl").val()];
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'You need to choose a star before doing this!',
+    })
+  }
+
+  // sending query to php
+  var formData = new FormData();
+  formData.append('action','npo');
+  formData.append('objArray', JSON.stringify(sendNPO));
+  fetch('php/insertfromadmin.php', {
+      method: "POST",
+      body: formData
+  })
+      .then(response => response.text())
+      .then(data => {
+          if(data=="success") {
+            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+              if(result.isConfirmed) {
+                location.reload();
+              }
+            });
+          } else {
+            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+
+          }
+      });
+}
+
+// When a Satellite object is submitted - Admin
+
+function submitSatellites() {
+  // assigning values - slightly longer due to check if star was chosen
+  var selectedStar = $("#selectInside .es-list .es-visible");
+  if (selectedStar.length == 1) {
+    // This one is slightly different, since a star needs to be chosen in order to get a planet, we don't need most of the variables used in the previous examples
+    var sendSatellite = [$("#satelliteExists").val(),adminInfo[1][$("#selectSatellitePlanetInner").val()][0],$("#satelliteName").val(),$("#satellitePosition").val(),$("#satelliteRotation").val(),
+    $("#satelliteRevolution").val(),$("#satelliteRadius").val(),$("#satelliteTemperature").val(),$("#satelliteOverview").val(),$("#satelliteOverviewSource").val(),$("#satelliteOverviewUrl").val(),
+    $("#satelliteInternal").val(),$("#satelliteInternalSource").val(),$("#satelliteInternalUrl").val(),$("#satelliteSurface").val(),$("#satelliteSurfaceSource").val(),$("#satelliteSurfaceUrl").val()];
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'You need to choose a star before doing this!',
+    })
+  }
+
+  // sending query to php
+  var formData = new FormData();
+  formData.append('action','satellite');
+  formData.append('objArray', JSON.stringify(sendSatellite));
+  fetch('php/insertfromadmin.php', {
+      method: "POST",
+      body: formData
+  })
+      .then(response => response.text())
+      .then(data => {
+          if(data=="success") {
+            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+              if(result.isConfirmed) {
+                location.reload();
+              }
+            });
+          } else {
+            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+          }
+      });
 }

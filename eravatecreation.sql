@@ -197,7 +197,7 @@ CREATE TABLE Planet(
     surfaceTXT text NOT NULL,
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
-    3D tinyint NOT NULL,
+    3D tinyint NOT NULL DEFAULT 0,
     FOREIGN KEY (Star) REFERENCES Star(ID)
 );
 
@@ -221,7 +221,7 @@ CREATE TABLE NPO(
     surfaceTXT text NOT NULL,
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
-    3D tinyint NOT NULL,
+    3D tinyint NOT NULL DEFAULT 0,
     FOREIGN KEY (Star) REFERENCES Star(ID)
 );
 
@@ -246,7 +246,7 @@ CREATE TABLE Satellite(
     surfaceTXT text NOT NULL,
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
-    3D tinyint NOT NULL,
+    3D tinyint NOT NULL DEFAULT 0,
     FOREIGN KEY (Planet) REFERENCES Planet(ID)
 );
 
