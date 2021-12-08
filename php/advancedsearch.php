@@ -2,7 +2,10 @@
 ini_set('display_errors',1);
 session_start();
 # Database Con
+// Database for local
 $database = new mysqli('localhost', 'root', '', 'eravate');
+// Database for ionos
+//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 
 $queryname = $_POST['location'];
 $objects = array();
@@ -29,7 +32,7 @@ switch ($rowcount) {
             // If the object that was searched for was a Star, It is starting to get extremely complicated y'know
             case "star":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=? AND s.startype = t.ID");
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, StarType t WHERE s.ID=? AND s.startype = t.ID");
                 $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();
@@ -100,7 +103,7 @@ switch ($rowcount) {
             // If the object that was searched for was a Star - Uses subquery to determine ID
             case "planet":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM Planet WHERE ID=?) AND s.startype = t.ID");
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, StarType t WHERE s.ID=(SELECT Star FROM Planet WHERE ID=?) AND s.startype = t.ID");
                 $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();
@@ -172,7 +175,7 @@ switch ($rowcount) {
             // If the object that was searched for was a Star
             case "npo":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM NPO WHERE ID=?) AND s.startype = t.ID");
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, StarType t WHERE s.ID=(SELECT Star FROM NPO WHERE ID=?) AND s.startype = t.ID");
                 $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();
@@ -219,7 +222,7 @@ switch ($rowcount) {
             // If the object that was searched for was a Star, This one's boutta have so much code fml
             case "satellite":
                 $database->stmt_init();
-                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=(SELECT Star FROM Planet WHERE ID=(SELECT Planet FROM Satellite WHERE ID=?)) AND s.startype = t.ID");
+                $result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, StarType t WHERE s.ID=(SELECT Star FROM Planet WHERE ID=(SELECT Planet FROM Satellite WHERE ID=?)) AND s.startype = t.ID");
                 $result->bind_param('i',$idRes);
                 $result->execute();
                 $result->store_result();

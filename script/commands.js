@@ -211,11 +211,11 @@ function fillWithDataAdmin(typeofInfo) {
 
       // We fill the left side with a stellar choice (no pun intended)
 
-      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'><select id='starPicker' name='numStar'>";
+      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'><div id='selectOutside'><select id='starPicker' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
-      fillWithLeft += "</select><button type='button' id='modifyStar'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
+      fillWithLeft += "</select></div><button type='button' id='modifyStar'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
 
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
@@ -575,7 +575,7 @@ function submitLogin() {
     })
       .then(response => response.text())
       .then(data => {
-        result = JSON.parse(data);
+        var result = (data);
         switch(result) {
           // I've set up two different success cases and 2 different error cases for more specific alerts
           // sucl means the client has succesfully logged into his account
@@ -595,7 +595,7 @@ function submitLogin() {
             })
                 .then(response => response.text())
                 .then(data => {
-                    var result = JSON.parse(data);
+                    var result = data;
                     if (result == "success") {
                       window.location.href = "admin.php";
                     } else {

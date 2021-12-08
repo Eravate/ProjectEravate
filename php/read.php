@@ -1,9 +1,12 @@
 <?php 
 ini_set('display_errors',1);
 session_start();
+
 # Database Con
+// Database for local
 $database = new mysqli('localhost', 'root', '', 'eravate');
-$databaseS = new mysqli('localhost', 'root', '', 'eravate');
+// Database for ionos
+//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 
 $solar = $_POST['solar'];
 $objects = array();
@@ -82,7 +85,7 @@ switch ($rowcount) {
 /* CURRENTLY IN-DEVELOPMENT W/ MOONS*/
 
 $database->stmt_init();
-$result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, Startype t WHERE s.ID=? AND s.startype = t.ID");
+$result = $database->prepare("SELECT s.ID, s.name, s.rotation, s.revolution, s.radius, s.temp, s.overviewTXT, s.overviewSor, s.overviewURL, s.internalTXT, s.internalSor, s.internalURL, s.surfaceTXT, s.surfaceSor, s.surfaceURL, t.name FROM Star s, StarType t WHERE s.ID=? AND s.startype = t.ID");
 $result->bind_param('i',$solar);
 $result->execute();
 $result->store_result();

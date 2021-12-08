@@ -101,7 +101,7 @@ CREATE TABLE AppUser(
     -- #activated tinyint NOT NULL DEFAULT 0,
     isAdmin tinyint NOT NULL DEFAULT 0,
     isSuperAdmin tinyint NOT NULL DEFAULT 0
-);
+) ENGINE = InnoDB;
 
 -- Admin logs will be kept here 
 
@@ -112,7 +112,7 @@ CREATE TABLE AdminLogs(
     objectAffected varchar(80),
     done timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user) REFERENCES AppUser(email)
-);
+) ENGINE = InnoDB;
 
 -- Messages sent by the users to the site admins will be kept here
 
@@ -125,7 +125,7 @@ CREATE TABLE MessageToTeam(
     closed tinyint NOT NULL DEFAULT 0,
     isTagged tinyint NOT NULL DEFAULT 0,
     FOREIGN KEY (sentBy) REFERENCES AppUser(email)
-);
+) ENGINE = InnoDB;
 
 -- Man why the fuck am I complicating this more?
 
@@ -137,7 +137,7 @@ CREATE TABLE CommentsOnMessage(
     sentOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (message) REFERENCES MessageToTeam(ID),
     FOREIGN KEY (sentBy) REFERENCES AppUser(email)
-);
+) ENGINE = InnoDB;
 
 -- A star is any object whose orbit depends solely on the galaxy it belongs to.
 -- To this day, it is unknown whether these objects are gravitationally bound to SMBH (Supermassive Black Holes), 
@@ -154,7 +154,7 @@ CREATE TABLE CommentsOnMessage(
 CREATE TABLE StarType(
     ID int primary key auto_increment,
     name varchar(1) NOT NULL
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE Star(
     ID int primary key auto_increment,
@@ -173,8 +173,8 @@ CREATE TABLE Star(
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
     startype int NOT NULL,
-    FOREIGN KEY (startype) REFERENCES StarType(ID)
-);
+    CONSTRAINT StarType FOREIGN KEY (startype) REFERENCES StarType(ID) ON DELETE CASCADE
+) ENGINE = InnoDB;
 
 -- A planet is any object whose orbit depends on it's host star, has sufficient mass to assume hydrostatic equilibrium (nearly-round shape) 
 -- and has cleared it's own orbit around the host star (the reason Pluto is not considered a planet).
@@ -198,8 +198,8 @@ CREATE TABLE Planet(
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
     3D tinyint NOT NULL DEFAULT 0,
-    FOREIGN KEY (Star) REFERENCES Star(ID)
-);
+    CONSTRAINT PlanetStar FOREIGN KEY (Star) REFERENCES Star(ID) ON DELETE CASCADE
+) ENGINE = InnoDB;
 
 -- NPO are Non-planetary objects, or objects that fail to meet one of the criteria of becoming a planet, 
 -- they include any asteroids and comets, as well as any TNOs (Trans-Neptunian Objects).
@@ -222,8 +222,8 @@ CREATE TABLE NPO(
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
     3D tinyint NOT NULL DEFAULT 0,
-    FOREIGN KEY (Star) REFERENCES Star(ID)
-);
+    CONSTRAINT NpoStar FOREIGN KEY (Star) REFERENCES Star(ID) ON DELETE CASCADE
+) ENGINE = InnoDB;
 
 -- a Satellite is any object whose orbit depends on it's host planet, however, it does not need sufficient mass to assume hydrostatic equilibrium, 
 -- nor cleared it's own orbit around the host planet, to be considered a satellite.
@@ -247,8 +247,8 @@ CREATE TABLE Satellite(
     surfaceSor tinytext NOT NULL,
     surfaceURL text NOT NULL,
     3D tinyint NOT NULL DEFAULT 0,
-    FOREIGN KEY (Planet) REFERENCES Planet(ID)
-);
+    CONSTRAINT SatellitePlanet FOREIGN KEY (Planet) REFERENCES Planet(ID) ON DELETE CASCADE
+) ENGINE = InnoDB;
 
 -- Here we add basic data for the app to work
 

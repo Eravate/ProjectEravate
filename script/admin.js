@@ -394,3 +394,176 @@ $("body").on("click", "#resetSatellite", function() {
     $("#satelliteSubmitTitle").html("Add New Satellite");
     $("#selectSatellitePlanetInner").html("<option value='no'>Select A Star</option>");
 })
+
+// DELETE BUTTON ACTIONS
+
+// Delete Star on click
+
+$("body").on("click", "#deleteStar", function() { 
+    var selectedStar = $("#selectOutside .es-list .es-visible");
+    if (selectedStar.length == 1) { 
+        var starPosition = selectedStar[0].value;
+        var starToDelete = [adminInfo[0][starPosition][0],adminInfo[0][starPosition][1]];
+        // sending query to php
+        Swal.fire({
+            title: "Careful!",
+            icon: "warning",
+            text: "This action is irreversible, do you wish to continue?",
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed) {
+                var formData = new FormData();
+                formData.append('action','star');
+                formData.append('affObject', JSON.stringify(starToDelete));
+                fetch('php/deletefromadmin.php', {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if(data=="success") {
+                        Swal.fire('Deleted!', 'The Star has been deleted!', 'success').then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        } else {
+                            console.log(data);
+                            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                        }
+                    });
+            }
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'You need to choose a Star before doing this!',
+          })
+    }
+});
+
+// Delete Planet on click
+
+$("body").on("click", "#deletePlanet", function() { 
+    if ($("#selectPlanet").val() !== "no") {
+        var planetToDelete = [adminInfo[1][$("#selectPlanet").val()][0],adminInfo[1][$("#selectPlanet").val()][2]];
+        // sending query to php
+        Swal.fire({
+            title: "Careful!",
+            icon: "warning",
+            text: "This action is irreversible, do you wish to continue?",
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed) {
+                var formData = new FormData();
+                formData.append('action','planet');
+                formData.append('affObject', JSON.stringify(planetToDelete));
+                fetch('php/deletefromadmin.php', {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if(data=="success") {
+                        Swal.fire('Submitted!', 'The Planet has been deleted!', 'success').then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        } else {
+                            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                        }
+                    });
+            }
+        });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'You need to choose a Planet before doing this!',
+      })
+    }
+});
+
+// Delete NPO on click
+
+$("body").on("click", "#deleteNPO", function() { 
+    if ($("#selectNPO").val() !== "no") {
+        var npoToDelete = [adminInfo[2][$("#selectNPO").val()][0],adminInfo[2][$("#selectNPO").val()][2]];
+        // sending query to php
+        Swal.fire({
+            title: "Careful!",
+            icon: "warning",
+            text: "This action is irreversible, do you wish to continue?",
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed) {
+                var formData = new FormData();
+                formData.append('action','npo');
+                formData.append('affObject', JSON.stringify(npoToDelete));
+                fetch('php/deletefromadmin.php', {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if(data=="success") {
+                        Swal.fire('Submitted!', 'The NPO has been deleted!', 'success').then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        } else {
+                            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                        }
+                    });
+            }
+        });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'You need to choose a NPO before doing this!',
+      })
+    }
+});
+
+// Delete Satellite on click
+
+$("body").on("click", "#deleteSatellite", function() { 
+    if ($("#selectSatellite").val() !== "no") {
+        var satelliteToDelete = [adminInfo[3][$("#selectSatellite").val()][0],adminInfo[3][$("#selectSatellite").val()][2]];
+        // sending query to php
+        Swal.fire({
+            title: "Careful!",
+            icon: "warning",
+            text: "This action is irreversible, do you wish to continue?",
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed) {
+                var formData = new FormData();
+                formData.append('action','satellite');
+                formData.append('affObject', JSON.stringify(satelliteToDelete));
+                fetch('php/deletefromadmin.php', {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if(data=="success") {
+                        Swal.fire('Submitted!', 'The Satellite has been deleted!', 'success').then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        } else {
+                            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                        }
+                    });
+            }
+        });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'You need to choose a satellite before doing this!',
+      })
+    }
+});
