@@ -45,6 +45,12 @@ switch ($action) {
         $actionDone = "Removed Satellite ".$affObject[1];
         $result->execute();
         break;
+    case "user":
+        $result = $database->prepare("DELETE FROM AppUser WHERE email=?");
+        $result->bind_param('s',$affObject[0]);
+        $actionDone = "Removed User ".$affObject[0];
+        $result->execute();
+        break;
 }
 
 // Inserting into admin logs to keep control

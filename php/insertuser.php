@@ -20,7 +20,7 @@ $zero = 0;
 if ($objArray[0]=="no") {
     $encpasswd = password_hash($objArray[2],PASSWORD_DEFAULT);
     $result = $database->prepare("INSERT INTO AppUser(email,passwd,isAdmin,isSuperAdmin) VALUES (?,?,?,?)");
-    $result->bind_param('ssiis',$objArray[1],$encpasswd,$objArray[3],$objArray[4]);
+    $result->bind_param('ssii',$objArray[1],$encpasswd,$objArray[3],$objArray[4]);
     $result->execute();
     $actionDone = "Added User ".$objArray[1];
     $objAffected = $objArray[1];
