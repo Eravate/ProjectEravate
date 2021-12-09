@@ -14,8 +14,9 @@ $npos = array();
 $satellites = array();
 $logs = array();
 $messages = array();
+$messageComments = array();
 $starTypes = array();
-
+$users = array();
 
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 
@@ -229,6 +230,44 @@ switch ($rowcount) {
         break;
     }
 
+$database->stmt_init();
+$result = $database->prepare("SELECT email, isAdmin, isSuperAdmin FROM AppUser");
+$result->execute();
+$result->store_result();
+$result->bind_result($email,$isAdmin,$isSuperAdmin);
+
+$rowcount = $result->num_rows;
+
+switch ($rowcount) {
+    case 0:
+        break;
+    default:
+        while ($result->fetch()) {
+            $user = array($email,$isAdmin,$isSuperAdmin);
+            array_push($users, $user);
+        }
+        break;
+    }
+
+$database->stmt_init();
+$result = $database->prepare("SELECT * FROM CommentsOnMessage");
+$result->execute();
+$result->store_result();
+$result->bind_result($id,$message,$sentBy,$comment,$sentOn);
+
+$rowcount = $result->num_rows;
+
+switch ($rowcount) {
+    case 0:
+        break;
+    default:
+        while ($result->fetch()) {
+            $messageComment = array($id,$message,$sentBy,$comment,$sentOn);
+            array_push($messageComments, $messageComment);
+        }
+        break;
+    }
+
 array_push($objects,$suns);
 array_push($objects,$planets);
 array_push($objects,$npos);
@@ -236,6 +275,8 @@ array_push($objects,$satellites);
 array_push($objects,$logs);
 array_push($objects,$messages);
 array_push($objects,$starTypes);
+array_push($objects,$users);
+array_push($objects,$messageComments);
 
 
 echo json_encode($objects);

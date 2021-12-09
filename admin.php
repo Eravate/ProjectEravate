@@ -23,12 +23,9 @@ if (!isset($_SESSION['admin'])) {
     <script src="script/sweetalert2.min.js"></script>
     <script src="script/commands.js"></script>
     <script src="script/adminstart.js"></script>
+    <script src="script/materialize.min.js"></script>
     <script defer src="script/admin.js"></script>
-    <script defer src="script/three.min.js"></script>
-    <script defer src="script/postprocessing.min.js"></script>
     <script src="script/jqueryeditableselect.min.js"></script>
-    <script type="module" src="script/GLTFLoader.js"></script>
-    <script type="module" src="script/OrbitControls.js"></script>
     
     
     <!--<script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>-->

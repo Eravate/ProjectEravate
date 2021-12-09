@@ -46,7 +46,12 @@ input {
 }
 textarea {
   color: white;
+  border: 1px solid #FF6E00;
   height: 5vw;
+}
+textarea:focus {
+  outline: none !important;
+  border: 1px solid #FF6E00;
 }
 button {
   background-color: transparent;
@@ -64,16 +69,22 @@ button {
   border: 1px solid #FF0000;
   float: right;
 }
-button:hover {
-  background: #FF6E00;
-}
-button:focus {
+.buttonAdmin:hover {
   background: #FF6E00;
 }
 .delete:hover {
   background: #FF0000;
 }
-
+.buttonMessages {
+  width: 5vw;
+}
+.buttonMessagesSecondary {
+  width: 5vw;
+  margin-left: 0.4vw;
+}
+.handleMessage {
+  width: 5vw;
+}
 .selectTra {
   color: white;
   border: 0px;
@@ -233,6 +244,9 @@ button:focus {
   font-size:1.2vw;
   text-overflow: ellipsis; 
   white-space: nowrap;
+}
+.rowTextFull {
+  font-size: 1.2vw;
 }
 .rowFooter {
   font-size: 0.8vw;

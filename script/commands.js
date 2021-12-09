@@ -211,15 +211,15 @@ function fillWithDataAdmin(typeofInfo) {
 
       // We fill the left side with a stellar choice (no pun intended)
 
-      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'><div id='selectOutside'><select id='starPicker' name='numStar'>";
+      fillWithLeft = "<div class='titleInfo'>Select Star</div><div class='textInfo'>Select a Star to modify or delete it.</div><div class='textInfo'><div id='selectOutside'><select id='starPicker' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
-      fillWithLeft += "</select></div><button type='button' id='modifyStar'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
+      fillWithLeft += "</select></div><button type='button' id='modifyStar' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
 
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='starSubmitTitle'>Add New Star</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='starSubmitTitle'>Add New Star</div><div class='textInfo' id='starSubmitInfo'>Add a new star by filing the form down below.</div><div class='textInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitStars();'>";
       fillWithCenter += "<input type='hidden' id='starExists' name='starExists' value='no'>"
       fillWithCenter += "<label for='starName'>Star Name:</label><input type='text' id='starName' name='starName' required><br>";
@@ -241,7 +241,7 @@ function fillWithDataAdmin(typeofInfo) {
         fillWithCenter += "<option id='starType"+adminInfo[6][i][0]+"' value='"+adminInfo[6][i][0]+"'>"+adminInfo[6][i][1]+"</option>";
       }
       fillWithCenter += "</select><br>";
-      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetStar' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetStar' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
       fillWithCenter += "</div>";
       
@@ -263,16 +263,16 @@ function fillWithDataAdmin(typeofInfo) {
 
       // We fill the left side with a planetary choice
 
-      fillWithLeft = "<div class='titleInfo'>Select Planet</div><div class='textInfo'><div id='selectOutside'><select id='starPickerPlanet' name='numStar'>";
+      fillWithLeft = "<div class='titleInfo'>Select Planet</div><div class='textInfo'>Select a Planet to modify or delete it.</div><div class='textInfo'><div id='selectOutside'><select id='starPickerPlanet' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
       fillWithLeft += "</select></div>";
-      fillWithLeft += "<select id='selectPlanet' name='numPlanet' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyPlanet'>Modify Data</button><button type='button' class='delete' id='deletePlanet'>Delete Planet</button></div>"
+      fillWithLeft += "<select id='selectPlanet' name='numPlanet' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyPlanet' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deletePlanet'>Delete Planet</button></div>"
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='planetSubmitTitle'>Add New Planet</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='planetSubmitTitle'>Add New Planet</div><div class='textInfo' id='planetSubmitInfo'>Add a new planet by filing the form down below.</div><div class='textInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitPlanets();'>";
       fillWithCenter += "<input type='hidden' id='planetExists' name='planetExists' value='no'>"
       fillWithCenter += "<label for='planetName'>Planet Name:</label><input type='text' id='planetName' name='planetName' required><br>";
@@ -295,7 +295,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface' required></textarea><br>";
       fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource' required><br>";
       fillWithCenter += "<label for='planetSurfaceUrl'>Surface URL:</label><input type='text' id='planetSurfaceUrl' name='planetSurfaceUrl' required><br>";
-      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
       // The right side is filled with the last added planets, the if is necessary in case there's more than 5 planets.
@@ -316,16 +316,16 @@ function fillWithDataAdmin(typeofInfo) {
 
       // We fill the left side with a NPO choice
 
-      fillWithLeft = "<div class='titleInfo'>Select NPO</div><div class='textInfo'><div id='selectOutside'><select id='starPickerNPO' name='numStar'>";
+      fillWithLeft = "<div class='titleInfo'>Select NPO</div><div class='textInfo' >Select a NPO to modify or delete it.</div><div class='textInfo'><div id='selectOutside'><select id='starPickerNPO' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
       fillWithLeft += "</select></div>";
-      fillWithLeft += "<select id='selectNPO' name='numNPO' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyNPO'>Modify Data</button><button type='button' class='delete' id='deleteNPO'>Delete NPO</button></div>"
+      fillWithLeft += "<select id='selectNPO' name='numNPO' class='selectTra'><option value='no'>Select A Star</option></select><button type='button' id='modifyNPO' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteNPO'>Delete NPO</button></div>"
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='npoSubmitTitle'>Add New NPO</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='npoSubmitTitle'>Add New NPO</div><div class='textInfo' id='npoSubmitInfo'>Add a new NPO by filing the form down below.</div><div class='textInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitNPOs();'>";
       fillWithCenter += "<input type='hidden' id='npoExists' name='npoExists' value='no'>"
       fillWithCenter += "<label for='npoName'>NPO Name:</label><input type='text' id='npoName' name='npoName' required><br>";
@@ -347,7 +347,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface' required></textarea><br>";
       fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface' required><br>";
       fillWithCenter += "<label for='npoSurfaceUrl'>Surface URL:</label><input type='text' id='npoSurfaceUrl' name='npoSurfaceUrl' required ><br>";
-      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetNPO' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetNPO' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
       // The right side is filled with the last added npos, the if is necessary in case there's more than 5 npos.
@@ -368,16 +368,16 @@ function fillWithDataAdmin(typeofInfo) {
 
       // We fill the left side with a Satellite choice
 
-      fillWithLeft = "<div class='titleInfo'>Select Satellite</div><div class='textInfo'><div id='selectOutside'><select id='starPickerSatellite' name='numStar'>";
+      fillWithLeft = "<div class='titleInfo'>Select Satellite</div><div class='textInfo'>Select a Satellite to modify or delete it.</div><div class='textInfo'><div id='selectOutside'><select id='starPickerSatellite' name='numStar'>";
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
       fillWithLeft += "</select></div>";
-      fillWithLeft += "<select id='selectSatellitePlanet' name='numSatellitePlanet' class='selectTra'><option value='no'>Select A Star</option></select><select id='selectSatellite' name='numSatellite' class='selectTra'><option value='no'>Select A Planet</option></select><button type='button' id='modifySatellite'>Modify Data</button><button type='button' class='delete' id='deleteSatellite'>Delete Satellite</button></div>"
+      fillWithLeft += "<select id='selectSatellitePlanet' name='numSatellitePlanet' class='selectTra'><option value='no'>Select A Star</option></select><select id='selectSatellite' name='numSatellite' class='selectTra'><option value='no'>Select A Planet</option></select><button type='button' id='modifySatellite' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteSatellite'>Delete Satellite</button></div>"
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo' id='starSubmitInfo'>Add a new satellite by filing the form down below</div><div class='textInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitSatellites();'>";
       fillWithCenter += "<input type='hidden' id='satelliteExists' name='satelliteExists' value='no'>"
       fillWithCenter += "<label for='satelliteName'>NPO Name:</label><input type='text' id='satelliteName' name='satelliteName' required><br>";
@@ -401,7 +401,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface' required></textarea><br>";
       fillWithCenter += "<label for='satelliteSurfaceSource'>Surface Source:</label><input type='text' id='satelliteSurfaceSource' name='satelliteSurfaceSource' required><br>";
       fillWithCenter += "<label for='satelliteSurfaceUrl'>Surface URL:</label><input type='text' id='satelliteSurfaceUrl' name='satelliteSurfaceUrl' required><br>";
-      fillWithCenter += "<button type='submit' value='Submit'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
       // The right side is filled with the last added satellites, the if is necessary in case there's more than 5 satellites.
@@ -419,23 +419,52 @@ function fillWithDataAdmin(typeofInfo) {
       break;
     // IF user goes to MESSAGE page
     case "message":
-      fillWithLeft = "<div class='titleInfo'>Select Message</div>";
+      fillWithLeft = "<div class='titleInfo'>Select Message</div><div class='textInfo'>Use the buttons to filter through the messages.</div><div class='textInfo'><button type='button' id='showHidden' class='buttonMessages'>Hidden</button><button type='button' id='showUnseen' class='buttonMessagesSecondary'>Unseen</button><button type='button' id='showFlagged' class='buttonMessagesSecondary'>Flagged</button></div><div id='messageRow' class='textInfo'>";
+      fillWithLeft += "<div class='messageRow'>";
       for (var i=0;i<adminInfo[5].length;i++) {
-        fillWithLeft += "<option value='"+adminInfo[5][i][0]+"'>"+adminInfo[5][i][1]+"</option>";
+        // IF the message is still open
+        if (adminInfo[5][i][5] == 0) {
+          fillWithLeft += "<div class='row' onclick='loadMessage("+i+");'><div class='rowTitle'>"+adminInfo[5][i][1] + " / " + adminInfo[5][i][0];
+          // IF the message is tagged / not tagged
+          if (adminInfo[5][i][6] == 0) {
+            fillWithLeft += "<img class='rowIcon' src='icons/notflagged.png'>";
+          } else {
+            fillWithLeft += "<img class='rowIcon' src='icons/flagged.png'>";
+          }
+          // IF the message has not been read / has been read
+          if (adminInfo[5][i][4] == 0) {
+            fillWithLeft += " <img class='rowIcon' src='icons/notread.png'>";
+          } else {
+            fillWithLeft += "<img class='rowIcon' src='icons/read.png'>";
+          }
+          fillWithLeft += "</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
+        }
+        fillWithLeft += "</div>";
       }
-      fillWithLeft += "</select></div>";
-      fillWithCenter = "<div class='titleInfo'>Handle Message</div>";
-      fillWithRight = "<div class='titleInfo'>Message Comments</div>";
+      fillWithLeft += "</div>";
+
+      fillWithLeft += "</div>";
+      fillWithCenter = "<div class='titleInfo'>Handle Message</div><div class='textInfo'>Choose a message to check it's content.</div><div class='textInfo' id='infoMessages'></div>";
+      fillWithRight = "<div class='titleInfo'>Message Comments</div><div class='textInfo'>Check the comments left under a message.</div><div class='textInfo' id='commentMessages'></div>";
       break;
     // IF user goes to USER page (requires superadmin priv)
     case "user":
-      fillWithLeft = "<div class='titleInfo'>Select User</div>";
-      for (var i=0;i<adminInfo[0].length;i++) {
-        fillWithLeft += "<option value='"+adminInfo[0][i][0]+"'>"+adminInfo[0][i][1]+"</option>";
+      fillWithLeft = "<div class='titleInfo'>Select User</div><div class='textInfo'>Select an user to modify or delete it.</div><div class='textInfo'><div id='selectUser'><select id='userPicker' name='numUser'>";
+      for (var i=0;i<adminInfo[7].length;i++) {
+        fillWithLeft += "<option value='"+i+"'>"+adminInfo[7][i][0]+"</option>";
       }
-      fillWithLeft += "</select></div>";
-      fillWithCenter = "<div class='titleInfo'>Add New User</div>";
-      fillWithRight = "<div class='titleInfo'>User Logs</div>";
+      fillWithLeft += "</select></div><button type='button' id='modifyUser' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteUser'>Delete User</button></div>";
+
+      fillWithCenter = "<div class='titleInfo'>Add New User</div><div class='textInfo'>Add a new user by filling the form down below.</div><div class='textInfo'>";
+      fillWithCenter += "<form onsubmit='event.preventDefault(); submitUser();'>";
+      fillWithCenter += "<input type='hidden' id='userExists' name='userExists' value='no'>";
+      fillWithCenter += "<label for='userEmail'>Email:</label><input type='text' id='userEmail' name='userEmail' required><br>";
+      fillWithCenter += "<label for='userPasswd'>Password:</label><input type='password' id='userPasswd' name='userPasswd'><br>";
+      fillWithCenter += "<label><input type='checkbox' id='adminPriv'><span>Admin Priviledge</span></label><br>";
+      fillWithCenter += "<label><input type='checkbox' id='superadminPriv'><span>Superadmin Priviledge</span></label><br><br>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button><button type='reset' id='resetUser' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "</div>";
+      fillWithRight = "<div class='titleInfo'>User Logs</div><div class='textInfo'>Only available for Admins and Super Admins</div><div class='textInfo' id='userLogs'></div>";
       break;
     default:
       break;
@@ -455,6 +484,7 @@ function fillWithDataAdmin(typeofInfo) {
   $('#starPickerPlanetInner').editableSelect();
   $('#starPickerNPOInner').editableSelect();
   $('#starPickerSatelliteInner').editableSelect();
+  $('#userPicker').editableSelect();
 }
 
 // Fill admin homepage with basic data
@@ -889,6 +919,199 @@ function submitSatellites() {
               }
             });
           } else {
+            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+          }
+      });
+}
+
+function loadMessage(messageID) {
+  var fillWithCenter = "";
+  var fillWithRight = "";
+  // check if message has been read, if not, add read flag
+  if (adminInfo[5][messageID][4] == 0) {
+    var formData = new FormData();
+    formData.append('action','read');
+    formData.append('affectedID', adminInfo[5][messageID][0]);
+    fetch('php/insertfrommessages.php', {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        });
+  } else {
+    var formData = new FormData();
+    formData.append('action','readA');
+    formData.append('affectedID', adminInfo[5][messageID][0]);
+    fetch('php/insertfrommessages.php', {
+        method: "POST",
+        body: formData
+    })
+        .then(response => response.text())
+        .then(data => {
+        });
+  }
+
+  fillWithCenter += "<div class='row'><div class='rowTitle'>"+adminInfo[5][messageID][1] + " / <span id='messageId'>" + adminInfo[5][messageID][0] + "</span>";
+  fillWithCenter += "</div><div class='rowTextFull'>"+adminInfo[5][messageID][2]+"</div><div class='rowFooter'>"+adminInfo[5][messageID][3]+"</div></div>";
+  // if the message is hidden / closed
+  if (adminInfo[5][messageID][5]==1) {
+    fillWithCenter += "<div id='buttonHide'><button type='button' id='hideMessage' class='buttonAdmin handleMessage'>Unhide</button>";
+  } else {
+    fillWithCenter += "<div id='buttonHide'><button type='button' id='hideMessage' class='buttonAdmin handleMessage'>Hide</button>";
+  }
+  // if the message is flagged
+  if (adminInfo[5][messageID][6]==1) {
+    fillWithCenter += "<button type='button' class='delete handleMessage' id='flagMessage'>Unflag</button></div>";
+  } else {
+    fillWithCenter += "<button type='button' class='delete handleMessage' id='flagMessage'>Flag</button></div>";
+  }
+
+  // fadeout / fadein animations for the message information to load in
+
+  if($("#infoMessages").html()=="") {
+    $("#infoMessages").hide().html(fillWithCenter).fadeIn();
+  } else {
+    $("#infoMessages").fadeOut(function() {
+      $("#infoMessages").html(fillWithCenter).fadeIn();
+    });
+  }
+  
+  // fill the comments
+  fillWithRight += "<div class='textInfo'>";
+  for (var i=0;i<adminInfo[8].length;i++) {
+    if (adminInfo[8][i][1] == adminInfo[5][messageID][0]) {
+      fillWithRight += "<div class='row'><div class='rowTitle'>" + adminInfo[8][i][2] + "</div><div class='rowTextFull'>" + adminInfo[8][i][3] + "</div><div class='rowFooter'>" + adminInfo[8][i][4] + "</div></div>";
+    }
+  }
+  if (fillWithRight == "<div class='textInfo'>") {
+    fillWithRight += "There are no comments as of yet!";
+  }
+  fillWithRight += "</div>";
+  fillWithRight += "<input type='hidden' value='"+adminInfo[5][messageID][0]+"' id='commentMessageAso'>";
+  fillWithRight += "<div class='textInfo'><textarea placeholder='Type your comment here...' id='commentText'></textarea>";
+  fillWithRight += "<button type='submit' value='Submit' id='submitComment' class='buttonAdmin'>Submit</button></div>";
+
+  // fadeout / fadein animations for the comment information to load in
+
+  if($("#commentMessages").html()=="") {
+    $("#commentMessages").hide().html(fillWithRight).fadeIn();
+  } else {
+    $("#commentMessages").fadeOut(function() {
+      $("#commentMessages").html(fillWithRight).fadeIn();
+    });
+  }
+  //$("#commentMessages").html(fillWithRight);
+}
+
+function messageQuery() {
+  messageArray1 = [];
+  messageArray2 = [];
+  messageArrayFinal = [];
+  
+  console.log(showHidden + ", " + showUnseen + ", " + showFlagged);
+
+  if (showHidden == 1) {
+    for (var i=0;i<adminInfo[5].length;i++) {
+      // IF the message is hidden
+      if (adminInfo[5][i][5] == 1) {
+        messageArray1.push(adminInfo[5][i]);
+      }
+    }
+  } else {
+    for (var i=0;i<adminInfo[5].length;i++) {
+      // IF the message is not hidden
+      if (adminInfo[5][i][5] == 0) {
+        messageArray1.push(adminInfo[5][i]);
+      }
+    }
+  }
+
+  if (showUnseen == 1) {
+    for (var i=0;i<messageArray1.length;i++) {
+      // IF the message is unread
+      if (messageArray1[i][4] == 0) {
+        messageArray2.push(messageArray1[i]);
+      }
+    }
+  } else {
+    for (var i=0;i<messageArray1.length;i++) {
+      // ALL the messages no matter if read or not
+        messageArray2.push(messageArray1[i]);
+    }
+  }
+
+  if (showFlagged == 1) {
+    for (var i=0;i<messageArray2.length;i++) {
+      // IF the message is flagged
+      if (messageArray2[i][6] == 1) {
+        messageArrayFinal.push(messageArray2[i]);
+      }
+    }
+  } else {
+    for (var i=0;i<messageArray2.length;i++) {
+      // ALL the messages no matter if flagged or not
+      messageArrayFinal.push(messageArray2[i]);
+    }
+  }
+
+  fillWithLeft = "";
+
+  console.log(messageArrayFinal);
+
+  for (var i=0;i<messageArrayFinal.length;i++) {
+    // IF the message is still open
+      fillWithLeft += "<div class='row' onclick='loadMessage("+i+");'><div class='rowTitle'>"+messageArrayFinal[i][1] + " / " + messageArrayFinal[i][0];
+      // IF the message is tagged / not tagged
+      if (messageArrayFinal[i][6] == 0) {
+        fillWithLeft += "<img class='rowIcon' src='icons/notflagged.png'>";
+      } else {
+        fillWithLeft += "<img class='rowIcon' src='icons/flagged.png'>";
+      }
+      // IF the message has not been read / has been read
+      if (messageArrayFinal[i][4] == 0) {
+        fillWithLeft += " <img class='rowIcon' src='icons/notread.png'>";
+      } else {
+        fillWithLeft += "<img class='rowIcon' src='icons/read.png'>";
+      }
+      fillWithLeft += "</div><div class='rowText'>"+messageArrayFinal[i][2]+"</div><div class='rowFooter'>"+messageArrayFinal[i][3]+"</div></div>";
+  }
+  
+  $("#messageRow").html(fillWithLeft);
+}
+
+function submitUser() {
+  sendUser = [];
+  sendUser.push($("#userExists").val());
+  sendUser.push($("#userEmail").val());
+  sendUser.push($("#userPasswd").val());
+  if ($("#adminPriv").prop('checked')) {
+    sendUser.push(1);
+  } else {
+    sendUser.push(0);
+  }
+  if ($("#superadminPriv").prop('checked')) {
+    sendUser.push(1);
+  } else {
+    sendUser.push(0);
+  }
+  var formData = new FormData();
+  formData.append('objArray', JSON.stringify(sendUser));
+  fetch('php/insertuser.php', {
+      method: "POST",
+      body: formData
+  })
+      .then(response => response.text())
+      .then(data => {
+          if(data=="success") {
+            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+              if(result.isConfirmed) {
+                location.reload();
+              }
+            });
+          } else {
+            console.log(data);
             Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
           }
       });
