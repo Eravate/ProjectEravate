@@ -652,6 +652,12 @@ function submitLogin() {
               title: 'The Email And The Password Do Not Correspond To Any Account!',
             })
             break;
+          case "err3":
+            Swal.fire({
+              icon: 'error',
+              title: 'The account has not been activated yet!',
+            })
+            break;
         }
       });
   } else {
@@ -712,7 +718,11 @@ function forgotPassword() {
       })
           .then(response => response.text())
           .then(data => {
-              Swal.fire('Sent!', 'An email to reset the password has been sent!', 'success');
+              if (data=="success") {
+                Swal.fire('Sent!', 'An email to reset the password has been sent!', 'success');
+              } else {
+                Swal.fire('Error!', 'An unknown error has appeared!', 'error');
+              }
           });
       
     } else {
@@ -754,6 +764,27 @@ function submitForgotten() {
         title: 'Passwords Don\'t Match!',
       })
   }
+}
+
+function activateAccount() {
+  var formData = new FormData();
+    fetch('php/activateAccount.php', {
+      method: "POST",
+      body: formData
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        if(data == "success") {
+          Swal.fire('Success!','The account has been activated','success').then((result) => {
+            if(result.isConfirmed) {
+              window.location.href = "login.php";
+            }
+          });
+        } else {
+          Swal.fire('Error!','This token has already been used!','error');
+        }
+      });
 }
 
 // Function to change between Log-in and Register

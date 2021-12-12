@@ -3,9 +3,9 @@ ini_set('display_errors',1);
 session_start();
 # Database Con
 // Database for local
-$database = new mysqli('localhost', 'root', '', 'eravate');
+//$database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
-//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
+$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 
 $objects = array();
 $suns = array();

@@ -11,9 +11,9 @@ session_start();
 
 # Database con
 // Database for local
-$database = new mysqli('localhost', 'root', '', 'eravate');
+//$database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
-//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
+$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 
@@ -65,15 +65,13 @@ switch ($action) {
                 $mail->Host       = 'smtp.ionos.es';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = 'arkadiusz@eravate.es';                     //SMTP username
-                $mail->Password   = '5aFMKt#!T7A5Qz#x';                               //SMTP password
+                $mail->Password   = 'secret';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
                 $mail->setFrom('arkadiusz@eravate.es', 'Project: Eravate!');
                 $mail->addAddress($email);     //Add a recipient
-
-                $mail->AddEmbeddedImage('../icons/mailer.jpg', 'mailer');
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
@@ -97,7 +95,6 @@ switch ($action) {
 
                 $mail->send();
             } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }
         break;
