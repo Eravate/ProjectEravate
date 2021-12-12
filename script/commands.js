@@ -691,10 +691,75 @@ function logout() {
   $('#logoutForm').submit();
 }
 
+// function for forgotten password
+function forgotPassword() {
+  Swal.fire({
+    title: "Enter your email address",
+    input: 'textarea',
+    inputPlaceholder: 'Type your email address here...',
+    inputAttributes: {
+      'aria-label': 'Type your email address here'
+    },
+    showCancelButton: true
+  }).then((result) => {
+    if(result.isConfirmed) {
+      var formData = new FormData();
+      formData.append('action', 'sendEmail');
+      formData.append('data', result.value);
+      fetch('php/forgotPassword.php', {
+          method: "POST",
+          body: formData
+      })
+          .then(response => response.text())
+          .then(data => {
+              Swal.fire('Sent!', 'An email to reset the password has been sent!', 'success');
+          });
+      
+    } else {
+      Swal.fire('Canceled!', 'The email has not been sent', 'info');
+    }
+  });
+}
+
+// function for forgotten password
+function submitForgotten() {
+  var passwd = $('#password_input').val();
+  var passwd2 = $('#sec_password_input').val();;
+
+  if (passwd == passwd2) {
+    var formData = new FormData();
+    formData.append('action','changePasswd');
+    formData.append('data', passwd);
+    fetch('php/forgotPassword.php', {
+      method: "POST",
+      body: formData
+    })
+      .then(response => response.text())
+      .then(data => {
+        if(data == "success") {
+          Swal.fire('Success!','The password has been changed','success').then((result) => {
+            if(result.isConfirmed) {
+              window.location.href = "login.php";
+            }
+          });
+        } else {
+          Swal.fire('Error!','This token has already been used!','error');
+        }
+      });
+  } else {
+      // This alert is pretty self-explanatory, it's when the client has typed two different passwords when creating his account
+      Swal.fire('Passwords Not Matching!','error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Passwords Don\'t Match!',
+      })
+  }
+}
+
 // Function to change between Log-in and Register
 
 function changeLoginScope(createAcc) {
-  var txtLogin = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="login"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label><div class="forgotPass"><a href="#">Forgot password?</a></div></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
+  var txtLogin = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="login"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label><div class="forgotPass"><a href="" onclick="event.preventDefault(); forgotPassword();">Forgot password?</a></div></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
   var txtCreate = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="create"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label></div></div><div class="row"><div class="input-field col s12"><input id="sec_password_input" type="password" class="validate" required="" aria-required="true"><label for="sec_password_input">Repeat Password</label></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(true)">Have an account? Log In</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Create</button></div></div>';
   if (!createAcc) {
     $('#formLogin').html(txtCreate);

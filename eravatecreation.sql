@@ -97,6 +97,8 @@ CREATE TABLE AppUser(
 	email varchar(80) primary key,
     passwd varchar(120) NOT NULL,
 	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    token varchar(120),
+    tokenRes varchar(120),
     -- #activate varchar(20) NOT NULL,
     -- #activated tinyint NOT NULL DEFAULT 0,
     isAdmin tinyint NOT NULL DEFAULT 0,

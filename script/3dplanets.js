@@ -141,8 +141,8 @@ window.execute3d = function (object) {
         deltaX = evt.clientX - mouse.x + mousePrevX;
         deltaY = evt.clientY - mouse.y + mousePrevY;
         evt.preventDefault;
-        deltaCurrentX += deltaX * 0.000015;
-        deltaCurrentY += deltaY * 0.000015;
+        deltaCurrentX += deltaX * 0.00005;
+        deltaCurrentY += deltaY * 0.00005;
     }, false);
 
     // ON MOUSE UP Stores the previous rotation to counteract it later on

@@ -1,15 +1,16 @@
 <?php
 //ini_set('display_errors',0);
 session_start();
-if (isset($_POST['action'])) {
-  session_destroy();
-}
-if (isset($_SESSION['user'])) {
-  header("Location: index.php");
-}
-if (isset($_SESSION['admin'])) {
-  header("Location: admin.php");
-}
+//if (isset($_POST['action'])) {
+//  session_destroy();
+//}
+//if (isset($_SESSION['user'])) {
+//  header("Location: index.php");
+//}
+//if (isset($_SESSION['admin'])) {
+//  header("Location: admin.php");
+//}
+$_SESSION['restoken'] = $_GET['restoken'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,27 +47,25 @@ if (isset($_SESSION['admin'])) {
           <div class="logo" id="logo"></div>
         </div>
         <div class="row center-align">
-          <h5>Sign in</h5>
+          <h5>Reestablish Password</h5>
         </div>
-        <form id="formLogin" class="col s12" action='#' onsubmit="submitLogin();return false">
+        <form id="formLogin" class="col s12" action='#' onsubmit="event.preventDefault(); submitForgotten();return false">
           <div class="row">
-            <div class="input-field col s12">
-              <input id="type_input" type="hidden" value="login">
-              <input id="email_input" type="email" class="validate" required="" aria-required="true">
-              <label for="email_input">Email</label>
+          <div class="input-field col s12">
+              <input id="password_input" type="password" class="validate" required="" aria-required="true">
+              <label for="password_input">New Password</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="password_input" type="password" class="validate" required="" aria-required="true">
-              <label for="password_input">Password</label>
-              <div class="forgotPass"><a href="" onclick="event.preventDefault(); forgotPassword();">Forgot password?</a></div>
+              <input id="sec_password_input" type="password" class="validate" required="" aria-required="true">
+              <label for="sec_password_input">Repeat New Password</label>
             </div>
           </div>
           <div class="row"></div>
           <div class="row">
-            <div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div>
-            <div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div>
+          <div class="col s6"><a href="#"></a></div>
+            <div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Send</button></div>
           </div>
         </form>
       </div>
