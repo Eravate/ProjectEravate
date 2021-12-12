@@ -5,10 +5,13 @@
     if (keyCode == 'Enter'){
         var inputValue = $("#consoleInput").val().split(" ");
         var wordValue = inputValue[0];
+        // SWITCH for the console inputs
         switch (wordValue.toLowerCase()) {
+            // Command CLR clears the command
             case "clr":
                 $("#textArea").html("");
                 break;
+            // Command GOTO goes to a specific object
             case "goto":
                 // Separate GOTO into two different searches: an easy one (inside actual array) and an extensive one (outside actual array) if the easy one fails.
                 $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
@@ -62,7 +65,7 @@
                         .then(data => {
                             objectsTemp = JSON.parse(data);
                         });
-                    
+                    // Function to wait for the results of Advanced Search
                     function waitForAdvSearch(){
                         if(typeof objectsTemp !== "undefined") {
                             switch (objectsTemp) {
@@ -117,10 +120,12 @@
                     waitForAdvSearch();
                 }
                 break;
+            // Command HELP gives help
             case "help":
                 $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
                 $("#textArea").append("<span class='yellowall'>The following commands are available to choose from:</span><br>- clr: Clears the console<br>- goto: Goes to specified object<br>");
                 break;
+            // Any other command does not exist
             default:
                 $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
                 $("#textArea").append("<span class='redall'>Such command does not exist!</span><br>");

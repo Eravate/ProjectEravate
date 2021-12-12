@@ -4,9 +4,9 @@ session_start();
 
 # Database con
 // Database for local
-$database = new mysqli('localhost', 'root', '', 'eravate');
+//$database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
-//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
+$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 
@@ -43,6 +43,12 @@ switch ($action) {
         $result = $database->prepare("DELETE FROM Satellite WHERE ID=?");
         $result->bind_param('i',$affObject[0]);
         $actionDone = "Removed Satellite ".$affObject[1];
+        $result->execute();
+        break;
+    case "user":
+        $result = $database->prepare("DELETE FROM AppUser WHERE email=?");
+        $result->bind_param('s',$affObject[0]);
+        $actionDone = "Removed User ".$affObject[0];
         $result->execute();
         break;
 }

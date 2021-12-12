@@ -4,9 +4,9 @@ session_start();
 
 # Database con
 // Database for local
-$database = new mysqli('localhost', 'root', '', 'eravate');
+//$database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
-//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
+$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 
@@ -20,7 +20,7 @@ $zero = 0;
 if ($objArray[0]=="no") {
     $encpasswd = password_hash($objArray[2],PASSWORD_DEFAULT);
     $result = $database->prepare("INSERT INTO AppUser(email,passwd,isAdmin,isSuperAdmin) VALUES (?,?,?,?)");
-    $result->bind_param('ssiis',$objArray[1],$encpasswd,$objArray[3],$objArray[4]);
+    $result->bind_param('ssii',$objArray[1],$encpasswd,$objArray[3],$objArray[4]);
     $result->execute();
     $actionDone = "Added User ".$objArray[1];
     $objAffected = $objArray[1];

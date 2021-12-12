@@ -1,4 +1,5 @@
 // USED PREVIOUSLY TO IMPORT VERTEX SHADERS
+import gsap from './gsap-core'
 import * as THREE from './three.module';
 import { MapControls, OrbitControls } from './OrbitControls.js';
 import {ObjectControls} from './ObjectControls.js';
@@ -8,6 +9,8 @@ import {ObjectControls} from './ObjectControls.js';
 
 window.execute3d = function (object) {
     const canvasContainer = document.querySelector('#object');
+    var deltaX = 0, deltaY = 0;
+    var mousePrevX = 0, mousePrevY = 0, deltaCurrentX = 0, deltaCurrentY = 0;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75,canvasContainer.offsetWidth / canvasContainer.offsetHeight,0.1,1000);
@@ -18,10 +21,8 @@ window.execute3d = function (object) {
         // Alpha allows the background to be transparent ESSENTIAL
         alpha: true
     });
-    const mouse = {
-        x: undefined,
-        y: undefined
-    };
+    
+    var mouseDown = false;
 
     renderer.setSize(canvasContainer.offsetWidth,canvasContainer.offsetHeight);
 
@@ -44,7 +45,13 @@ window.execute3d = function (object) {
     }));
 
     // Add the sphere to the scene
-    scene.add(sphere);
+    //scene.add(sphere);
+
+    const group = new THREE.Group();
+
+    group.add(sphere);
+
+    scene.add(group);
 
     // Position the camera
     camera.position.z = 8.3;
@@ -67,7 +74,13 @@ window.execute3d = function (object) {
 
     };
 
-    /*const starGeometry = new THREE.BufferGeometry();
+    const mouse = {
+        x: 0,
+        y: 0
+    };
+
+    /* This was used for adding stars to the background, but it ended up looking quite not that nice
+    const starGeometry = new THREE.BufferGeometry();
     const starMaterial = new THREE.PointsMaterial({
         color: 0xffffff
     });
@@ -91,9 +104,56 @@ window.execute3d = function (object) {
         requestAnimationFrame(animate);
         renderer.render(scene,camera);
         // Used for slow rotation of the planet in X and Y axis
-        sphere.rotation.y += 0.0005; 
-        sphere.rotation.x += 0.0002;
+        sphere.rotation.y += 0.0010; 
+        sphere.rotation.x += 0.0005;
+        //group.rotation.y += deltaX * 0.00005;
+        //group.rotation.x += deltaY * 0.00005;
+        gsap.to(group.rotation, {
+            y: deltaCurrentX,
+            x: deltaCurrentY,
+            duration: 1
+        });
     };
 
     animate();
+
+    // Since there isn't a mouse drag, I needed to create 3 event listeners
+
+    // ON MOUSE DOWN Returns the object to its original rotation
+
+    addEventListener('mousedown', function (evt) {
+        evt.preventDefault();
+        mouseDown = true;
+        mouse.x = evt.clientX;
+        mouse.y = evt.clientY;
+        /*mousePrevX = sphere.rotation.x;
+        mousePrevY = sphere.rotation.y;*/
+        //deltaX = evt.clientX - mouse.x + mousePrevX;
+        //deltaY = evt.clientY - mouse.y + mousePrevY;
+    }, false);
+
+    // ON MOUSE MOVE can amplify the objects rotation
+
+    addEventListener('mousemove', function (evt) {
+        if (!mouseDown) {return}
+        //mouse.x = (evt.clientX / canvasContainer.offsetWidth) * 2 - 1;
+        //mouse.y = (evt.clientY / canvasContainer.offsetHeight) * 2 + 1;
+        deltaX = evt.clientX - mouse.x + mousePrevX;
+        deltaY = evt.clientY - mouse.y + mousePrevY;
+        evt.preventDefault;
+        deltaCurrentX += deltaX * 0.00005;
+        deltaCurrentY += deltaY * 0.00005;
+    }, false);
+
+    // ON MOUSE UP Stores the previous rotation to counteract it later on
+
+    addEventListener('mouseup', function (evt) {
+        
+        evt.preventDefault();
+        mousePrevX = 0;
+        mousePrevY = 0;
+        mouseDown = false;
+    }, false);
 }
+
+// For anyone wondering, getting the right variables for rotation took literal FUCKING DAYS

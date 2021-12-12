@@ -134,8 +134,27 @@ $("body").on("click", "#modifyStar", function() {
 // When the reset button is pressed in Star
 
 $("body").on("click", "#resetStar", function() {
-    $("#starExists").val("no");
-    $("#starSubmitTitle").html("Add New Star");
+    $("#infocentreInner").fadeOut(function() {
+        $("#starName").val("");
+        $("#starRotation").val("");
+        $("#starRevolution").val("");
+        $("#starRadius").val("");
+        $("#starTemperature").val("");
+        $("#starOverview").val("");
+        $("#starOverviewSource").val("");
+        $("#starOverviewUrl").val("");
+        $("#starInternal").val("");
+        $("#starInternalSource").val("");
+        $("#starInternalUrl").val("");
+        $("#starSurface").val("");
+        $("#starSurfaceSource").val("");
+        $("#starSurfaceUrl").val("");
+        $("#starType").val(1);
+        $("#starExists").val("no");
+        $("#starSubmitTitle").html("Add New Star");
+        $("#starSubmitInfo").html("Add a new star by filling the form down below");
+        $("#infocentreInner").fadeIn();
+    });
 })
 
 // On Key Presses for Planetary Objects
@@ -206,8 +225,36 @@ $("body").on("click", "#modifyPlanet", function() {
 // When the reset button is pressed in Planet
 
 $("body").on("click", "#resetPlanet", function() {
-    $("#planetExists").val("no");
-    $("#planetSubmitTitle").html("Add New Planet");
+    $("#infocentreInner").fadeOut(function() {
+        var etwo = jQuery.Event("keydown");
+        etwo.which = 50;
+        etwo.keyCode = 50;
+
+        $("#planetName").val("");
+        $("#planetPosition").val("");
+        $("#planetRotation").val("");
+        $("#planetRevolution").val("");
+        $("#planetRadius").val("");
+        $("#planetTemperature").val("");
+        $("#planetOverview").val("");
+        $("#planetOverviewSource").val("");
+        $("#planetOverviewUrl").val("");
+        $("#planetInternal").val("");
+        $("#planetInternalSource").val("");
+        $("#planetInternalUrl").val("");
+        $("#planetSurface").val("");
+        $("#planetSurfaceSource").val("");
+        $("#planetSurfaceUrl").val("");
+
+        $("#starPickerPlanetInner").val("");
+        $("#starPickerPlanetInner").trigger(etwo);
+        $("#selectInside .es-list").css("display","none");
+
+        $("#planetExists").val("no");
+        $("#planetSubmitTitle").html("Add New Planet");
+        $("#planetSubmitInfo").html("Add a new planet by filling the form down below");
+        $("#infocentreInner").fadeIn();
+    });
 })
 
 // On Key Presses for NPO Objects
@@ -278,8 +325,36 @@ $("body").on("click", "#modifyNPO", function() {
 // When the reset button is pressed in NPO
 
 $("body").on("click", "#resetNPO", function() {
-    $("#npoExists").val("no");
-    $("#npoSubmitTitle").html("Add New NPO");
+    $("#infocentreInner").fadeOut(function() {
+        var etwo = jQuery.Event("keydown");
+        etwo.which = 50;
+        etwo.keyCode = 50;
+
+        $("#npoName").val("");
+        $("#npoPosition").val("");
+        $("#npoRotation").val("");
+        $("#npoRevolution").val("");
+        $("#npoRadius").val("");
+        $("#npoTemperature").val("");
+        $("#npoOverview").val("");
+        $("#npoOverviewSource").val("");
+        $("#npoOverviewUrl").val("");
+        $("#npoInternal").val("");
+        $("#npoInternalSource").val("");
+        $("#npoInternalUrl").val("");
+        $("#npoSurface").val("");
+        $("#npoSurfaceSource").val("");
+        $("#npoSurfaceUrl").val("");
+
+        $("#starPickerNPOInner").val("");
+        $("#starPickerNPOInner").trigger(etwo);
+        $("#selectInside .es-list").css("display","none");
+
+        $("#npoExists").val("no");
+        $("#npoSubmitTitle").html("Add New NPO");
+        $("#npoSubmitInfo").html("Add a new planet by filling the form down below");
+        $("#infocentreInner").fadeIn();
+    });
 })
 
 // On Key Presses for Satellites Objects, longer than usual because of the sheer amount of checks needed to be done
@@ -408,9 +483,37 @@ $("body").on("keypress focusout", "#starPickerSatelliteInner", function() {
 // When the reset button is pressed on the satellite form
 
 $("body").on("click", "#resetSatellite", function() {
-    $("#satelliteExists").val("no");
-    $("#satelliteSubmitTitle").html("Add New Satellite");
-    $("#selectSatellitePlanetInner").html("<option value='no'>Select A Star</option>");
+    $("#infocentreInner").fadeOut(function() {
+        var etwo = jQuery.Event("keydown");
+        etwo.which = 50;
+        etwo.keyCode = 50;
+
+        $("#satelliteName").val("");
+        $("#satellitePosition").val("");
+        $("#satelliteRotation").val("");
+        $("#satelliteRevolution").val("");
+        $("#satelliteRadius").val("");
+        $("#satelliteTemperature").val("");
+        $("#satelliteOverview").val("");
+        $("#satelliteOverviewSource").val("");
+        $("#satelliteOverviewUrl").val("");
+        $("#satelliteInternal").val("");
+        $("#satelliteInternalSource").val("");
+        $("#satelliteInternalUrl").val("");
+        $("#satelliteSurface").val("");
+        $("#satelliteSurfaceSource").val("");
+        $("#satelliteSurfaceUrl").val("");
+
+        $("#starPickerSatelliteInner").val("");
+        $("#starPickerSatelliteInner").trigger(etwo);
+        $("#selectInside .es-list").css("display","none");
+        $("#selectSatellitePlanetInner").html("<option value='no'>Select A Star</option>");
+
+        $("#satelliteExists").val("no");
+        $("#satelliteSubmitTitle").html("Add New Satellite");
+        $("#satelliteSubmitInfo").html("Add a new satellite by filling the form down below");
+        $("#infocentreInner").fadeIn();
+    });
 })
 
 // DELETE BUTTON ACTIONS
@@ -810,7 +913,66 @@ $("body").on("click", "#modifyUser", function() {
     });
 })
 
+// When the reset button is pressed in user
+
 $("body").on("click","#resetUser", function() {
-    $("#userPasswd").show();
-    $("#userEmail").prop("readonly",false);
+
+    $("#infocentreInner").fadeOut(function() {
+        $("#userPasswd").show();
+        $("#userEmail").prop("readonly",false);
+
+        $("#userEmail").val("");
+        $("#userPasswd").val("");
+        $("#adminPriv").prop('checked',false);
+        $("#superadminPriv").prop('checked',false);
+        $("#userExists").val("no");
+
+        $("#infocentreInner").fadeIn();
+    });
 })
+
+
+// Delete User on click
+
+$("body").on("click", "#deleteUser", function() { 
+    var selectedUser = $("#selectUser .es-list .es-visible");
+    if (selectedUser.length == 1) { 
+        var userPosition = selectedUser[0].value;
+        var userToDelete = [adminInfo[7][userPosition][0]];
+        // sending query to php
+        Swal.fire({
+            title: "Careful!",
+            icon: "warning",
+            text: "This action is irreversible, do you wish to continue?",
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed) {
+                var formData = new FormData();
+                formData.append('action','user');
+                formData.append('affObject', JSON.stringify(userToDelete));
+                fetch('php/deletefromadmin.php', {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if(data=="success") {
+                        Swal.fire('Deleted!', 'The User has been deleted!', 'success').then((result) => {
+                            if(result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        } else {
+                            console.log(data);
+                            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                        }
+                    });
+            }
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'You need to choose an user before doing this!',
+          })
+    }
+});

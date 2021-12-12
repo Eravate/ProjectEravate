@@ -241,7 +241,7 @@ function fillWithDataAdmin(typeofInfo) {
         fillWithCenter += "<option id='starType"+adminInfo[6][i][0]+"' value='"+adminInfo[6][i][0]+"'>"+adminInfo[6][i][1]+"</option>";
       }
       fillWithCenter += "</select><br>";
-      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetStar' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetStar' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
       fillWithCenter += "</div>";
       
@@ -295,7 +295,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface' required></textarea><br>";
       fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource' required><br>";
       fillWithCenter += "<label for='planetSurfaceUrl'>Surface URL:</label><input type='text' id='planetSurfaceUrl' name='planetSurfaceUrl' required><br>";
-      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
       // The right side is filled with the last added planets, the if is necessary in case there's more than 5 planets.
@@ -347,7 +347,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface' required></textarea><br>";
       fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface' required><br>";
       fillWithCenter += "<label for='npoSurfaceUrl'>Surface URL:</label><input type='text' id='npoSurfaceUrl' name='npoSurfaceUrl' required ><br>";
-      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetNPO' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetNPO' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
       // The right side is filled with the last added npos, the if is necessary in case there's more than 5 npos.
@@ -377,7 +377,7 @@ function fillWithDataAdmin(typeofInfo) {
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo' id='starSubmitInfo'>Add a new satellite by filing the form down below</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo' id='satelliteSubmitInfo'>Add a new satellite by filing the form down below</div><div class='textInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitSatellites();'>";
       fillWithCenter += "<input type='hidden' id='satelliteExists' name='satelliteExists' value='no'>"
       fillWithCenter += "<label for='satelliteName'>NPO Name:</label><input type='text' id='satelliteName' name='satelliteName' required><br>";
@@ -401,7 +401,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface' required></textarea><br>";
       fillWithCenter += "<label for='satelliteSurfaceSource'>Surface Source:</label><input type='text' id='satelliteSurfaceSource' name='satelliteSurfaceSource' required><br>";
       fillWithCenter += "<label for='satelliteSurfaceUrl'>Surface URL:</label><input type='text' id='satelliteSurfaceUrl' name='satelliteSurfaceUrl' required><br>";
-      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='reset' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
       // The right side is filled with the last added satellites, the if is necessary in case there's more than 5 satellites.
@@ -462,7 +462,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='userPasswd'>Password:</label><input type='password' id='userPasswd' name='userPasswd'><br>";
       fillWithCenter += "<label><input type='checkbox' id='adminPriv'><span>Admin Priviledge</span></label><br>";
       fillWithCenter += "<label><input type='checkbox' id='superadminPriv'><span>Superadmin Priviledge</span></label><br><br>";
-      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button><button type='reset' id='resetUser' value='Reset' class='delete'>Reset</button>";
+      fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button><button type='button' id='resetUser' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</div>";
       fillWithRight = "<div class='titleInfo'>User Logs</div><div class='textInfo'>Only available for Admins and Super Admins</div><div class='textInfo' id='userLogs'></div>";
       break;
@@ -652,6 +652,12 @@ function submitLogin() {
               title: 'The Email And The Password Do Not Correspond To Any Account!',
             })
             break;
+          case "err3":
+            Swal.fire({
+              icon: 'error',
+              title: 'The account has not been activated yet!',
+            })
+            break;
         }
       });
   } else {
@@ -691,10 +697,100 @@ function logout() {
   $('#logoutForm').submit();
 }
 
+// function for forgotten password
+function forgotPassword() {
+  Swal.fire({
+    title: "Enter your email address",
+    input: 'textarea',
+    inputPlaceholder: 'Type your email address here...',
+    inputAttributes: {
+      'aria-label': 'Type your email address here'
+    },
+    showCancelButton: true
+  }).then((result) => {
+    if(result.isConfirmed) {
+      var formData = new FormData();
+      formData.append('action', 'sendEmail');
+      formData.append('data', result.value);
+      fetch('php/forgotPassword.php', {
+          method: "POST",
+          body: formData
+      })
+          .then(response => response.text())
+          .then(data => {
+              if (data=="success") {
+                Swal.fire('Sent!', 'An email to reset the password has been sent!', 'success');
+              } else {
+                Swal.fire('Error!', 'An unknown error has appeared!', 'error');
+              }
+          });
+      
+    } else {
+      Swal.fire('Canceled!', 'The email has not been sent', 'info');
+    }
+  });
+}
+
+// function for forgotten password
+function submitForgotten() {
+  var passwd = $('#password_input').val();
+  var passwd2 = $('#sec_password_input').val();;
+
+  if (passwd == passwd2) {
+    var formData = new FormData();
+    formData.append('action','changePasswd');
+    formData.append('data', passwd);
+    fetch('php/forgotPassword.php', {
+      method: "POST",
+      body: formData
+    })
+      .then(response => response.text())
+      .then(data => {
+        if(data == "success") {
+          Swal.fire('Success!','The password has been changed','success').then((result) => {
+            if(result.isConfirmed) {
+              window.location.href = "login.php";
+            }
+          });
+        } else {
+          Swal.fire('Error!','This token has already been used!','error');
+        }
+      });
+  } else {
+      // This alert is pretty self-explanatory, it's when the client has typed two different passwords when creating his account
+      Swal.fire('Passwords Not Matching!','error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Passwords Don\'t Match!',
+      })
+  }
+}
+
+function activateAccount() {
+  var formData = new FormData();
+    fetch('php/activateAccount.php', {
+      method: "POST",
+      body: formData
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        if(data == "success") {
+          Swal.fire('Success!','The account has been activated','success').then((result) => {
+            if(result.isConfirmed) {
+              window.location.href = "login.php";
+            }
+          });
+        } else {
+          Swal.fire('Error!','This token has already been used!','error');
+        }
+      });
+}
+
 // Function to change between Log-in and Register
 
 function changeLoginScope(createAcc) {
-  var txtLogin = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="login"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label><div class="forgotPass"><a href="#">Forgot password?</a></div></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
+  var txtLogin = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="login"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label><div class="forgotPass"><a href="" onclick="event.preventDefault(); forgotPassword();">Forgot password?</a></div></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div></div>';
   var txtCreate = '<div class="row"><div class="input-field col s12"><input id="type_input" type="hidden" value="create"><input id="email_input" type="email" class="validate" required="" aria-required="true"><label for="email_input">Email</label></div></div><div class="row"><div class="input-field col s12"><input id="password_input" type="password" class="validate" required="" aria-required="true"><label for="password_input">Password</label></div></div><div class="row"><div class="input-field col s12"><input id="sec_password_input" type="password" class="validate" required="" aria-required="true"><label for="sec_password_input">Repeat Password</label></div></div><div class="row"></div><div class="row"><div class="col s6"><a href="#" onclick="changeLoginScope(true)">Have an account? Log In</a></div><div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Create</button></div></div>';
   if (!createAcc) {
     $('#formLogin').html(txtCreate);
@@ -1089,7 +1185,11 @@ function submitUser() {
   if ($("#adminPriv").prop('checked')) {
     sendUser.push(1);
   } else {
-    sendUser.push(0);
+    if ($("#superadminPriv").prop('checked')) {
+      sendUser.push(1);
+    } else {
+      sendUser.push(0);
+    }
   }
   if ($("#superadminPriv").prop('checked')) {
     sendUser.push(1);
