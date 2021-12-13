@@ -636,7 +636,7 @@ function submitLogin() {
           case "succ":
             Swal.fire({
               icon: 'success',
-              title: 'The Account Has Been Created Succesfully, You Can Now Log In!',
+              title: 'The Account Has Been Created Succesfully, An email has been sent in order to activate it!',
             })
             changeLoginScope(true);
             break;
