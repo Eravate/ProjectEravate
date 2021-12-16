@@ -58,7 +58,7 @@ if($type=="create") {
                 $mail->Host       = 'smtp.ionos.es';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = 'arkadiusz@eravate.es';                     //SMTP username
-                $mail->Password   = 'secret';                               //SMTP password
+                $mail->Password   = '5aFMKt#!T7A5Qz#x';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -78,7 +78,7 @@ if($type=="create") {
                                             <div style='position:absolute;text-align:center;'>
                                                 <h1 style='font-size:40px'>Project: Eravate!</h1>
                                                 <h3>Activate your account down below.</h3>
-                                                <p><a href='eravate.es/activation.php?actoken=".$token."' style='text-decoration:none;color:black;font-weight:bold;'>Click Here!</a></p>
+                                                <p><a href='https://eravate.es/activation.php?actoken=".$token."' style='text-decoration:none;color:black;font-weight:bold;'>Click Here!</a></p>
                                                 <p style='font-size:10px'>If you haven't registered in our app, simply ignore this message.</p>
                                             </div>
                                         </div>
