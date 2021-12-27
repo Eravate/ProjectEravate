@@ -11,9 +11,9 @@ session_start();
 
 # Database con
 // Database for local
-$database = new mysqli('localhost', 'root', '', 'eravate');
+//$database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
-//$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
+$database = new mysqli('db5005997291.hosting-data.io','dbu1086761','Erawaito2021','dbs5024145');
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 

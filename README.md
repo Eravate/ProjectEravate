@@ -1,24 +1,21 @@
-# Project: Eravate!
 
-A Project to gather information about our local star system, including it's planets and some satelites!
-First version of the app is limited to 2D only with no animation, which will be added as time comes.
+<div align="center"><h1>Project: Eravate!</h1>
 
-## How do I access the app?
+---
+
+##### [Contribution guidelines for this project](/CONTRIBUTIONS.md)
+
+## A Project with education in mind, based on recolecting data on known star systems, their planets and satellites!
+## It comes with a great varierity of animations and information on the planets
+
+#### What is the main goal behind this app?
+
+There's no goal and I can't really explain why it exists, it's just something I felt the need to do to make sure I didn't waste any of my time.
+
+#### How do I access the app?
 
 It's available on eravate.es, any changes visible in this repository will be available on there.
 
-## What is the update frequency?
+#### What is the update frequency?
 
-Usually weekly updates with full versions comming out every month or so.
-
-## What are your plans to add in the future?
-
-Aditional neighbour systems, 3D objects and even for information!
-
-## What is the goal?
-
-None, actually! other than to show it off as a portfolio
-
-## Can I use it?
-
-Of course! it's all completely free to use!
+The update frequency is dependant on the features this app lacks, as well as any bugs that may be present. You can always ask me about any future updates on twitter @Fus1oN4

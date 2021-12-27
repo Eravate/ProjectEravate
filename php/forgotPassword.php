@@ -60,7 +60,7 @@ switch ($action) {
 
             try {
                 //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->SMTPDebug = 0;                      //Enable verbose debug output
                 $mail->isSMTP();                                            //Send using SMTP
                 $mail->Host       = 'smtp.ionos.es';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -85,7 +85,7 @@ switch ($action) {
                                             <div style='position:absolute;text-align:center;'>
                                                 <h1 style='font-size:40px'>Project: Eravate!</h1>
                                                 <h3>Reset your password down below.</h3>
-                                                <p><a href='eravate.es/forgotten.php?restoken=".$token."' style='text-decoration:none;color:black;font-weight:bold;'>Click Here!</a></p>
+                                                <p><a href='https://eravate.es/forgotten.php?restoken=".$token."' style='text-decoration:none;color:black;font-weight:bold;'>Click Here!</a></p>
                                                 <p style='font-size:10px'>Note: if you haven't requested this password change, make sure to change your password immediately.</p>
                                             </div>
                                         </div>

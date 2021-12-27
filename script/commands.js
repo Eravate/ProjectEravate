@@ -18,7 +18,7 @@ function fetchData() {
 // Fetch data for admin app
 
 function fetchDataAdmin() {
-  fetch('php/receivemessages.php', {
+  fetch('php/readAdmin.php', {
       method: "POST",
   })
       .then(response => response.text())
@@ -168,7 +168,7 @@ function fillWithDataAdmin(typeofInfo) {
         for (var i=0;i<adminInfo[5].length;i++) {
           // IF the message is still open
           if (adminInfo[5][i][5] == 0) {
-            fillWithCenter += "<div class='row'><div class='rowTitle'>"+adminInfo[5][i][1];
+            fillWithCenter += "<div class='row messageMain' value='"+i+"'><div class='rowTitle'>"+adminInfo[5][i][1];
             // IF the message is tagged / not tagged
             if (adminInfo[5][i][6] == 0) {
               fillWithCenter += "<img class='rowIcon' src='icons/notflagged.png'>";
@@ -189,19 +189,30 @@ function fillWithDataAdmin(typeofInfo) {
       }
 
       // This one's for Logs, fills the right column
+      var today = new Date();
 
       if (adminInfo[4].length == 1) {
-        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOG</div><div class='textInfo'>Only one log is available as of currently.</div><div id='infoLogs'></div>";
+        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOG</div><div class='textInfo'>Only one log is available from the last 24h.</div><div id='infoLogs'></div>";
       } else if (adminInfo[4].length == 0) {
         fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>There are no logs as of currently.</div>";
       } else {
-        fillWithRight = "<div class='titleInfo'>"+ adminInfo[4].length + " LOGS</div><div class='textInfo'>Are available as of currently.</div>";
+        var count = 0;
+        for (var i=0;i<adminInfo[4].length;i++) {
+          var logTime = new Date(adminInfo[4][i][4].replace(' ','T'));
+          if (Math.abs(today - logTime) <= 60 * 60 * 24 * 1000) {
+            count++;
+          }
+        }
+        fillWithRight = "<div class='titleInfo'>"+ count + " LOGS</div><div class='textInfo'>Are available from the last 24h.</div>";
       }
 
       if (adminInfo[4].length >= 1) {
         fillWithRight += "<div class='logRow'>";
         for (var i=0;i<adminInfo[4].length;i++) {
-          fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[4][i][1]+"</div><div class='rowText'>"+adminInfo[4][i][2]+"</div><div class='rowFooter'>"+adminInfo[4][i][4]+"</div></div>";
+          var logTime = new Date(adminInfo[4][i][4].replace(' ','T'));
+          if (Math.abs(today - logTime) <= 60 * 60 * 24 * 1000) {
+            fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[4][i][1]+"</div><div class='rowText'>"+adminInfo[4][i][2]+"</div><div class='rowFooter'>"+adminInfo[4][i][4]+"</div></div>";
+          }
         }
         fillWithRight += "</div>";
       }
@@ -219,7 +230,7 @@ function fillWithDataAdmin(typeofInfo) {
 
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='starSubmitTitle'>Add New Star</div><div class='textInfo' id='starSubmitInfo'>Add a new star by filing the form down below.</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='starSubmitTitle'>Add New Star</div><div class='textInfo' id='starSubmitInfo'>Add a new star by filing the form down below.</div><div class='textInfo objectInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitStars();'>";
       fillWithCenter += "<input type='hidden' id='starExists' name='starExists' value='no'>"
       fillWithCenter += "<label for='starName'>Star Name:</label><input type='text' id='starName' name='starName' required><br>";
@@ -247,7 +258,7 @@ function fillWithDataAdmin(typeofInfo) {
       
       // The right side is filled with the last added planets, the if is necessary in case there's more than 5 stars.
 
-      fillWithRight = "<div class='titleInfo'>Last Added Stars</div><div class='textInfo'>The last added stars are:</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added Stars</div><div class='textInfo'>The last added stars are:</div><div class='textInfo objectLast'>";
       if (adminInfo[0].length <=5) {
         for (var i=0;i<adminInfo[0].length;i++) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[0][i][1]+"</div><div class='rowText'>"+adminInfo[0][i][6]+"</div><div class='rowFooter'>"+adminInfo[0][i][7]+"</div></div>";
@@ -257,6 +268,7 @@ function fillWithDataAdmin(typeofInfo) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[0][i][1]+"</div><div class='rowText'>"+adminInfo[0][i][6]+"</div><div class='rowFooter'>"+adminInfo[0][i][7]+"</div></div>";
         }
       }
+      fillWithRight += "</div>"
       break;
     // IF user goes to PLANET page
     case "planet":
@@ -272,7 +284,7 @@ function fillWithDataAdmin(typeofInfo) {
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='planetSubmitTitle'>Add New Planet</div><div class='textInfo' id='planetSubmitInfo'>Add a new planet by filing the form down below.</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='planetSubmitTitle'>Add New Planet</div><div class='textInfo' id='planetSubmitInfo'>Add a new planet by filing the form down below.</div><div class='textInfo objectInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitPlanets();'>";
       fillWithCenter += "<input type='hidden' id='planetExists' name='planetExists' value='no'>"
       fillWithCenter += "<label for='planetName'>Planet Name:</label><input type='text' id='planetName' name='planetName' required><br>";
@@ -300,7 +312,7 @@ function fillWithDataAdmin(typeofInfo) {
 
       // The right side is filled with the last added planets, the if is necessary in case there's more than 5 planets.
 
-      fillWithRight = "<div class='titleInfo'>Last Added Planets</div><div class='textInfo'>The last added planets are:</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added Planets</div><div class='textInfo'>The last added planets are:</div><div class='textInfo objectLast'>";
       if (adminInfo[1].length <=5) {
         for (var i=0;i<adminInfo[1].length;i++) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[1][i][2]+"</div><div class='rowText'>"+adminInfo[1][i][8]+"</div><div class='rowFooter'>"+adminInfo[1][i][9]+"</div></div>";
@@ -310,6 +322,7 @@ function fillWithDataAdmin(typeofInfo) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[1][i][2]+"</div><div class='rowText'>"+adminInfo[1][i][8]+"</div><div class='rowFooter'>"+adminInfo[1][i][9]+"</div></div>";
         }
       }
+      fillWithRight += "</div>";
       break;
     // IF user goes to NPO page
     case "npo":
@@ -325,7 +338,7 @@ function fillWithDataAdmin(typeofInfo) {
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='npoSubmitTitle'>Add New NPO</div><div class='textInfo' id='npoSubmitInfo'>Add a new NPO by filing the form down below.</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='npoSubmitTitle'>Add New NPO</div><div class='textInfo' id='npoSubmitInfo'>Add a new NPO by filing the form down below.</div><div class='textInfo objectInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitNPOs();'>";
       fillWithCenter += "<input type='hidden' id='npoExists' name='npoExists' value='no'>"
       fillWithCenter += "<label for='npoName'>NPO Name:</label><input type='text' id='npoName' name='npoName' required><br>";
@@ -352,7 +365,7 @@ function fillWithDataAdmin(typeofInfo) {
 
       // The right side is filled with the last added npos, the if is necessary in case there's more than 5 npos.
       
-      fillWithRight = "<div class='titleInfo'>Last Added NPOs</div><div class='textInfo'>The last added npos are:</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added NPOs</div><div class='textInfo'>The last added npos are:</div><div class='textInfo objectLast'>";
       if (adminInfo[2].length <=5) {
         for (var i=0;i<adminInfo[2].length;i++) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[2][i][2]+"</div><div class='rowText'>"+adminInfo[2][i][8]+"</div><div class='rowFooter'>"+adminInfo[2][i][9]+"</div></div>";
@@ -362,6 +375,7 @@ function fillWithDataAdmin(typeofInfo) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[2][i][2]+"</div><div class='rowText'>"+adminInfo[2][i][8]+"</div><div class='rowFooter'>"+adminInfo[2][i][9]+"</div></div>";
         }
       }
+      fillWithRight += "</div>";
       break;
     // IF user goes to SATELLITE page
     case "satellite":
@@ -377,7 +391,7 @@ function fillWithDataAdmin(typeofInfo) {
       
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
-      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo' id='satelliteSubmitInfo'>Add a new satellite by filing the form down below</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo' id='satelliteSubmitTitle'>Add New Satellite</div><div class='textInfo' id='satelliteSubmitInfo'>Add a new satellite by filing the form down below</div><div class='textInfo objectInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitSatellites();'>";
       fillWithCenter += "<input type='hidden' id='satelliteExists' name='satelliteExists' value='no'>"
       fillWithCenter += "<label for='satelliteName'>NPO Name:</label><input type='text' id='satelliteName' name='satelliteName' required><br>";
@@ -406,7 +420,7 @@ function fillWithDataAdmin(typeofInfo) {
 
       // The right side is filled with the last added satellites, the if is necessary in case there's more than 5 satellites.
 
-      fillWithRight = "<div class='titleInfo'>Last Added Satellites</div><div class='textInfo'>The last added satellites are:</div>";
+      fillWithRight = "<div class='titleInfo'>Last Added Satellites</div><div class='textInfo'>The last added satellites are:</div><div class='textInfo objectLast'>";
       if (adminInfo[3].length <=5) {
         for (var i=0;i<adminInfo[3].length;i++) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[3][i][2]+"</div><div class='rowText'>"+adminInfo[3][i][8]+"</div><div class='rowFooter'>"+adminInfo[3][i][9]+"</div></div>";
@@ -416,11 +430,12 @@ function fillWithDataAdmin(typeofInfo) {
           fillWithRight += "<div class='row'><div class='rowTitle'>"+adminInfo[3][i][2]+"</div><div class='rowText'>"+adminInfo[3][i][8]+"</div><div class='rowFooter'>"+adminInfo[3][i][9]+"</div></div>";
         }
       }
+      fillWithRight += "</div>";
       break;
     // IF user goes to MESSAGE page
     case "message":
-      fillWithLeft = "<div class='titleInfo'>Select Message</div><div class='textInfo'>Use the buttons to filter through the messages.</div><div class='textInfo'><button type='button' id='showHidden' class='buttonMessages'>Hidden</button><button type='button' id='showUnseen' class='buttonMessagesSecondary'>Unseen</button><button type='button' id='showFlagged' class='buttonMessagesSecondary'>Flagged</button></div><div id='messageRow' class='textInfo'>";
-      fillWithLeft += "<div class='messageRow'>";
+      fillWithLeft = "<div class='titleInfo'>Select Message</div><div class='textInfo'>Use the buttons to filter through the messages.</div><div class='textInfo'><button type='button' id='showHidden' class='buttonMessages'>Hidden</button><button type='button' id='showUnseen' class='buttonMessagesSecondary'>Unseen</button><button type='button' id='showFlagged' class='buttonMessagesSecondary'>Flagged</button></div><div id='messageRow' class='textInfo objectInfo'>";
+      
       for (var i=0;i<adminInfo[5].length;i++) {
         // IF the message is still open
         if (adminInfo[5][i][5] == 0) {
@@ -438,10 +453,9 @@ function fillWithDataAdmin(typeofInfo) {
             fillWithLeft += "<img class='rowIcon' src='icons/read.png'>";
           }
           fillWithLeft += "</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
+          fillWithLeft += "</div>";
         }
-        fillWithLeft += "</div>";
       }
-      fillWithLeft += "</div>";
 
       fillWithLeft += "</div>";
       fillWithCenter = "<div class='titleInfo'>Handle Message</div><div class='textInfo'>Choose a message to check it's content.</div><div class='textInfo' id='infoMessages'></div>";
@@ -455,7 +469,7 @@ function fillWithDataAdmin(typeofInfo) {
       }
       fillWithLeft += "</select></div><button type='button' id='modifyUser' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteUser'>Delete User</button></div>";
 
-      fillWithCenter = "<div class='titleInfo'>Add New User</div><div class='textInfo'>Add a new user by filling the form down below.</div><div class='textInfo'>";
+      fillWithCenter = "<div class='titleInfo'>Add New User</div><div class='textInfo'>Add a new user by filling the form down below.</div><div class='textInfo objectInfo'>";
       fillWithCenter += "<form onsubmit='event.preventDefault(); submitUser();'>";
       fillWithCenter += "<input type='hidden' id='userExists' name='userExists' value='no'>";
       fillWithCenter += "<label for='userEmail'>Email:</label><input type='text' id='userEmail' name='userEmail' required><br>";
@@ -464,7 +478,7 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label><input type='checkbox' id='superadminPriv'><span>Superadmin Priviledge</span></label><br><br>";
       fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button><button type='button' id='resetUser' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</div>";
-      fillWithRight = "<div class='titleInfo'>User Logs</div><div class='textInfo'>Only available for Admins and Super Admins</div><div class='textInfo' id='userLogs'></div>";
+      fillWithRight = "<div class='titleInfo'>User Logs</div><div class='textInfo'>Only available for Admins and Super Admins</div><div class='textInfo logRow' id='userLogs'></div>";
       break;
     default:
       break;
@@ -636,7 +650,7 @@ function submitLogin() {
           case "succ":
             Swal.fire({
               icon: 'success',
-              title: 'The Account Has Been Created Succesfully, You Can Now Log In!',
+              title: 'The Account Has Been Created Succesfully, An email has been sent in order to activate it!',
             })
             changeLoginScope(true);
             break;
@@ -774,7 +788,6 @@ function activateAccount() {
     })
       .then(response => response.text())
       .then(data => {
-        console.log(data);
         if(data == "success") {
           Swal.fire('Success!','The account has been activated','success').then((result) => {
             if(result.isConfirmed) {
@@ -926,7 +939,6 @@ function submitPlanets() {
   })
       .then(response => response.text())
       .then(data => {
-        console.log(data);
           if(data=="success") {
             Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
               if(result.isConfirmed) {
@@ -1034,11 +1046,11 @@ function loadMessage(messageID) {
     })
         .then(response => response.text())
         .then(data => {
-            console.log(data);
+          adminInfo[5][messageID][4] = 1;
         });
   } else {
     var formData = new FormData();
-    formData.append('action','readA');
+    formData.append('action','readA'); 
     formData.append('affectedID', adminInfo[5][messageID][0]);
     fetch('php/insertfrommessages.php', {
         method: "POST",
@@ -1048,8 +1060,7 @@ function loadMessage(messageID) {
         .then(data => {
         });
   }
-
-  fillWithCenter += "<div class='row'><div class='rowTitle'>"+adminInfo[5][messageID][1] + " / <span id='messageId'>" + adminInfo[5][messageID][0] + "</span>";
+  fillWithCenter += "<div class='row'><div class='rowTitle'>"+adminInfo[5][messageID][1] + " / <span id='messageId' value='"+messageID+"'>" + adminInfo[5][messageID][0] + "</span>";
   fillWithCenter += "</div><div class='rowTextFull'>"+adminInfo[5][messageID][2]+"</div><div class='rowFooter'>"+adminInfo[5][messageID][3]+"</div></div>";
   // if the message is hidden / closed
   if (adminInfo[5][messageID][5]==1) {
@@ -1101,17 +1112,20 @@ function loadMessage(messageID) {
   //$("#commentMessages").html(fillWithRight);
 }
 
+// function for filtering messages
+
 function messageQuery() {
-  messageArray1 = [];
-  messageArray2 = [];
-  messageArrayFinal = [];
-  
-  console.log(showHidden + ", " + showUnseen + ", " + showFlagged);
+  var messageArray1 = [];
+  var messageArray2 = [];
+  var messageArrayFinal = [];
 
   if (showHidden == 1) {
     for (var i=0;i<adminInfo[5].length;i++) {
       // IF the message is hidden
       if (adminInfo[5][i][5] == 1) {
+        if(adminInfo[5][i].length == 7) {
+          adminInfo[5][i].push(i);
+        }
         messageArray1.push(adminInfo[5][i]);
       }
     }
@@ -1119,6 +1133,9 @@ function messageQuery() {
     for (var i=0;i<adminInfo[5].length;i++) {
       // IF the message is not hidden
       if (adminInfo[5][i][5] == 0) {
+        if(adminInfo[5][i].length == 7) {
+          adminInfo[5][i].push(i);
+        }
         messageArray1.push(adminInfo[5][i]);
       }
     }
@@ -1154,13 +1171,11 @@ function messageQuery() {
 
   fillWithLeft = "";
 
-  console.log(messageArrayFinal);
-
   for (var i=0;i<messageArrayFinal.length;i++) {
     // IF the message is still open
-      fillWithLeft += "<div class='row' onclick='loadMessage("+i+");'><div class='rowTitle'>"+messageArrayFinal[i][1] + " / " + messageArrayFinal[i][0];
+      fillWithLeft += "<div class='row' onclick='loadMessage("+messageArrayFinal[i][7]+");'><div class='rowTitle'>"+messageArrayFinal[i][1] + " / " + messageArrayFinal[i][0];
       // IF the message is tagged / not tagged
-      if (messageArrayFinal[i][6] == 0) {
+      if (messageArrayFinal[i][0][6] == 0) {
         fillWithLeft += "<img class='rowIcon' src='icons/notflagged.png'>";
       } else {
         fillWithLeft += "<img class='rowIcon' src='icons/flagged.png'>";
@@ -1173,9 +1188,13 @@ function messageQuery() {
       }
       fillWithLeft += "</div><div class='rowText'>"+messageArrayFinal[i][2]+"</div><div class='rowFooter'>"+messageArrayFinal[i][3]+"</div></div>";
   }
-  
-  $("#messageRow").html(fillWithLeft);
+  $("#messageRow").fadeOut(function() {
+    $("#messageRow").html(fillWithLeft);
+    $("#messageRow").fadeIn();
+  });
 }
+
+// When user is submitted in the admin page, does not require to be activated
 
 function submitUser() {
   sendUser = [];

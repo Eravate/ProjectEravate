@@ -692,6 +692,7 @@ $("body").on("click", "#deleteSatellite", function() {
 // If a message is hidden by the admin / closed
 $("body").on("click", "#hideMessage", function() { 
     var currentScope = $("#hideMessage").html();
+    var objPos = $("#messageId").attr('value');
     if (currentScope=="Unhide") {
         var formData = new FormData();
         formData.append('action','unhide');
@@ -703,7 +704,9 @@ $("body").on("click", "#hideMessage", function() {
             .then(response => response.text())
             .then(data => {
                 if (data=="success") {
+                    adminInfo[5][objPos][5] = 0;
                     Swal.fire('Unhidden!', 'The message has been Unhidden!', 'success');
+                    messageQuery();
                 } else {
                     Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
                 }
@@ -720,7 +723,9 @@ $("body").on("click", "#hideMessage", function() {
             .then(response => response.text())
             .then(data => {
                 if (data=="success") {
+                    adminInfo[5][objPos][5] = 1;
                     Swal.fire('Hidden!', 'The message has been hidden!', 'success');
+                    messageQuery();
                 } else {
                     Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
                 }
@@ -732,6 +737,7 @@ $("body").on("click", "#hideMessage", function() {
 // If a message is flagged by the admin
 $("body").on("click", "#flagMessage", function() { 
     var currentScope = $("#flagMessage").html();
+    var objPos = $("#messageId").attr('value');
     if (currentScope=="Unflag") {
         var formData = new FormData();
         formData.append('action','unflag');
@@ -743,7 +749,9 @@ $("body").on("click", "#flagMessage", function() {
             .then(response => response.text())
             .then(data => {
                 if (data=="success") {
+                    adminInfo[5][objPos][6] = 0;
                     Swal.fire('Unflagged!', 'The message has been unflagged!', 'success');
+                    messageQuery();
                 } else {
                     Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
                 }
@@ -760,7 +768,9 @@ $("body").on("click", "#flagMessage", function() {
             .then(response => response.text())
             .then(data => {
                 if (data=="success") {
+                    adminInfo[5][objPos][6] = 1;
                     Swal.fire('Flagged!', 'The message has been flagged!', 'success');
+                    messageQuery();
                 } else {
                     Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
                 }
@@ -975,4 +985,17 @@ $("body").on("click", "#deleteUser", function() {
             title: 'You need to choose an user before doing this!',
           })
     }
+});
+
+$("body").on("click", ".messageMain", function() {
+    $("#infoleftInner").fadeOut();
+    $("#infocentreInner").fadeOut();
+    var id = $(this).attr('value');
+    $("#inforightInner").fadeOut(function() {
+        fillWithDataAdmin("message");
+        loadMessage(id);
+        $("#infoleftInner").fadeIn();
+        $("#infocentreInner").fadeIn();
+        $("#inforightInner").fadeIn();
+    });
 });

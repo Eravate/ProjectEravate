@@ -1,4 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+require './Exception.php';
+require './PHPMailer.php';
+require './SMTP.php';
 ini_set('display_errors',1);
 session_start();
 
@@ -71,7 +78,7 @@ if($type=="create") {
                                             <div style='position:absolute;text-align:center;'>
                                                 <h1 style='font-size:40px'>Project: Eravate!</h1>
                                                 <h3>Activate your account down below.</h3>
-                                                <p><a href='eravate.es/activation.php?actoken=".$token."' style='text-decoration:none;color:black;font-weight:bold;'>Click Here!</a></p>
+                                                <p><a href='https://eravate.es/activation.php?actoken=".$token."' style='text-decoration:none;color:black;font-weight:bold;'>Click Here!</a></p>
                                                 <p style='font-size:10px'>If you haven't registered in our app, simply ignore this message.</p>
                                             </div>
                                         </div>
