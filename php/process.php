@@ -58,7 +58,7 @@ if($type=="create") {
                 $mail->Host       = 'smtp.ionos.es';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
                 $mail->Username   = 'arkadiusz@eravate.es';                     //SMTP username
-                $mail->Password   = '5aFMKt#!T7A5Qz#x';                               //SMTP password
+                $mail->Password   = 'secret';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
                 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
