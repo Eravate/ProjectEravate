@@ -51,6 +51,7 @@ if (!isset($_SESSION['admin'])) {
                       echo ("<img src='icons/user.png' id='users' alt='Users'>");
                     };
                     ?>
+                    <img src="icons/console.png" id="console" alt="Console">
                     <img src="icons/messages.png" id="messages" alt="Messages">
                     <img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();">
                     <img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out">
@@ -58,6 +59,12 @@ if (!isset($_SESSION['admin'])) {
                 </div></div>
 
                 <!-- Information Layer -->
+
+                <div id="consoleDiv">
+                    <div id="consoleDivheader"><img src="icons/x.png" id="reddot" alt="Close"></div>
+                    <div id="textArea"></div>
+                    <!--<div id="consoleInfo">Eravate@EravateProject:</div>--><input id="consoleInput" type="text">
+                </div>
 
                 <!-- Information Left, obsolete as of now -->
                 <!--

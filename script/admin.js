@@ -999,3 +999,102 @@ $("body").on("click", ".messageMain", function() {
         $("#inforightInner").fadeIn();
     });
 });
+
+// Allows the dragging of the command prompt
+dragElement(document.getElementById("consoleDiv"));
+// Make console invisible at the beginning
+$("#consoleDiv").toggle();
+// Make console toggle on click
+$("#console").click(function(){
+    $("#consoleDiv").fadeToggle(500);
+    $("#consoleInput").focus();
+    $("#consoleInput").val("");
+});
+$("#reddot").click(function(){
+    $("#consoleDiv").fadeToggle(500);
+});
+
+ // Command needed to recognize Enter key on command prompt
+ document.getElementById('consoleInput').onkeypress = function(e){
+    if (!e) e = window.event;
+    var keyCode = e.code || e.key;
+    if (keyCode == 'Enter'){
+        var inputValue = $("#consoleInput").val().split(" ");
+        var wordValue = inputValue[0];
+        // SWITCH for the console inputs
+        switch (wordValue.toLowerCase()) {
+            // Command CLR clears the command
+            case "clr":
+                $("#textArea").html("");
+                break;
+            // Command PERFORMTEST to perform a system-wide test
+            case "performtest":
+                // Separate PERFORMTEST into different tests.
+                $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
+                var performTestText = $("#consoleInput").val();
+                if (performTestText.length > 12) {
+                    var testType = $("#consoleInput").val().substring(12);
+                    switch (testType) {
+                        case "stellar":
+                        case "messages":
+                        case "comments":
+                        case "users":
+                        case "logs":
+                        case "full":
+                            var formData = new FormData();
+                            formData.append('type', testType);
+                            fetch('php/test.php', {
+                                method: "POST",
+                                body: formData
+                            })
+                                .then(response => response.text())
+                                .then(data => {
+                                    if (data="success"){
+                                        $("#textArea").append("<span class='yellowall'>"+testType+" test has been successful, no errors found.</span><br>");
+                                    } else {
+                                        $("#textArea").append("<span class='redall'>"+testType+" test has failed, check the console for more information.</span><br>");
+                                        console.log(data);
+                                    }
+                                });
+                            break;
+                        case "help":
+                            $("#textArea").append("<span class='yellowall'>Does a system-wide test, possible parameters:<br>- stellar: Performs a test on stellar objects<br>- messages: Performs a test on messages<br>- comments: Performs a test on comments<br>- users: Performs a test on users<br>- logs: Performs a test on logs<br>- full: Performs a complete test</span><br>");
+                            break;
+                        default:
+                            $("#textArea").append("<span class='redall'>Invalid use of command!</span><br>");
+                            break;
+                    }
+                } else {
+                    var formData = new FormData();
+                    formData.append('type', "full");
+                    fetch('php/test.php', {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            if (data="success"){
+                                $("#textArea").append("<span class='yellowall'>full test has been successful, no errors found.</span><br>");
+                            } else {
+                                $("#textArea").append("<span class='redall'>full test has failed, check the console for more information.</span><br>");
+                                console.log(data);
+                            }
+                        });
+                }
+                break;
+            // Command HELP gives help
+            case "help":
+                $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
+                $("#textArea").append("<span class='yellowall'>The following commands are available to choose from:</span><br>- clr: Clears the console<br>- performtest: Performs a system-wide test<br>");
+                break;
+            // Any other command does not exist
+            default:
+                $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
+                $("#textArea").append("<span class='redall'>Such command does not exist!</span><br>");
+                break;
+        }
+        //$("#textarea").scrollTop($('#textarea').prop("scrollHeight"));
+        $("#consoleInput").val("");
+        $('#textArea').animate({scrollTop: 9999});
+    }
+}

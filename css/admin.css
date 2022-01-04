@@ -100,6 +100,76 @@ button {
   outline: none;
   
 }
+
+/* CSS FOR CONSOLE */
+#consoleDiv {
+  position: absolute;
+  top: 20vw;
+  left: 35vw;
+  width: 600px;
+  height: 300px;
+  z-index: 9;
+  border: 1px solid #FF6E00;
+  /*border: 1px solid #675288;*/
+  background-color: rgba(0,0,0,0.8);
+  overflow: hidden;
+  display:flex;
+  flex-direction: column;
+  
+}
+#consoleDivheader {
+  width: 598px;
+  height: 20px;
+  z-index: 10;
+  background-color: #FF6E00;
+  /*background-color: #675288;*/
+  outline: none;
+}
+#textArea {
+  overflow: hidden;
+  width: 550px;
+  padding-left: 5px;
+  padding-top: 5px;
+  height:254px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+/*
+#consoleInfo {
+  display:inline-block;
+  width:190px;
+  height: 20px;
+  border-top: 1px solid #FF6E00;
+  font-size: 18px;
+  padding-top:3px;
+  padding-left:5px;
+}
+*/
+#consoleInput {
+  width: 593px;
+  height: 20px;
+  padding-left: 5px;
+  border-top: 1px solid #FF6E00;
+  border-bottom: 0px!important;
+  /*border-top: 1px solid #675288;*/
+  background-color: transparent;
+  color: white;
+}
+
+input {
+  outline:0;
+}
+input:focus {
+  outline:none!important;
+  -webkit-appearance:none;
+}
+
+#reddot {
+  width: 15px;
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
 /* CSS FOR NAVIGATION BAR */
 
 #navbar {
@@ -122,12 +192,16 @@ button {
   float: right;
   text-align: right;
   height: 3vw;
-  width: 12vw;
+  width: 16vw;
 }
 #users {
   height: 2vw;
 }
 #messages {
+  height: 2vw;
+  margin-left: 1vw;
+}
+#console {
   height: 2vw;
   margin-left: 1vw;
 }
@@ -201,6 +275,7 @@ button {
 
 #infocentreInner {
   height:100%;
+  width:100%;
   overflow: hidden;
   display:flex;
   flex-direction:column;

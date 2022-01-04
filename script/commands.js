@@ -177,13 +177,12 @@ function fillWithDataAdmin(typeofInfo) {
             }
             // IF the message has not been read / has been read
             if (adminInfo[5][i][4] == 0) {
-              fillWithCenter += " <img class='rowIcon' src='icons/notread.png'>";
+              fillWithCenter += "<img class='rowIcon' src='icons/notread.png'>";
             } else {
               fillWithCenter += "<img class='rowIcon' src='icons/read.png'>";
             }
-            fillWithCenter += "</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div>";
+            fillWithCenter += "</div><div class='rowText'>"+adminInfo[5][i][2]+"</div><div class='rowFooter'>"+adminInfo[5][i][3]+"</div></div>";
           }
-          fillWithCenter += "</div>";
         }
         fillWithCenter += "</div>";
       }

@@ -133,6 +133,7 @@
         }
         //$("#textarea").scrollTop($('#textarea').prop("scrollHeight"));
         $("#consoleInput").val("");
+        $('#textArea').animate({scrollTop: 9999});
     }
 }
 // Allows the dragging of the command prompt
@@ -147,7 +148,7 @@ $("#console").click(function(){
 });
 $("#reddot").click(function(){
     $("#consoleDiv").fadeToggle(500);
-})
+});
 /* Make menu and info disappear on click
 $('#see').click(function(){
     $('#navbar').fadeOut(500);
