@@ -48,6 +48,7 @@ textarea {
   color: white;
   border: 1px solid #FF6E00;
   height: 5vw;
+  max-height:8.88vh;
 }
 textarea:focus {
   outline: none !important;
@@ -77,13 +78,16 @@ button {
 }
 .buttonMessages {
   width: 5vw;
+  max-width:8.88vh;
 }
 .buttonMessagesSecondary {
   width: 5vw;
+  max-width:8.88vh;
   margin-left: 0.4vw;
 }
 .handleMessage {
   width: 5vw;
+  max-width:8.88vh;
 }
 .selectTra {
   color: white;
@@ -104,8 +108,8 @@ button {
 /* CSS FOR CONSOLE */
 #consoleDiv {
   position: absolute;
-  top: 20vw;
-  left: 35vw;
+  top: 35%;
+  left: 35%;
   width: 600px;
   height: 300px;
   z-index: 9;
@@ -178,11 +182,14 @@ input:focus {
   box-sizing: border-box;
   position: absolute;
   width: 80vw;
+  max-width: 142.21vh;
   height: 3vw;
-  padding: 0.25vw 0.05vw 0px;
-  top: 3vw;
-  left: 10vw;
-  font-size: 2vw;
+  max-height: 5.33vh;
+  /*padding: 0.25vw 0.05vw 0px;*/
+  padding: 0.25% 0.05% 0%;
+  top: 5.33%;
+  left: 10%;
+  font-size: min(2vw, 3.55vh);
   border-bottom: 1px solid #FF6E00;
   /*border-bottom: 1px solid #675288;*/
   /*border-bottom: rgb(63,94,251);
@@ -192,34 +199,43 @@ input:focus {
   float: right;
   text-align: right;
   height: 3vw;
-  width: 16vw;
+  max-height: 5.33vh;
+  width: 20vw;
+  max-width: 35.554vh;
 }
 #users {
-  height: 2vw;
+  width: 2vw;
+  max-width: 3.54vh;
 }
 #messages {
-  height: 2vw;
-  margin-left: 1vw;
+  width: 2vw;
+  max-width: 3.54vh;
+  margin-left: 5%;
 }
 #console {
-  height: 2vw;
-  margin-left: 1vw;
+  width: 2vw;
+  max-width: 3.54vh;
+  margin-left: 5%;
 }
 #fulls {
-  height: 2vw;
-  margin-left: 1vw;
+  width: 2vw;
+  max-width: 3.54vh;
+  margin-left: 5%;
 }
 #logout {
-  height:2vw;
-  margin-left: 1vw;
+  width: 2vw;
+  max-width: 3.54vh;
+  margin-left: 5%;
 }
 
 /* CSS FOR CONTENT */
 
 #content {
   width: 100vw;
+  max-width: 177.77vh; /* be ready to adapt everything tomorrow */
   /* The height is set to 56.25 width to preserve the 16:9 format at all times */
   height: 56.25vw;
+  max-height: 100vh;
   position: relative;
   align-items: center; /* vertical */
   justify-content: center; /* horizontal */
@@ -235,18 +251,22 @@ input:focus {
 #info {
   position: absolute;
   display:flex;
-  top: 10vw;
-  right: 20vw;
+  top: 17.77%;
+  right: 20%;
   width: 60vw;
-  font-size: 0.7vw;
+  max-width: 106.66vh;
+  font-size: min(0.7vw, 1.24vh);
   height: 30vw;
+  max-height: 53.33vh;
 }
 
 #infoleft {
   width: 18vw;
+  max-width: 32vh;
   height: 30vw;
+  max-height: 53.33vh;
   border: 1px solid #FF6E00;
-  padding: 1vw;
+  padding: min(1vw, 1.77vh);
 }
 
 #infoleftInner {
@@ -257,19 +277,21 @@ input:focus {
 }
 
 .titleInfo {
-  font-size:2vw;
+  font-size: min(2vw, 3.55vh);
 }
 .textInfo {
-  font-size:1vw;
-  margin-bottom:1vw;
+  font-size: min(1vw, 1.77vh);
+  margin-bottom: min(1vw, 1.77vh);
 }
 
 #infocentre {
-  margin-left:3vw;
+  margin-left: min(3vw, 5.33vh);
   width: 18vw;
+  max-width: 32vh;
   height: 30vw;
+  max-height: 53.33vh;
   border: 1px solid #FF6E00;
-  padding: 1vw;
+  padding: min(1vw, 1.77vh);
   display: flex;
 }
 
@@ -307,13 +329,14 @@ input:focus {
 
 
 #inforight {
-  height:100%;
-  margin-left:3vw;
-  width: 18vw;
-  height: 30vw;
-  border: 1px solid #FF6E00;
-  padding: 1vw;
+  margin-left:min(3vw, 5.33vh);
   display: flex;
+  width: 18vw;
+  max-width: 32vh;
+  height: 30vw;
+  max-height: 53.33vh;
+  border: 1px solid #FF6E00;
+  padding: min(1vw, 1.77vh);
 }
 
 #inforightInner {
@@ -330,38 +353,42 @@ input:focus {
 }
 
 .messageRow {
-  margin-bottom:1vw;
+  margin-bottom: min(1vw, 1.77vh);
 }
 
 .logRow {
-  margin-bottom:1vw;
+  margin-bottom: min(1vw, 1.77vh);
 }
 
 .row {
-  margin-bottom: 1vw;
+  margin-bottom: min(1vw, 1.77vh);
   width: 16vw;
+  max-width: 28.44vh;
 }
 
 .rowTitle {
   vertical-align:middle;
   height:1vw;
-  font-size:0.8vw;
+  max-height: 1.77vh;
+  font-size:  min(0.8vw, 1.42vh);
 }
 .rowIcon {
   float:right;
+  max-height: 1.77vh;
   height: 1vw;
+  max-height: 1.77vh;
 }
 .rowText {
   overflow: hidden;
-  font-size:1.2vw;
+  font-size:  min(1.2vw, 2.13vh);
   text-overflow: ellipsis; 
   white-space: nowrap;
 }
 .rowTextFull {
-  font-size: 1.2vw;
+  font-size:  min(1.2vw, 1.42vh);
 }
 .rowFooter {
-  font-size: 0.8vw;
+  font-size:  min(0.8vw, 1.42vh);
 }
 /*#infoMessages {
   width:16vw;
@@ -380,10 +407,12 @@ input:focus {
 
 #additional {
   position: absolute;
-  top: 45vw;
+  top: 80%;
   height: 6vw;
+  max-height: 10.66vh;
   width: 60vw;
-  left: 20vw;
+  max-width: 106.66vh;
+  left: 20%;
   display: flex;
 }
 .additionalComp {
@@ -392,37 +421,41 @@ input:focus {
   -o-transition:background 1s;
   transition:background 1s;
   height:6vw;
+  max-height: 10.66vh;
   width: 13.25vw;
+  max-width: 23.55vh;
   border: 1px solid #FF6E00;
 }
 .additionalComp:hover {
   background-color:#FF6E00;
 }
 #add2 {
-  margin-left: 2.5vw;
+  margin-left: min(2.5vw,4.44vh);
 }
 #add3 {
-  margin-left: 2.5vw;
+  margin-left: min(2.5vw,4.44vh);
 }
 #add4 {
-  margin-left: 2.5vw;
+  margin-left: min(2.5vw,4.44vh);
 }
 
 .addtit {
   width: 100%;
-  padding-left: 1vw;
-  padding-top: 0.7vw;
+  padding-left: min(1vw,1.77vh);
+  padding-top: min(0.7vw,1.24vh);
   height: 2vw;
-  font-size: 1vw;
+  max-height: 3.55vh;
+  font-size: min(1vw,1.77vh);
   color: #B0B0B0;
   font-weight: bold;
 }
 
 .addtxt {
-  font-size: 2vw;
+  font-size: min(2vw,3.55vh);
   width: 100%;
-  padding-left: 1vw;
+  padding-left: min(1vw,1.77vh);
   height: 4vw;
+  max-height: 7.1vh;
 }
 
 
@@ -478,45 +511,6 @@ input:focus {
   border-radius: 10px;
 }   display: inline-block;
 */
-
-/* NAVIGATION ARROWS */
-#goleft {
-  position: absolute;
-  top: 25.3125vw;
-  left: 2vw;
-}
-#arrowleft {
-  height: 5.625vw;
-}
-
-
-#goright {
-  position: absolute;
-  top: 25.3125vw;
-  right: 2vw;
-}
-#arrowright {
-  height: 5.625vw;
-}
-
-#goup {
-  position: absolute;
-  top: 10vw;
-  right: 11.8vw;
-}
-#arrowup {
-  height: 5.625vw;
-}
-
-
-#godown {
-  position: absolute;
-  top: 36vw;
-  right: 11.8vw;
-}
-#arrowdown {
-  height: 5.625vw;
-}
 
 /* USED PREVIOUSLY
 #music {
