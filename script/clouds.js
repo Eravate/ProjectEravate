@@ -1,9 +1,9 @@
 let scene, camera, cloudParticles = [],composer;
+const canvasContainer = document.querySelector('#object');
 
 function initClouds() {
-
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight,1,1000);
+    camera = new THREE.PerspectiveCamera(60,canvasContainer.offsetWidth / canvasContainer.offsetHeight,1,1000);
     camera.position.z = 1;
     camera.rotation.x = 1.16;
     camera.rotation.y = -0.12;
@@ -36,11 +36,16 @@ function initClouds() {
     blueLight.position.set(300,300,200);
     scene.add(blueLight);*/
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth,window.innerHeight);
+    const renderer = new THREE.WebGLRenderer({
+        //Applying Anti-aliasing
+        antialias: true,
+        canvas: document.querySelector('canvas'),
+        // Alpha allows the background to be transparent ESSENTIAL
+        alpha: true
+    });
+    renderer.setSize(canvasContainer.offsetWidth,canvasContainer.offsetHeight);
     scene.fog = new THREE.FogExp2(0x121212, 0.001);
     renderer.setClearColor(scene.fog.color);
-    document.body.appendChild(renderer.domElement);
 
     let loader = new THREE.TextureLoader();
 
@@ -95,15 +100,17 @@ function initClouds() {
         composer.addPass(new POSTPROCESSING.RenderPass(scene, camera));
         composer.addPass(effectPass);
         
-        window.addEventListener("resize", onWindowResize, false);
         render();
     });
-}
 
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    window.onresize = function () {
+
+        camera.aspect = canvasContainer.offsetWidth / canvasContainer.offsetHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( canvasContainer.offsetWidth, canvasContainer.offsetHeight );
+
+    };
 }
 
 function render() {
@@ -113,5 +120,3 @@ function render() {
     composer.render(0.1);
     requestAnimationFrame(render);
 }
-
-initClouds();

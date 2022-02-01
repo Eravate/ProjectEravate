@@ -3,10 +3,8 @@ body {
   height: 100vh;
   margin: 0;
   background: black;
-  overflow: hidden;
+  overflow: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
   color:white;
 }
 canvas {
@@ -15,7 +13,27 @@ canvas {
   left:0;
   z-index:-99;
 }
+main {
+  width: 100vw;
+  height: 100vh;
+}
+#object {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:-99;
+  width:100%;
+  height:100%;
+}
+
+#objectCanvas {
+  width:100%;
+  min-width: 430px;
+  height:100%;
+}
+
 .login-div {
+  margin: auto;
   width: 430px;
   padding: 35px;
   border-radius: 15px;
