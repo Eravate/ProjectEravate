@@ -18,8 +18,9 @@ if (isset($_SESSION['admin'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="icons/logo.png"/>
-    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    
     <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
     <link rel="stylesheet" type="text/css" href="css/dark.css">
     <link rel="stylesheet" type="text/css" href="css/swup.css"/>
 
@@ -41,6 +42,7 @@ if (isset($_SESSION['admin'])) {
   <body class="loader">
     <iframe id="loading" src="loader.php" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" ></iframe>
     <main id="content">
+    <div id="object" alt="Object"><canvas id="objectCanvas"></canvas></div>
       <div class="login-div">
         <div class="row">
           <div class="logo" id="logo"></div>
