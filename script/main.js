@@ -1,3 +1,4 @@
+
  // Command needed to recognize Enter key on command prompt
  document.getElementById('consoleInput').onkeypress = function(e){
     if (!e) e = window.event;
@@ -322,3 +323,10 @@ $("#surface").click(function(){
     });
 });
 waitForObjects();
+
+$("#continueIndex").click(function(){
+    $("#infoScreen").fadeOut(1000);
+    if($("#dnsagain").is(":checked")){
+        setCookie('dnsagain','true',365);
+    }
+});

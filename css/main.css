@@ -29,6 +29,28 @@ main {
     height:100vh;
 }
 
+#infoScreen {
+    position: absolute;
+    z-index: 9;
+    width:100vw;
+    height:100vh;
+    background-color: black;
+    display: flex;
+}
+
+#infoContent {
+    margin: auto;
+    text-align:center;
+    color:white;
+    font-size: min(1.5vw,2.66vh);
+    width:65vw;
+    max-width:115.55vh;
+}
+#infoContent h2 {
+    font-size: min(2vw,3.55vh);
+    color:#FF6E00;
+}
+
 #landscape {
     width:100vw;
     height:100vh;
