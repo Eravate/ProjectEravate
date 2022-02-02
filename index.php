@@ -15,7 +15,7 @@ if (!isset($_SESSION['user'])) {
 
     <link rel="icon" type="image/png" href="icons/logo.png"/>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="css/dark.css">
     <link rel="stylesheet" type="text/css" href="css/swup.css"/>
 
@@ -30,6 +30,8 @@ if (!isset($_SESSION['user'])) {
     <script defer src="script/postprocessing.min.js"></script>
     <script type="module" src="script/GLTFLoader.js"></script>
     <script type="module" src="script/OrbitControls.js"></script>
+
+    
     
     
     <!--<script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>-->
@@ -37,11 +39,23 @@ if (!isset($_SESSION['user'])) {
 
     <script src="script/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#ffe4e1","text":"#000000","border":"#c25e5e"},"button":{"background":"#c25e5e","text":"#ffffff"}},"position":"bottom","content":{"href":"https://eravate.es/cookiepolicy.php"}})});</script>
 
-    <title>Eravate Project</title>
+    <title>Project: Eravate</title>
 
 </head>
 <body class="loader">
     <iframe id="loading" src="loader.php" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" ></iframe>
+    <div id="infoScreen">
+        <div id="infoContent">
+            <h2>Welcome to Project: Eravate!</h2>
+            <p>Before we let you jump into the action, We'll explain you a couple of things.</p>
+            <p>For improved experience, make sure that you are running on fullscreen, that can be achieved by pressing F11 on your keyboard or using our navigation panel to click on full-screen mode.</p>
+            <p>If you are on your phone, make sure you are in landscape mode.</p>
+            <p>To move to a different system, use the command prompt in the navigation bar. Use the help command to be guided through.</p>
+            <p>If you have to report any error, you can do so by clicking on the exclamation mark on the navigational panel. You can also write me on twitter @Erawaito.</p>
+            <label><input id="dnsagain" type="checkbox" name="dnsagain"><span>Do not show again</span></label><br><br>
+            <button id="continueIndex" class="waves-effect waves-light btn" type="submit" name="continue">Continue</button>
+        </div>
+    </div>
     <main>
         <div id="landscape">
             <!-- All the Content -->
