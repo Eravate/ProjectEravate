@@ -191,7 +191,7 @@
                                             }
                                         } else {
                                             $("#textArea").append("<span class='yellowall'>The following systems are available:</span><br>");
-                                            for (var pos=0;pos<objects.length;pos++) {
+                                            for (var pos=0;pos<objectsTemp.length;pos++) {
                                                 $("#textArea").append("- "+objectsTemp[pos]+"<br>");
                                             }
                                         }
