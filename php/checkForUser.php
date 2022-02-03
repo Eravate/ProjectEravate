@@ -85,6 +85,12 @@ if (isset($_COOKIE['user'])) {
                     break;
             }
         }
+    } else {
+        switch ($location) {
+            case 'admin': case 'index':
+                header("Location: login.php");
+                break;
+        }
     }
 }
 ?>
