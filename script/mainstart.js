@@ -10,4 +10,5 @@ var hiddenLeft;
 var hiddenRight;
 var hiddenUp;
 var hiddenDown;
+var clickDisabledLeft = false;var clickDisabledRight = false;var clickDisabledTop = false;var clickDisabledBottom = false;
 fetchData();

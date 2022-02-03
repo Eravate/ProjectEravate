@@ -13,7 +13,7 @@ $actionDone = "";
 
 $action=$_POST['action'];
 $affObject=json_decode($_POST['affObject']);
-$user=$_SESSION['admin'];
+$user=$_SESSION['adminMail'];
 
 switch ($action) {
     // IF the submitted object is a star - FIRST IF IS FOR DETERMINING WHETHER IT'S A NEW STAR OR NOT

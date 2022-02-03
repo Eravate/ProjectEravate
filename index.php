@@ -2,7 +2,8 @@
 ini_set('display_errors',0);
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    $location = 'index';
+    include 'php/checkForUser.php';
 }
 ?>
 <!DOCTYPE html>
@@ -30,12 +31,8 @@ if (!isset($_SESSION['user'])) {
     <script defer src="script/postprocessing.min.js"></script>
     <script type="module" src="script/GLTFLoader.js"></script>
     <script type="module" src="script/OrbitControls.js"></script>
-
-    
-    
     
     <!--<script defer src="script/clouds.js">// all the script for loading the clouds is included there!</script>-->
-
 
     <script src="script/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#ffe4e1","text":"#000000","border":"#c25e5e"},"button":{"background":"#c25e5e","text":"#ffffff"}},"position":"bottom","content":{"href":"https://eravate.es/cookiepolicy.php"}})});</script>
 
@@ -66,10 +63,10 @@ if (!isset($_SESSION['user'])) {
                 <div id="object" alt="Object"><canvas id="objectCanvas"></canvas></div>
                 <div id="navbar"><span id="solarsystem"></span>
                 <div id="imgnav">
-                    <img src="icons/exclamation.png" id="exclamation" alt="Notif" onclick="reportError();">
-                    <img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();">
-                    <img src="icons/console.png" id="console" alt="Console">
-                    <img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out">
+                    <div class="tooltip"><img src="icons/exclamation.png" id="exclamation" alt="Notif" onclick="reportError();"><span class="tooltiptext tooltiptextTop">Report Error</span></div>
+                    <div class="tooltip tooltipMargin"><img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();"><span class="tooltiptext tooltiptextTop">Fullscreen</span></div>
+                    <div class="tooltip tooltipMargin"><img src="icons/console.png" id="console" alt="Console"><span class="tooltiptext tooltiptextTop">Console</span></div>
+                    <div class="tooltip tooltipMargin"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><span class="tooltiptext tooltiptextTop">Logout</span></div>
                     <form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form>
                 </div></div>
 
@@ -91,7 +88,7 @@ if (!isset($_SESSION['user'])) {
                 <!-- Information Right -->
 
                 <div id="info">
-                    <div id='name'></div>
+                    <div class="tooltip"><div id='name'></div><span class="tooltiptext tooltiptextTop" id='nameTooltip'></span></div>
                     <div id='txt'></div>
                     <div id="source">Source: </div>
                     <div class="seldiv" id="overview"><div class='selnumber'>01</div><div class='seltxt'>OVERVIEW</div></div>
@@ -101,10 +98,10 @@ if (!isset($_SESSION['user'])) {
 
                 <!-- Navigation Layer -->
 
-                <div id="goleft"><img src="icons/left.png" id="arrowleft"></div>
-                <div id="goright"><img src="icons/right.png" id="arrowright"></div>
-                <div id="goup"><img src="icons/up.png" id="arrowup"></div>
-                <div id="godown"><img src="icons/down.png" id="arrowdown"></div>
+                <div id="goleft" class="tooltip"><img src="icons/left.png" id="arrowleft"><span class="tooltiptext tooltiptextTop">Previous Object</span></div>
+                <div id="goright" class="tooltip"><img src="icons/right.png" id="arrowright"><span class="tooltiptext tooltiptextTop">Next Object</span></div>
+                <div id="goup" class="tooltip"><img src="icons/up.png" id="arrowup"><span class="tooltiptext tooltiptextBottom">Previous Satellite/Object</span></div>
+                <div id="godown" class="tooltip"><img src="icons/down.png" id="arrowdown"><span class="tooltiptext tooltiptextTop">Next Satellite</span></div>
                 
                 <!-- Layer previously used for music, now used for info below. -->
 
@@ -121,33 +118,31 @@ if (!isset($_SESSION['user'])) {
                 </div>-->
 
                 <div id="additional">
-                    <div id="add1">
+                    <div id="add1" class="additionalComp">
                         <div class="addtit">ROTATION TIME</div>
                         <div class="addtxt" id="rottime"></div>
                     </div>
-                    <div id="add2">
+                    <div id="add2" class="additionalComp">
                         <div class="addtit">REVOLUTION TIME</div>
                         <div class="addtxt" id="revtime"></div>
                     </div>
-                    <div id="add3">
+                    <div id="add3" class="additionalComp">
                         <div class="addtit">RADIUS</div>
                         <div class="addtxt" id="radius"></div>
                     </div>
-                    <div id="add4">
+                    <div id="add4" class="additionalComp">
                         <div class="addtit">AVERAGE TEMP.</div>
                         <div class="addtxt" id="temp"></div>
                     </div>
                 </div>
-
                 <!-- Transition Layer, used to ensure smooth transitions between objects, may be subject to a lot of changes depending on how the app ends up working -->
-
-                <div class="top-layer"></div>
-                <div class="top-layer top-layer--1"></div>
-                <div class="top-layer top-layer--2"></div>
-                <div class="top-layer top-layer--3"></div>
-                <div class="top-layer top-layer--4"></div>
-                <div class="top-layer top-layer--5">ERAVATE</div>
             </div>
+            <div class="top-layer"></div>
+            <div class="top-layer top-layer--1"></div>
+            <div class="top-layer top-layer--2"></div>
+            <div class="top-layer top-layer--3"></div>
+            <div class="top-layer top-layer--4"></div>
+            <div class="top-layer top-layer--5">ERAVATE</div>
         </div>
         <!-- Used Previously 
         <div id="portrait">

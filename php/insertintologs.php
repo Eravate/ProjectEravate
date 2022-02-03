@@ -12,7 +12,7 @@ $database->stmt_init();
 $action=$_POST['action'];
 $objAffected=$_POST['objAffected'];
 $zero = 0;
-$user=$_SESSION['admin'];
+$user=$_SESSION['adminMail'];
 
 $result = $database->prepare("INSERT INTO AdminLogs(ID,user,action,objectAffected) VALUES (?,?,?,?)");
 $result->bind_param('issi',$zero,$user,$action,$objAffected);
