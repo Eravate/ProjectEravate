@@ -52,6 +52,9 @@ main {
   margin-top: 20px;
   font-weight: bold;
 }
+.rememberMe {
+  margin-top: 20px;
+}
 .validate {
   color:white;
 }
@@ -62,4 +65,3 @@ main {
   width:100vw;
   height:100vh;
 }
-

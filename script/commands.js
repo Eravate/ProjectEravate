@@ -58,6 +58,7 @@ function fillWithPlanet() {
     $("#solarsystem").html(objects[0][1].toUpperCase());
     if (Array.isArray(objects[numObject][0])) {
       $("#name").html(objects[numObject][numSat][1].toUpperCase());
+      $("#nameTooltip").html(objects[numObject][numSat][1].toUpperCase());
       $("#txt").html(objects[numObject][numSat][6]);
       $("#source").html('Source: &nbsp; <a href=\''+objects[numObject][0][8]+'\'>'+objects[numObject][numSat][7]+'</a>');
       $("#rottime").html(objects[numObject][numSat][2]+'&nbsp;DAYS');
@@ -81,6 +82,7 @@ function fillWithPlanet() {
       }
     } else {
       $("#name").html(objects[numObject][1].toUpperCase());
+      $("#nameTooltip").html(objects[numObject][1].toUpperCase());
       $("#txt").html(objects[numObject][6]);
       $("#source").html('Source: &nbsp; <a href=\''+objects[numObject][8]+'\'>'+objects[numObject][7]+'</a>');
       $("#rottime").html(objects[numObject][2]+'&nbsp;DAYS');
@@ -602,7 +604,7 @@ function submitLogin() {
   var type = $('#type_input').val();
   var email = $('#email_input').val();
   var passwd = $('#password_input').val();
-  var passwd2;
+  var rememberMe = $("#rememberMe").is(":checked");
   if (type == "create") {
     passwd2 = $('#sec_password_input').val();
   }
@@ -612,6 +614,7 @@ function submitLogin() {
     formData.append('type', type);
     formData.append('email', email);
     formData.append('passwd', passwd);
+    formData.append('rememberMe', rememberMe);
     fetch('php/process.php', {
       method: "POST",
       body: formData
@@ -649,20 +652,20 @@ function submitLogin() {
           case "succ":
             Swal.fire({
               icon: 'success',
-              title: 'The Account Has Been Created Succesfully, An email has been sent in order to activate it!',
+              title: 'The account has been created succesfully, an email has been sent in order to activate it!',
             })
             changeLoginScope(true);
             break;
           case "err1":
             Swal.fire({
               icon: 'error',
-              title: 'An Accout With This Email Already Exists!',
+              title: 'An account with this email already exists!',
             })
             break;
           case "err2":
             Swal.fire({
               icon: 'error',
-              title: 'The Email And The Password Do Not Correspond To Any Account!',
+              title: 'The email and the password do not correspond to any account!',
             })
             break;
           case "err3":
@@ -671,15 +674,17 @@ function submitLogin() {
               title: 'The account has not been activated yet!',
             })
             break;
+          default:
+            console.log(data);
+            break;
         }
       });
   } else {
     if (type == "create") {
       // This alert is pretty self-explanatory, it's when the client has typed two different passwords when creating his account
-      Swal.fire('Passwords Not Matching!','error');
       Swal.fire({
         icon: 'error',
-        title: 'Passwords Don\'t Match!',
+        title: 'Passwords don\'t match!',
       })
     }
   }
@@ -707,6 +712,7 @@ function logout() {
             }
         });
   }
+  console.log('here');
   $('#logoutForm').submit();
 }
 

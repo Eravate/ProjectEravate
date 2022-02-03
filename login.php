@@ -1,14 +1,34 @@
 <?php
-//ini_set('display_errors',0);
+ini_set('display_errors',0);
 session_start();
+
 if (isset($_POST['action'])) {
   session_destroy();
-}
-if (isset($_SESSION['user'])) {
-  header("Location: index.php");
-}
-if (isset($_SESSION['admin'])) {
-  header("Location: admin.php");
+  if (isset($_COOKIE['user'])) { 
+    setcookie('user','',time() - 3600);
+  }
+  if (isset($_COOKIE['admin'])) { 
+    setcookie('admin','',time() - 3600);
+  }
+} else {
+  if (isset($_SESSION['user'])) {
+    header("Location: index.php");
+  } else {
+    //if (isset($_COOKIE['user'])) { 
+    //  $_SESSION['user'] = $_COOKIE['user'];
+    //  header("Location: index.php");
+    //}
+    if (isset($_SESSION['admin'])) {
+      header("Location: admin.php");
+    } else {
+      $location = 'login';
+      include 'php/checkForUser.php';
+      //if (isset($_COOKIE['admin'])) { 
+      //  $_SESSION['admin'] = $_COOKIE['admin'];
+      //  header("Location: admin.php");
+      //}
+    }
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -62,10 +82,10 @@ if (isset($_SESSION['admin'])) {
             <div class="input-field col s12">
               <input id="password_input" type="password" class="validate" required="" aria-required="true">
               <label for="password_input">Password</label>
+              <div class="rememberMe"><label><input id="rememberMe" type="checkbox" name="rememberMe"><span>Remember Me</span></label></div>
               <div class="forgotPass"><a href="" onclick="event.preventDefault(); forgotPassword();">Forgot password?</a></div>
             </div>
           </div>
-          <div class="row"></div>
           <div class="row">
             <div class="col s6"><a href="#" onclick="changeLoginScope(false)">Create account</a></div>
             <div class="col s6 right-align"><button class="waves-effect waves-light btn" type="submit" name="login">Login</button></div>

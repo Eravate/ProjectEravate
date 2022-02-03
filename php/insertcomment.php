@@ -12,7 +12,7 @@ $database->stmt_init();
 $comment=$_POST['comment'];
 $message=$_POST['message'];
 $action="Added Comment on message ".$message;
-$user=$_SESSION['admin'];
+$user=$_SESSION['adminMail'];
 $zero = 0;
 
 

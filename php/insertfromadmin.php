@@ -14,7 +14,7 @@ $objAffected = 0;
 
 $action=$_POST['action'];
 $objArray=json_decode($_POST['objArray']);
-$user=$_SESSION['admin'];
+$user=$_SESSION['adminMail'];
 $zero = 0;
 
 switch ($action) {

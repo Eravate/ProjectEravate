@@ -13,7 +13,7 @@ $actionDone = "";
 
 $action=$_POST['action'];
 $affectedID=$_POST['affectedID'];
-$user=$_SESSION['admin'];
+$user=$_SESSION['adminMail'];
 $zero = 0;
 
 switch ($action) {
