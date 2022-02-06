@@ -65,7 +65,7 @@ if (!isset($_SESSION['user'])) {
                 <div id="imgnav">
                     <div class="tooltip"><img src="icons/exclamation.png" id="exclamation" alt="Notif" onclick="reportError();"><span class="tooltiptext tooltiptextTop">Report Error</span></div>
                     <div class="tooltip tooltipMargin"><img src="icons/fulls.png" id="fulls" alt="FS" onclick="gofullscreen();"><span class="tooltiptext tooltiptextTop">Fullscreen</span></div>
-                    <div class="tooltip tooltipMargin"><img src="icons/console.png" id="console" alt="Console"><span class="tooltiptext tooltiptextTop">Console</span></div>
+                    <div class="tooltip tooltipMarginConsole"><img src="icons/console.png" id="console" alt="Console"><span class="tooltiptext tooltiptextTop">Console</span></div>
                     <div class="tooltip tooltipMargin"><img src="icons/logout.png" onclick="logout();" id="logout" alt="Log Out"><span class="tooltiptext tooltiptextTop">Logout</span></div>
                     <form id="logoutForm" method="POST" action="login.php"><input type="hidden" name="action" value="true"></form>
                 </div></div>

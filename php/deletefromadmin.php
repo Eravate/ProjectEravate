@@ -6,6 +6,7 @@ session_start();
 // Database for local
 $database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
+
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 
@@ -25,6 +26,19 @@ switch ($action) {
         break;
     case "planet":
     // IF the submitted object is a planet - FIRST IF IS FOR DETERMINING WHETHER IT'S A NEW PLANET OR NOT
+
+        // First check if a texture is assigned to this object
+        $result = $database->prepare("SELECT 3D, name FROM Planet WHERE ID=?");
+        $result->bind_param('i',$affObject[0]);
+        $result->execute();
+        $result->store_result();
+        $result->bind_result($textureExists,$nameExists);
+        $result->fetch();
+
+        if ($textureExists == 1) {
+            unlink('../models/'.$nameExists.'.jpg');
+        }
+
         $result = $database->prepare("DELETE FROM Planet WHERE ID=?");
         $result->bind_param('i',$affObject[0]);
         $actionDone = "Removed Planet ".$affObject[1];
@@ -32,6 +46,21 @@ switch ($action) {
         break;
     case "npo":
     // IF the submitted object is a NPO - FIRST IF IS FOR DETERMINING WHETHER IT'S A NEW NPO OR NOT
+        
+        // First check if a texture is assigned to this object
+        $result = $database->prepare("SELECT 3D, name FROM NPO WHERE ID=?");
+        $result->bind_param('i',$affObject[0]);
+        $result->execute();
+        $result->store_result();
+        $result->bind_result($textureExists,$nameExists);
+        $result->fetch();
+
+        if ($textureExists == 1) {
+            if (file_exists('../models/'.$nameExists.'.jpg')) {
+                unlink('../models/'.$nameExists.'.jpg');
+            }
+        }
+    
         $result = $database->prepare("DELETE FROM NPO WHERE ID=?");
         $result->bind_param('i',$affObject[0]);
         $actionDone = "Removed NPO ".$affObject[1];
@@ -39,6 +68,21 @@ switch ($action) {
         break;
     case "satellite":
     // IF the submitted object is a satellite - FIRST IF IS FOR DETERMINING WHETHER IT'S A NEW SATELLITE OR NOT
+
+        // First check if a texture is assigned to this object
+        $result = $database->prepare("SELECT 3D, name FROM Satellite WHERE ID=?");
+        $result->bind_param('i',$affObject[0]);
+        $result->execute();
+        $result->store_result();
+        $result->bind_result($textureExists,$nameExists);
+        $result->fetch();
+
+        if ($textureExists == 1) {
+            if (file_exists('../models/'.$nameExists.'.jpg')) {
+                unlink('../models/'.$nameExists.'.jpg');
+            }
+        }
+    
         $result = $database->prepare("DELETE FROM Satellite WHERE ID=?");
         $result->bind_param('i',$affObject[0]);
         $actionDone = "Removed Satellite ".$affObject[1];

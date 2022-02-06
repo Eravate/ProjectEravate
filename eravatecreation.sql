@@ -105,6 +105,14 @@ CREATE TABLE AppUser(
     isSuperAdmin tinyint NOT NULL DEFAULT 0
 ) ENGINE = InnoDB;
 
+CREATE TABLE SessionID(
+	user varchar(80),
+    ID varchar(120),
+	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user) REFERENCES AppUser(email),
+    PRIMARY KEY (user, ID)
+)  ENGINE = InnoDB;
+
 -- Admin logs will be kept here 
 
 CREATE TABLE AdminLogs(

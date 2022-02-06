@@ -21,6 +21,8 @@ body {
   color: white;
   overflow: hidden;
   font-family:'Marsden Slim','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url("../icons/starsbackground.jpg");
+  background-size: cover;
 }
 main {
   width:100vw;
@@ -239,8 +241,7 @@ input:focus {
   position: relative;
   align-items: center; /* vertical */
   justify-content: center; /* horizontal */
-  background-image: url("../icons/starsbackground.jpg");
-  background-size: cover;
+  
 }
 .invis {
   opacity:0;

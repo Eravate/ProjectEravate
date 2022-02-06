@@ -19,7 +19,6 @@ $result->execute();
 $result->store_result();
 $result->bind_result($typeRes,$idRes,$nameRes);
 
-
 $rowcount = $result->num_rows;
 switch ($rowcount) {
     case 0:
