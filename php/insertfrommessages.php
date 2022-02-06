@@ -6,6 +6,7 @@ session_start();
 // Database for local
 $database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
+
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 

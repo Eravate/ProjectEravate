@@ -6,6 +6,7 @@ session_start();
 $database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
 
+
 $objects = array();
 $suns = array();
 $planets = array();

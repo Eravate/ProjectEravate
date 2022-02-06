@@ -140,9 +140,9 @@ function fillWithDataAdmin(typeofInfo) {
       if (adminInfo[2].length == 1) {
         fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPO</div><div class='textInfo'>Has been added since the creation of this app, the last being " + adminInfo[2][0][2] + ".</div>";
       } else if (adminInfo[2].length == 0) {
-        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPOs</div><div class='textInfo'>No npos have been added yet!</div>";
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPOS</div><div class='textInfo'>No npos have been added yet!</div>";
       } else {
-        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPOs</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[2][adminInfo[2].length-1][2] + ".</div>";
+        fillWithLeft += "<div class='titleInfo'>" + adminInfo[2].length + " NPOS</div><div class='textInfo'>Have been added since the creation of this app, the last of them being " + adminInfo[2][adminInfo[2].length-1][2] + ".</div>";
       }
       // Fill with Satellite info
       if (adminInfo[3].length == 1) {
@@ -227,7 +227,7 @@ function fillWithDataAdmin(typeofInfo) {
       for (var i=0;i<adminInfo[0].length;i++) {
         fillWithLeft += "<option value='"+i+"'>"+adminInfo[0][i][1]+"</option>";
       }
-      fillWithLeft += "</select></div><button type='button' id='modifyStar' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Planet</button></div>";
+      fillWithLeft += "</select></div><button type='button' id='modifyStar' class='buttonAdmin'>Modify Data</button><button type='button' class='delete' id='deleteStar'>Delete Star</button></div>";
 
       // In the centre we have the main data point and form, which on submit does a function instead of redirect
 
@@ -239,14 +239,14 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='starRevolution'>Revolution:</label><input type='text' id='starRevolution' name='starRevolution' required><br>";
       fillWithCenter += "<label for='starRadius'>Radius:</label><input type='text' id='starRadius' name='starRadius' required><br>";
       fillWithCenter += "<label for='starTemperature'>Temperature:</label><input type='text' id='starTemperature' name='starTemperature' required><br>";
-      fillWithCenter += "<label for='starOverview'>Overview:</label><textarea id='starOverview' name='starOverview' required></textarea><br>";
-      fillWithCenter += "<label for='starOverviewSource'>Overview Source:</label><input type='text' id='starOverviewSource' name='starOverviewSource' required><br>";
+      fillWithCenter += "<label for='starOverview'>Overview:</label><textarea id='starOverview' name='starOverview' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='starOverviewSource'>Overview Source:</label><input type='text' id='starOverviewSource' name='starOverviewSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='starOverviewUrl'>Overview URL:</label><input type='text' id='starOverviewUrl' name='starOverviewUrl' required><br>";
-      fillWithCenter += "<label for='starInternal'>Internal:</label><textarea id='starInternal' name='starInternal' required></textarea><br>";
-      fillWithCenter += "<label for='starInternalSource'>Internal Source:</label><input type='text' id='starInternalSource' name='starInternalSource' required><br>";
+      fillWithCenter += "<label for='starInternal'>Internal:</label><textarea id='starInternal' name='starInternal' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='starInternalSource'>Internal Source:</label><input type='text' id='starInternalSource' name='starInternalSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='starInternalUrl'>Internal URL:</label><input type='text' id='starInternalUrl' name='starInternalUrl' required><br>";
-      fillWithCenter += "<label for='starSurface'>Surface:</label><textarea id='starSurface' name='starSurface' required></textarea><br>";
-      fillWithCenter += "<label for='starSurfaceSource'>Surface Source:</label><input type='text' id='starSurfaceSource' name='starSurfaceSource' required><br>";
+      fillWithCenter += "<label for='starSurface'>Surface:</label><textarea id='starSurface' name='starSurface' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='starSurfaceSource'>Surface Source:</label><input type='text' id='starSurfaceSource' name='starSurfaceSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='starSurfaceUrl'>Surface URL:</label><input type='text' id='starSurfaceUrl' name='starSurfaceUrl' required><br>";
       fillWithCenter += "<label for='starType'>Star Type:</label><select id='starType' class='selectTra' name='starType'>";
       for (var i=0;i<adminInfo[6].length;i++) {
@@ -299,15 +299,16 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='planetRevolution'>Revolution:</label><input type='text' id='planetRevolution' name='planetRevolution' required><br>";
       fillWithCenter += "<label for='planetRadius'>Radius:</label><input type='text' id='planetRadius' name='planetRadius' required><br>";
       fillWithCenter += "<label for='planetTemperature'>Temperature:</label><input type='text' id='planetTemperature' name='planetTemperature' required><br>";
-      fillWithCenter += "<label for='planetOverview'>Overview:</label><textarea id='planetOverview' name='planetOverview' required></textarea><br>";
-      fillWithCenter += "<label for='planetOverviewSource'>Overview Source:</label><input type='text' id='planetOverviewSource' name='planetOverviewSource' required><br>";
+      fillWithCenter += "<label for='planetOverview'>Overview:</label><textarea id='planetOverview' name='planetOverview' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='planetOverviewSource'>Overview Source:</label><input type='text' id='planetOverviewSource' name='planetOverviewSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='planetOverviewUrl'>Overview URL:</label><input type='text' id='planetOverviewUrl' name='planetOverviewUrl' required><br>";
-      fillWithCenter += "<label for='planetInternal'>Internal:</label><textarea id='planetInternal' name='planetInternal' required></textarea><br>";
-      fillWithCenter += "<label for='planetInternalSource'>Internal Source:</label><input type='text' id='planetInternalSource' name='planetInternalSource' required><br>";
+      fillWithCenter += "<label for='planetInternal'>Internal:</label><textarea id='planetInternal' name='planetInternal' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='planetInternalSource'>Internal Source:</label><input type='text' id='planetInternalSource' name='planetInternalSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='planetInternalUrl'>Internal URL:</label><input type='text' id='planetInternalUrl' name='planetInternalUrl' required><br>";
-      fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface' required></textarea><br>";
-      fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource' required><br>";
+      fillWithCenter += "<label for='planetSurface'>Surface:</label><textarea id='planetSurface' name='planetSurface' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='planetSurfaceSource'>Surface Source:</label><input type='text' id='planetSurfaceSource' name='planetSurfaceSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='planetSurfaceUrl'>Surface URL:</label><input type='text' id='planetSurfaceUrl' name='planetSurfaceUrl' required><br>";
+      fillWithCenter += "<label for='planetSurfaceTexture'>Texture:</label><input type='file' id='planetSurfaceTexture' name='planetSurfaceTexture'><br><br>";
       fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetPlanet' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
@@ -352,15 +353,16 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='npoRevolution'>Revolution:</label><input type='text' id='npoRevolution' name='npoRevolution' required><br>";
       fillWithCenter += "<label for='npoRadius'>Radius:</label><input type='text' id='npoRadius' name='npoRadius' required><br>";
       fillWithCenter += "<label for='npoTemperature'>Temperature:</label><input type='text' id='npoTemperature' name='npoTemperature' required><br>";
-      fillWithCenter += "<label for='npoOverview'>Overview:</label><textarea id='npoOverview' name='npoOverview' required></textarea><br>";
-      fillWithCenter += "<label for='npoOverviewSource'>Overview Source:</label><input type='text' id='npoOverviewSource' name='npoOverviewSource' required><br>";
+      fillWithCenter += "<label for='npoOverview'>Overview:</label><textarea id='npoOverview' name='npoOverview' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='npoOverviewSource'>Overview Source:</label><input type='text' id='npoOverviewSource' name='npoOverviewSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='npoOverviewUrl'>Overview URL:</label><input type='text' id='npoOverviewUrl' name='npoOverviewUrl' required><br>";
-      fillWithCenter += "<label for='npoInternal'>Internal:</label><textarea id='npoInternal' name='npoInternal' required></textarea><br>";
-      fillWithCenter += "<label for='npoInternalSource'>Internal Source:</label><input type='text' id='npoInternalSource' name='npoInternalSource' required><br>";
+      fillWithCenter += "<label for='npoInternal'>Internal:</label><textarea id='npoInternal' name='npoInternal' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='npoInternalSource'>Internal Source:</label><input type='text' id='npoInternalSource' name='npoInternalSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='npoInternalUrl'>Internal URL:</label><input type='text' id='npoInternalUrl' name='npoInternalUrl' required><br>";
-      fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface' required></textarea><br>";
-      fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface' required><br>";
+      fillWithCenter += "<label for='npoSurface'>Surface:</label><textarea id='npoSurface' name='npoSurface' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='npoPlanetSurface'>Surface Source:</label><input type='text' id='npoPlanetSurface' name='npoPlanetSurface' maxlength='20' required><br>";
       fillWithCenter += "<label for='npoSurfaceUrl'>Surface URL:</label><input type='text' id='npoSurfaceUrl' name='npoSurfaceUrl' required ><br>";
+      fillWithCenter += "<label for='npoSurfaceTexture'>Texture:</label><input type='file' id='npoSurfaceTexture' name='npoSurfaceTexture'><br><br>";
       fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetNPO' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
@@ -407,15 +409,16 @@ function fillWithDataAdmin(typeofInfo) {
       fillWithCenter += "<label for='satelliteRevolution'>Revolution:</label><input type='text' id='satelliteRevolution' name='satelliteRevolution' required><br>";
       fillWithCenter += "<label for='satelliteRadius'>Radius:</label><input type='text' id='satelliteRadius' name='satelliteRadius' required><br>";
       fillWithCenter += "<label for='satelliteTemperature'>Temperature:</label><input type='text' id='satelliteTemperature' name='satelliteTemperature' required><br>";
-      fillWithCenter += "<label for='satelliteOverview'>Overview:</label><textarea id='satelliteOverview' name='satelliteOverview' required></textarea><br>";
-      fillWithCenter += "<label for='satelliteOverviewSource'>Overview Source:</label><input type='text' id='satelliteOverviewSource' name='satelliteOverviewSource' required><br>";
+      fillWithCenter += "<label for='satelliteOverview'>Overview:</label><textarea id='satelliteOverview' name='satelliteOverview' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='satelliteOverviewSource'>Overview Source:</label><input type='text' id='satelliteOverviewSource' name='satelliteOverviewSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='satelliteOverviewUrl'>Overview URL:</label><input type='text' id='satelliteOverviewUrl' name='satelliteOverviewUrl' required><br>";
-      fillWithCenter += "<label for='satelliteInternal'>Internal:</label><textarea id='satelliteInternal' name='satelliteInternal' required></textarea><br>";
-      fillWithCenter += "<label for='satelliteInternalSource'>Internal Source:</label><input type='text' id='satelliteInternalSource' name='satelliteInternalSource' required><br>";
+      fillWithCenter += "<label for='satelliteInternal'>Internal:</label><textarea id='satelliteInternal' name='satelliteInternal' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='satelliteInternalSource'>Internal Source:</label><input type='text' id='satelliteInternalSource' name='satelliteInternalSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='satelliteInternalUrl'>Internal URL:</label><input type='text' id='satelliteInternalUrl' name='satelliteInternalUrl' required><br>";
-      fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface' required></textarea><br>";
-      fillWithCenter += "<label for='satelliteSurfaceSource'>Surface Source:</label><input type='text' id='satelliteSurfaceSource' name='satelliteSurfaceSource' required><br>";
+      fillWithCenter += "<label for='satelliteSurface'>Surface:</label><textarea id='satelliteSurface' name='satelliteSurface' maxlength='240' required></textarea><br>";
+      fillWithCenter += "<label for='satelliteSurfaceSource'>Surface Source:</label><input type='text' id='satelliteSurfaceSource' name='satelliteSurfaceSource' maxlength='20' required><br>";
       fillWithCenter += "<label for='satelliteSurfaceUrl'>Surface URL:</label><input type='text' id='satelliteSurfaceUrl' name='satelliteSurfaceUrl' required><br>";
+      fillWithCenter += "<label for='satelliteSurfaceTexture'>Texture:</label><input type='file' id='satelliteSurfaceTexture' name='satelliteSurfaceTexture'><br><br>";
       fillWithCenter += "<button type='submit' value='Submit' class='buttonAdmin'>Submit</button>&nbsp;&nbsp;<button type='button' id='resetSatellite' value='Reset' class='delete'>Reset</button>";
       fillWithCenter += "</form>";
 
@@ -485,7 +488,7 @@ function fillWithDataAdmin(typeofInfo) {
       break;
   }
 
-  // Here we will the HTML
+  // Here we fill the HTML
 
   $("#infoleftInner").html(fillWithLeft);
   $("#infocentreInner").html(fillWithCenter);
@@ -500,6 +503,36 @@ function fillWithDataAdmin(typeofInfo) {
   $('#starPickerNPOInner').editableSelect();
   $('#starPickerSatelliteInner').editableSelect();
   $('#userPicker').editableSelect();
+
+  // Here we are setting up the Input Filters to only allow introduction of numbers.
+  switch (typeofInfo) {
+    case 'sun':
+      setInputFilter(document.getElementById('starRotation'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('starRevolution'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('starRadius'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('starTemperature'),function(value) {return /^-?\d*$/.test(value);});
+      break;
+    case 'planet':
+      setInputFilter(document.getElementById('planetPosition'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('planetRotation'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('planetRevolution'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('planetRadius'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('planetTemperature'),function(value) {return /^-?\d*$/.test(value);});
+      break;
+    case 'npo':
+      setInputFilter(document.getElementById('npoRotation'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('npoRevolution'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('npoRadius'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('npoTemperature'),function(value) {return /^-?\d*$/.test(value);});
+      break;
+    case 'satellite':
+      setInputFilter(document.getElementById('satellitePosition'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('satelliteRotation'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('satelliteRevolution'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('satelliteRadius'),function(value) {return /^-?\d*$/.test(value);});
+      setInputFilter(document.getElementById('satelliteTemperature'),function(value) {return /^-?\d*$/.test(value);});
+      break;
+  }
 }
 
 // Fill admin homepage with basic data
@@ -874,8 +907,12 @@ function reportError() {
               if(data=="success") {
                 Swal.fire('Sent!', 'The message has been sent', 'success');
               } else {
-                console.log(data);
-                Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                if (data=='errName') {
+                  Swal.fire('Error!', 'Make sure the object name is unique!', 'error');
+                } else {
+                  Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                  console.log(data);
+                }
               }
           });
       
@@ -909,8 +946,12 @@ function submitStars() {
               }
             });
           } else {
-            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
-            console.log(data);
+            if (data=='errName') {
+              Swal.fire('Error!', 'Make sure the object name is unique!', 'error');
+            } else {
+              Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+              console.log(data);
+            }
           }
       });
 }
@@ -924,36 +965,51 @@ function submitPlanets() {
   if (selectedStar.length == 1) {
     var starPosition = selectedStar[0].value;
     starID = adminInfo[0][starPosition][0];
-    var sendPlanet = [$("#planetExists").val(),starID,$("#planetName").val(),$("#planetPosition").val(),$("#planetRotation").val(),$("#planetRevolution").val(),$("#planetRadius").val(),
-    $("#planetTemperature").val(),$("#planetOverview").val(),$("#planetOverviewSource").val(),$("#planetOverviewUrl").val(),$("#planetInternal").val(),$("#planetInternalSource").val(),
-    $("#planetInternalUrl").val(),$("#planetSurface").val(),$("#planetSurfaceSource").val(),$("#planetSurfaceUrl").val()];
+    var validExtensions = ['jpg','jpeg','jfif'];
+    var texture = $("#planetSurfaceTexture").prop('files')[0];
+    // Checking for file extension
+    if (typeof texture !== "undefined" && $.inArray(texture.name.split('.').pop().toLowerCase(),validExtensions) == -1) {
+      Swal.fire('Error!', 'Only JPEG, JPG and/or JFIF files are allowed!', 'error');
+    } else {
+      var sendPlanet = [$("#planetExists").val(),starID,$("#planetName").val(),$("#planetPosition").val(),$("#planetRotation").val(),$("#planetRevolution").val(),$("#planetRadius").val(),
+      $("#planetTemperature").val(),$("#planetOverview").val(),$("#planetOverviewSource").val(),$("#planetOverviewUrl").val(),$("#planetInternal").val(),$("#planetInternalSource").val(),
+      $("#planetInternalUrl").val(),$("#planetSurface").val(),$("#planetSurfaceSource").val(),$("#planetSurfaceUrl").val(),texture];
+      // sending query to php
+      var formData = new FormData();
+      formData.append('action','planet');
+      if (typeof texture !== "undefined") {
+        formData.append('texture',texture);
+      }
+      formData.append('objArray', JSON.stringify(sendPlanet));
+      fetch('php/insertfromadmin.php', {
+          method: "POST",
+          body: formData
+      })
+          .then(response => response.text())
+          .then(data => {
+              if(data=="success") {
+                Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+                  if(result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+              } else {
+                if (data=='errName') {
+                  Swal.fire('Error!', 'Make sure the object name is unique!', 'error');
+                } else {
+                  Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                  console.log(data);
+                }
+              }
+          });
+    }
+    
   } else {
     Swal.fire({
       icon: 'error',
       title: 'You need to choose a star before doing this!',
     })
   }
-
-  // sending query to php
-  var formData = new FormData();
-  formData.append('action','planet');
-  formData.append('objArray', JSON.stringify(sendPlanet));
-  fetch('php/insertfromadmin.php', {
-      method: "POST",
-      body: formData
-  })
-      .then(response => response.text())
-      .then(data => {
-          if(data=="success") {
-            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
-              if(result.isConfirmed) {
-                location.reload();
-              }
-            });
-          } else {
-            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
-          }
-      });
 }
 
 // When a NPO object is submitted - Admin
@@ -965,37 +1021,50 @@ function submitNPOs() {
   if (selectedStar.length == 1) {
     var starPosition = selectedStar[0].value;
     starID = adminInfo[0][starPosition][0];
-    var sendNPO = [$("#npoExists").val(),starID,$("#npoName").val() ,$("#npoRotation").val(),$("#npoRevolution").val(),$("#npoRadius").val(),
-    $("#npoTemperature").val(),$("#npoOverview").val(),$("#npoOverviewSource").val(),$("#npoOverviewUrl").val(),$("#npoInternal").val(),$("#npoInternalSource").val(),
-    $("#npoInternalUrl").val(),$("#npoSurface").val(),$("#npoPlanetSurface").val(),$("#npoSurfaceUrl").val()];
+    var validExtensions = ['jpg','jpeg','jfif'];
+    var texture = $("#npoSurfaceTexture").prop('files')[0];
+    // Checking for file extension
+    if ($.inArray(texture.name.split('.').pop().toLowerCase(),validExtensions) == -1) {
+      Swal.fire('Error!', 'Only JPEG, JPG and/or JFIF files are allowed!', 'error');
+    } else { 
+      var sendNPO = [$("#npoExists").val(),starID,$("#npoName").val() ,$("#npoRotation").val(),$("#npoRevolution").val(),$("#npoRadius").val(),
+      $("#npoTemperature").val(),$("#npoOverview").val(),$("#npoOverviewSource").val(),$("#npoOverviewUrl").val(),$("#npoInternal").val(),$("#npoInternalSource").val(),
+      $("#npoInternalUrl").val(),$("#npoSurface").val(),$("#npoPlanetSurface").val(),$("#npoSurfaceUrl").val()];
+      // sending query to php
+      var formData = new FormData();
+      formData.append('action','npo');
+      if (typeof texture !== "undefined") {
+        formData.append('texture',texture);
+      }
+      formData.append('objArray', JSON.stringify(sendNPO));
+      fetch('php/insertfromadmin.php', {
+          method: "POST",
+          body: formData
+      })
+          .then(response => response.text())
+          .then(data => {
+              if(data=="success") {
+                Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+                  if(result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+              } else {
+                if (data=='errName') {
+                  Swal.fire('Error!', 'Make sure the object name is unique!', 'error');
+                } else {
+                  Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                  console.log(data);
+                }
+              }
+          });
+    }
   } else {
     Swal.fire({
       icon: 'error',
       title: 'You need to choose a star before doing this!',
     })
   }
-
-  // sending query to php
-  var formData = new FormData();
-  formData.append('action','npo');
-  formData.append('objArray', JSON.stringify(sendNPO));
-  fetch('php/insertfromadmin.php', {
-      method: "POST",
-      body: formData
-  })
-      .then(response => response.text())
-      .then(data => {
-          if(data=="success") {
-            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
-              if(result.isConfirmed) {
-                location.reload();
-              }
-            });
-          } else {
-            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
-
-          }
-      });
 }
 
 // When a Satellite object is submitted - Admin
@@ -1004,37 +1073,52 @@ function submitSatellites() {
   // assigning values - slightly longer due to check if star was chosen
   var selectedStar = $("#selectInside .es-list .es-visible");
   if (selectedStar.length == 1) {
-    // This one is slightly different, since a star needs to be chosen in order to get a planet, we don't need most of the variables used in the previous examples
-    var sendSatellite = [$("#satelliteExists").val(),adminInfo[1][$("#selectSatellitePlanetInner").val()][0],$("#satelliteName").val(),$("#satellitePosition").val(),$("#satelliteRotation").val(),
-    $("#satelliteRevolution").val(),$("#satelliteRadius").val(),$("#satelliteTemperature").val(),$("#satelliteOverview").val(),$("#satelliteOverviewSource").val(),$("#satelliteOverviewUrl").val(),
-    $("#satelliteInternal").val(),$("#satelliteInternalSource").val(),$("#satelliteInternalUrl").val(),$("#satelliteSurface").val(),$("#satelliteSurfaceSource").val(),$("#satelliteSurfaceUrl").val()];
+
+    var validExtensions = ['jpg','jpeg','jfif'];
+    var texture = $("#satelliteSurfaceTexture").prop('files')[0];
+    // Checking for file extension
+    if ($.inArray(texture.name.split('.').pop().toLowerCase(),validExtensions) == -1) {
+      Swal.fire('Error!', 'Only JPEG, JPG and/or JFIF files are allowed!', 'error');
+    } else { 
+      // This one is slightly different, since a star needs to be chosen in order to get a planet, we don't need most of the variables used in the previous examples
+      var sendSatellite = [$("#satelliteExists").val(),adminInfo[1][$("#selectSatellitePlanetInner").val()][0],$("#satelliteName").val(),$("#satellitePosition").val(),$("#satelliteRotation").val(),
+      $("#satelliteRevolution").val(),$("#satelliteRadius").val(),$("#satelliteTemperature").val(),$("#satelliteOverview").val(),$("#satelliteOverviewSource").val(),$("#satelliteOverviewUrl").val(),
+      $("#satelliteInternal").val(),$("#satelliteInternalSource").val(),$("#satelliteInternalUrl").val(),$("#satelliteSurface").val(),$("#satelliteSurfaceSource").val(),$("#satelliteSurfaceUrl").val()];
+      // sending query to php
+      var formData = new FormData();
+      formData.append('action','satellite');
+      if (typeof texture !== "undefined") {
+        formData.append('texture',texture);
+      }
+      formData.append('objArray', JSON.stringify(sendSatellite));
+      fetch('php/insertfromadmin.php', {
+          method: "POST",
+          body: formData
+      })
+          .then(response => response.text())
+          .then(data => {
+              if(data=="success") {
+                Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
+                  if(result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+              } else {
+                if (data=='errName') {
+                  Swal.fire('Error!', 'Make sure the object name is unique!', 'error');
+                } else {
+                  Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
+                  console.log(data);
+                }
+              }
+          });
+    }
   } else {
     Swal.fire({
       icon: 'error',
       title: 'You need to choose a star before doing this!',
     })
   }
-
-  // sending query to php
-  var formData = new FormData();
-  formData.append('action','satellite');
-  formData.append('objArray', JSON.stringify(sendSatellite));
-  fetch('php/insertfromadmin.php', {
-      method: "POST",
-      body: formData
-  })
-      .then(response => response.text())
-      .then(data => {
-          if(data=="success") {
-            Swal.fire('Submitted!', 'The form has been submitted!', 'success').then((result) => {
-              if(result.isConfirmed) {
-                location.reload();
-              }
-            });
-          } else {
-            Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
-          }
-      });
 }
 
 function loadMessage(messageID) {
@@ -1180,7 +1264,7 @@ function messageQuery() {
     // IF the message is still open
       fillWithLeft += "<div class='row' onclick='loadMessage("+messageArrayFinal[i][7]+");'><div class='rowTitle'>"+messageArrayFinal[i][1] + " / " + messageArrayFinal[i][0];
       // IF the message is tagged / not tagged
-      if (messageArrayFinal[i][0][6] == 0) {
+      if (messageArrayFinal[i][6] == 0) {
         fillWithLeft += "<img class='rowIcon' src='icons/notflagged.png'>";
       } else {
         fillWithLeft += "<img class='rowIcon' src='icons/flagged.png'>";
@@ -1262,4 +1346,22 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+
+// For Input Filters, courtesy of u/umkey08 on stackoverflow.
+function setInputFilter(textbox, inputFilter) {
+  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+    textbox.addEventListener(event, function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  });
 }

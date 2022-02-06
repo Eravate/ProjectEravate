@@ -4,6 +4,8 @@ session_start();
 # Database Con
 // Database for local
 $database = new mysqli('localhost', 'root', '', 'eravate');
+// Database for ionos
+
 
 $objects = array();
 

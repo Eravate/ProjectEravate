@@ -13,12 +13,15 @@ session_start();
 // Database for local
 $database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
+
+
 mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
 $database->stmt_init();
 
 $type=$_POST['type'];
 $email=$_POST['email'];
 $passwd=$_POST['passwd'];
+$rememberMe=$_POST['rememberMe'];
 $encpasswd = password_hash($passwd,PASSWORD_DEFAULT);
 
 $encemail = password_hash($email,PASSWORD_DEFAULT);
@@ -103,12 +106,32 @@ if($type=="create") {
         $result->fetch();
         if (password_verify($passwd,$passwdHash)){
             if ($token == "") {
+                //Generate a random string.
+                $sessionID = openssl_random_pseudo_bytes(16);
+
+                //Convert the binary data into hexadecimal representation.
+                $sessionID = bin2hex($sessionID);
                 if($isAdmin) {
-                    $_SESSION['admin'] = $email;
+                    $_SESSION['admin'] = $sessionID;
+                    $_SESSION['adminMail'] = $email;
                     $_SESSION['sadmin'] = $isSuperAdmin;
+                    if($rememberMe == 'true') {
+                        $result = $database->prepare("INSERT INTO SessionID(user,ID) VALUES (?,?)");
+                        $result->bind_param('ss',$email,$sessionID);
+                        $result->execute();
+
+                        setcookie('admin',$sessionID,time()+31556926,'/');
+                    }
                     echo ("suca");
                 } else {
-                    $_SESSION['user'] = $email;
+                    $_SESSION['user'] = $sessionID;
+                    if($rememberMe == 'true') {
+                        $result = $database->prepare("INSERT INTO SessionID(user,ID) VALUES (?,?)");
+                        $result->bind_param('ss',$email,$sessionID);
+                        $result->execute();
+
+                        setcookie('user',$sessionID,time()+31556926,'/');
+                    }
                     echo ("sucl");
                 }
             } else {

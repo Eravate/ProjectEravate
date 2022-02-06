@@ -592,6 +592,7 @@ $("body").on("click", "#deletePlanet", function() {
                             }
                         });
                         } else {
+                            console.log(data);
                             Swal.fire('Error!', 'An unexpected error has appeared!', 'error');
                         }
                     });
@@ -1028,7 +1029,7 @@ $("#reddot").click(function(){
                 $("#textArea").html("");
                 break;
             // Command PERFORMTEST to perform a system-wide test
-            case "performtest":
+            case "performtestdb":
                 // Separate PERFORMTEST into different tests.
                 $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
                 var performTestText = $("#consoleInput").val();
@@ -1085,7 +1086,7 @@ $("#reddot").click(function(){
             // Command HELP gives help
             case "help":
                 $("#textArea").append("> " + $("#consoleInput").val() + "<br>");
-                $("#textArea").append("<span class='yellowall'>The following commands are available to choose from:</span><br>- clr: Clears the console<br>- performtest: Performs a system-wide test<br>");
+                $("#textArea").append("<span class='yellowall'>The following commands are available to choose from:</span><br>- clr: Clears the console<br>- performtestdb: Performs a test on the database. Can test individual parts or do a full test.<br>");
                 break;
             // Any other command does not exist
             default:

@@ -7,6 +7,7 @@ session_start();
 $database = new mysqli('localhost', 'root', '', 'eravate');
 // Database for ionos
 
+
 $solar = $_POST['solar'];
 $objects = array();
 
