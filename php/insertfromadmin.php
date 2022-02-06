@@ -14,6 +14,7 @@ $actionDone = "";
 $objAffected = 0;
 
 $action=$_POST['action'];
+$nameDiffer=$_POST['nameDiffer'];
 $objArray=json_decode($_POST['objArray']);
 $user=$_SESSION['adminMail'];
 $zero = 0;
@@ -26,7 +27,8 @@ $result->store_result();
 $result->bind_result($idExistsObject);
 
 $rowcount = $result->num_rows;
-if ($rowcount==0) {
+// IF    NO OBJECTS SAME NAME   INSERT   OR   OBJECT SAME NAME    UPDATE       WITHOUT NAME CHANGE OR NO OBJECT SAME NAME   UPDATE          WITH NAME CHANGE
+if (($rowcount==0 && $objArray[0]=="no") || ($rowcount==1 && $objArray[0]!="no" && $nameDiffer=0) || ($rowcount==0 && $objArray[0]!="no" && $nameDiffer=1)) {
     switch ($action) {
         // IF the submitted object is a star - FIRST IF IS FOR DETERMINING WHETHER IT'S A NEW STAR OR NOT
         case "star":
