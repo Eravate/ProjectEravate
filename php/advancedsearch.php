@@ -195,7 +195,7 @@ switch ($rowcount) {
                     }
 
                 $database->stmt_init();
-                $result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM NPO WHERE Star=? ORDER BY position ASC");
+                $result = $database->prepare("SELECT ID, name, rotation, revolution, radius, temp, overviewTXT, overviewSor, overviewURL, internalTXT, internalSor, internalURL, surfaceTXT, surfaceSor, surfaceURL, 3d FROM NPO WHERE Star=?");
                 $result->bind_param('i',$idSun);
                 $result->execute();
                 $result->store_result();

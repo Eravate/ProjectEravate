@@ -28,7 +28,6 @@ $encemail = password_hash($email,PASSWORD_DEFAULT);
 
 # Handy dandy array that allows email verification to take place
 # This few lines are for verification ONLY
-#$arrayHash = ['Dust','Rhapsody','Stop','Pressure','Rock','Champions','Break','Radio','Love','Somebody','Innuendo'];
 #$numObject = array_rand($arrayHash,1);
 #$object = $arrayHash[$numObject];
 #$encobject = password_hash($object,PASSWORD_DEFAULT);
@@ -70,8 +69,7 @@ if($type=="create") {
 
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Project: Eravate! Password Reset';
-                $mail->Body    = 'In order to reset your password, you need to <a href="eravate.es/forgotten.php?restoken='.$token.'">click here!</a> to reset your password!';
+                $mail->Subject = 'Project: Eravate! Account Activation';
 
                 $mail->Body    = "
                                     <html><head></head>
@@ -131,6 +129,8 @@ if($type=="create") {
                         $result->execute();
 
                         setcookie('user',$sessionID,time()+31556926,'/');
+                    } else {
+                        $_SESSION['userTemp'] = $email;
                     }
                     echo ("sucl");
                 }
