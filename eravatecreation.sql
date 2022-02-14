@@ -109,7 +109,7 @@ CREATE TABLE SessionID(
 	user varchar(80),
     ID varchar(120),
 	created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user) REFERENCES AppUser(email),
+    FOREIGN KEY (user) REFERENCES AppUser(email)  ON DELETE CASCADE,
     PRIMARY KEY (user, ID)
 )  ENGINE = InnoDB;
 
@@ -134,7 +134,7 @@ CREATE TABLE MessageToTeam(
     hasBeenRead tinyint NOT NULL DEFAULT 0,
     closed tinyint NOT NULL DEFAULT 0,
     isTagged tinyint NOT NULL DEFAULT 0,
-    FOREIGN KEY (sentBy) REFERENCES AppUser(email)
+    FOREIGN KEY (sentBy) REFERENCES AppUser(email) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 -- Man why the fuck am I complicating this more?
@@ -145,8 +145,8 @@ CREATE TABLE CommentsOnMessage(
     sentBy varchar(80) NOT NULL,
     comment text NOT NULL,
     sentOn timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (message) REFERENCES MessageToTeam(ID),
-    FOREIGN KEY (sentBy) REFERENCES AppUser(email)
+    FOREIGN KEY (message) REFERENCES MessageToTeam(ID)  ON DELETE CASCADE,
+    FOREIGN KEY (sentBy) REFERENCES AppUser(email)  ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 -- A star is any object whose orbit depends solely on the galaxy it belongs to.
@@ -318,4 +318,4 @@ INSERT INTO Satellite VALUES(0,3,"Moon",1,27.32,27.32,1737.4,-23,"The Moon is Ea
 INSERT INTO Satellite VALUES(0,5,"Io",1,1.76,1.76,1821.6,-163,"Io is the innermost satellite of the planet Jupiter. It is slightly larger than Earth's moon and is the fourth largest satellite in the Sol System.","Wikipedia","https://en.wikipedia.org/wiki/Io_(moon)","Io is primarily composed of silicate rock and iron. It is believed that its interior is differentiated between a silicate-rich crust and mantle and iron-rich core.","Wikipedia","https://en.wikipedia.org/wiki/Io_(moon)","Io is the most volcanically active world in the Sol System, with hundreds of volcanic centres and extensive lava flows. Its surface is mostly composed of sulfur.","Wikipedia","https://en.wikipedia.org/wiki/Io_(moon)",1);
 INSERT INTO Satellite VALUES(0,5,"Europa",2,3.55,3.55,1560.8,-171,"Europa is the smallest of the four Galilean moons orbiting Jupiter, and the sixth-largest moon in the Sol System.","Wikipedia","https://en.wikipedia.org/wiki/Europa_(moon)","Europa is primarily made of silicate rock with a water-ice crust, it also probably contain an iron-nickel core. It has a very thin oxygen atmosphere.","Wikipedia","https://en.wikipedia.org/wiki/Europa_(moon)","Europa has the smoothest surface of any known solid object in the Sol system. It is believed that a water ocean is precent beneath the surface.","Wikipedia","https://en.wikipedia.org/wiki/Europa_(moon)",1);
 INSERT INTO Satellite VALUES(0,5,"Ganymede",3,7.15,7.15,2634.1,-163,"Ganymede is the largest and most massive satellite in the Sol system. It is also the largest object without a substantial atmosphere, It is 26% larger than Mercury.","Wikipedia","https://en.wikipedia.org/wiki/Ganymede_(moon)","Ganymede is composed of equal amounts of silicate rock and water. Its internal ocean may contain more water than all of Earth's oceans combined.","Wikipedia","https://en.wikipedia.org/wiki/Ganymede_(moon)","The surface of Ganymede is composed of two main terrain types. Dark regions saturated with impact craters and Light regions covered by grooves and ridges.","Wikipedia","https://en.wikipedia.org/wiki/Ganymede_(moon)",1);
-INSERT INTO Satellite VALUES(0,5,"Callisto",4,16.69,16.69,2410.3,-139,"Callisto is the second-largest moon of Jupiter after Ganymede. It has 99% of the diameter of the planet Mercury while only being a third of its mass.","Wikipedia","https://en.wikipedia.org/wiki/Callisto_(moon)","Callisto is composed of approximately equal amounts of rock and ices. Investigation by Galileo revealed that it may contain a subsurface ocean of liquid water.","Wikipedia","https://en.wikipedia.org/wiki/Callisto_(moon)","Callisto's surface can be divided into several geologically different parts: cratered plains, light plains, bright and dark smooth plains, and various units associated with particular multi-ring structures and impact craters.","Wikipedia","https://en.wikipedia.org/wiki/Callisto_(moon)",1);
+INSERT INTO Satellite VALUES(0,5,"Callisto",4,16.69,16.69,2410.3,-139,"Callisto is the second-largest moon of Jupiter after Ganymede. It has 99% of the diameter of the planet Mercury while only being a third of its mass.","Wikipedia","https://en.wikipedia.org/wiki/Callisto_(moon)","Callisto is composed of approximately equal amounts of rock and ices. Investigation by Galileo revealed that it may contain a subsurface ocean of liquid water.","Wikipedia","https://en.wikipedia.org/wiki/Callisto_(moon)","","Wikipedia","https://en.wikipedia.org/wiki/Callisto_(moon)",1);

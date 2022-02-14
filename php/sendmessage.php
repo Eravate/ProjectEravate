@@ -12,10 +12,32 @@ $database->stmt_init();
 
 $message=$_POST['message'];
 $user=$_SESSION['user'];
+$userTemp=$_SESSION['userTemp'];
 $zero = 0;
 
-$result = $database->prepare("INSERT INTO MessageToTeam(ID,sentBy,message) VALUES (?,?,?)");
-$result->bind_param('iss',$zero,$user,$message);
+$result = $database->prepare("SELECT a.email FROM AppUser a, SessionID s WHERE a.email = s.user AND s.ID=?");
+$result->bind_param('s',$user);
 $result->execute();
-echo ("success");
+$result->store_result();
+$result->bind_result($email);
+$rowcount = $result->num_rows;
+
+switch ($rowcount) {
+    case 0:
+        $result = $database->prepare("INSERT INTO MessageToTeam(ID,sentBy,message) VALUES (?,?,?)");
+        $result->bind_param('iss',$zero,$userTemp,$message);
+        $result->execute();
+        echo ("success");
+        break;
+    case 1:
+        $result->fetch();
+        $result = $database->prepare("INSERT INTO MessageToTeam(ID,sentBy,message) VALUES (?,?,?)");
+        $result->bind_param('iss',$zero,$email,$message);
+        $result->execute();
+        echo ("success");
+    default:
+        break;
+}
+
+
 ?>

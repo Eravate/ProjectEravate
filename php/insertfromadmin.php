@@ -26,9 +26,11 @@ $result->execute();
 $result->store_result();
 $result->bind_result($idExistsObject);
 
+
 $rowcount = $result->num_rows;
+
 // IF    NO OBJECTS SAME NAME   INSERT   OR   OBJECT SAME NAME    UPDATE       WITHOUT NAME CHANGE OR NO OBJECT SAME NAME   UPDATE          WITH NAME CHANGE
-if (($rowcount==0 && $objArray[0]=="no") || ($rowcount==1 && $objArray[0]!="no" && $nameDiffer=0) || ($rowcount==0 && $objArray[0]!="no" && $nameDiffer=1)) {
+if (($rowcount==0 && $objArray[0]=="no") || ($rowcount==1 && $objArray[0]!="no" && $nameDiffer==0) || ($rowcount==0 && $objArray[0]!="no" && $nameDiffer==1)) {
     switch ($action) {
         // IF the submitted object is a star - FIRST IF IS FOR DETERMINING WHETHER IT'S A NEW STAR OR NOT
         case "star":
